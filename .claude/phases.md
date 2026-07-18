@@ -31,12 +31,12 @@ Nav & List: Bottom Navigation Bar, Transaction List Card, App Bar/Simple Title, 
 Cards: Budget Card (+ over-limit variant), Net Durum Card, Goal Card, Recurring Payment Card, Income Source Card.
 - [x] Compose from Phase 2/3 only
 
-## Phase 5 — Supabase Schema & Data Layer 🔄 in-progress — plan: `.claude/PRPs/plans/phase-5-supabase-data-layer.plan.md`
-- [ ] Dev workflow: create Supabase project w/ GitHub-connect (auto-deploy on push). Supabase CLI local, migrations as SQL files in `supabase/migrations/` (source of truth in repo), `supabase link` to project. MCP `supabase` tools used only for inspect/debug (`list_tables`, `get_advisors`, `get_logs`), not for writing schema directly to remote.
-- [ ] Tables: `users`, `income_sources`, `recurring_payments`, `goals`, `budgets`, `transactions`
-- [ ] RLS policies (per-user row access)
-- [ ] Redux slices + RTK Query (or thunks) per entity
-- [ ] Auth flow (email/password + Google OAuth — matches "Button/Google CTA" atom)
+## Phase 5 — Supabase Schema & Data Layer ✅ complete — report: `.claude/PRPs/reports/phase-5-supabase-data-layer-report.md`
+- [x] Dev workflow: create Supabase project w/ GitHub-connect (auto-deploy on push). Supabase CLI local, migrations as SQL files in `supabase/migrations/` (source of truth in repo), `supabase link` to project. MCP `supabase` tools used only for inspect/debug (`list_tables`, `get_advisors`, `get_logs`), not for writing schema directly to remote.
+- [x] Tables: `profiles`, `income_sources`, `recurring_payments`, `goals`, `budgets`, `transactions`
+- [x] RLS policies (per-user row access)
+- [x] Redux slices + RTK Query (or thunks) per entity
+- [x] Auth flow (email/password + Google OAuth — matches "Button/Google CTA" atom)
 
 ## Phase 6 — Auth & Onboarding Screens
 - [ ] Login

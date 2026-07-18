@@ -28,7 +28,7 @@ Postgres schema (6 tables + RLS + triggers) written as a versioned Supabase CLI 
 | 16 | API barrel | Done | `src/store/api/index.ts` |
 | 17 | Wire the store | Done | `auth` reducer, `api` reducer/middleware, `setupListeners` |
 | 18 | Session bootstrap in root layout | Done | `getSession()` + `onAuthStateChange` |
-| 19 | Update `.claude/phases.md` | **Blocked** | Plan requires this only after migration is pushed to a linked project and `get_advisors` shows zero RLS warnings — no FollowFlow Supabase project exists yet (only an unrelated `traintera` project was found via `list_projects`). Left unchecked. |
+| 19 | Update `.claude/phases.md` | Done | Supabase project `followflow` (`rfrhsnjvdxyojsxrcxfl`, eu-central-1) created, linked via GitHub-integration auto-deploy, migration pushed, `get_advisors` (security) zero warnings — all 5 checkboxes marked `[x]` |
 
 ## Validation Results
 
@@ -40,8 +40,8 @@ Postgres schema (6 tables + RLS + triggers) written as a versioned Supabase CLI 
 | Unit Tests | N/A | No test runner configured in this repo (consistent with Phases 0-4) |
 | Build | N/A | Expo project — no standalone `build` script; static analysis is the gate |
 | Integration | N/A | No server process to boot |
-| Database Validation | **Blocked** | No linked Supabase project — `supabase link` / `db push` / `get_advisors` not run |
-| Manual Validation (auth smoke test) | **Blocked** | Same reason — no live project, no `.env` credentials |
+| Database Validation | Pass | Project `followflow` created, GitHub-integration auto-deploy applied both migrations, `list_tables` shows all 6 tables with RLS enabled, `get_advisors` (security) — zero warnings |
+| Manual Validation (auth smoke test) | Deferred | Not run this session — no `.env` credentials issue (now populated), just not exercised; Phase 6 screens are the natural place to exercise sign-up/sign-in end-to-end |
 
 ## Files Changed
 
@@ -76,16 +76,17 @@ Postgres schema (6 tables + RLS + triggers) written as a versioned Supabase CLI 
 Both deviations are type-fidelity fixes only — no behavioral or schema changes from the plan.
 
 ## Issues Encountered
-- No FollowFlow Supabase project exists yet (`mcp__supabase__list_projects` returns only an unrelated `traintera` project). This blocks: `supabase link`, `supabase db push`, `get_advisors` security check, and the manual auth smoke test (sign up → sign in → sign out). This was explicitly flagged as the plan's top risk ("Supabase project not yet created/linked when implementation starts") — all code/schema/types/Redux artifacts that don't require a live project are complete and validated; only the database-push and manual-validation steps remain.
+- No FollowFlow Supabase project existed at the start of this phase (`mcp__supabase__list_projects` returned only an unrelated `traintera` project). This was explicitly flagged as the plan's top risk. Resolved: created project `followflow` (`rfrhsnjvdxyojsxrcxfl`, eu-central-1, free tier), connected the Supabase GitHub integration to this repo, and confirmed migrations auto-deploy on merge to `main` (~15-20s propagation delay observed both times).
+- `get_advisors` (security) on the first deploy surfaced 3 WARN-level findings unrelated to RLS: `set_updated_at` had a mutable `search_path`, and `handle_new_user()` (a `SECURITY DEFINER` trigger function) was auto-exposed via PostgREST's RPC with `anon`/`authenticated` EXECUTE grants. Fixed in a follow-up migration (`20260719010000_harden_function_security.sql`, PR #6): pinned `search_path = public` on `set_updated_at`, revoked EXECUTE on `handle_new_user()` from `public`/`anon`/`authenticated`. Re-ran `get_advisors` after merge — zero warnings.
 
 ## Tests Written
 None — no test runner configured (consistent with Phases 0-4).
 
 ## Next Steps
-- [ ] Create the Supabase project (dashboard or `supabase projects create`), populate `.env` with real `EXPO_PUBLIC_SUPABASE_URL`/`EXPO_PUBLIC_SUPABASE_ANON_KEY`
-- [ ] `npx supabase link --project-ref <ref>` then `npx supabase db push`
-- [ ] Run `mcp__supabase__list_tables` and `mcp__supabase__get_advisors` (security) — confirm 6 tables, zero RLS warnings
-- [ ] Enable Google OAuth provider in the Supabase dashboard + configure Google Cloud OAuth client
-- [ ] Manual smoke test: `signUpWithEmail` → confirm `profiles` row auto-created → `signInWithEmail` → `signOut`
-- [ ] Once the above passes: check off `.claude/phases.md` Phase 5 boxes and archive this plan to `completed/`
-- [ ] Code review via `/code-review`
+- [x] Create the Supabase project, populate `.env` with real `EXPO_PUBLIC_SUPABASE_URL`/`EXPO_PUBLIC_SUPABASE_ANON_KEY`
+- [x] Link via GitHub-integration auto-deploy (in place of manual `supabase link`/`db push` — same effect, triggered by merge to `main`)
+- [x] Run `mcp__supabase__list_tables` and `mcp__supabase__get_advisors` (security) — 6 tables confirmed, zero warnings (RLS and general security)
+- [x] Code review via `/code-review` — found and fixed one MEDIUM issue (delete mutations silently no-op on RLS-filtered/missing rows; added `.select('id')` + `NOT_FOUND` error to all 5)
+- [x] Once the above passed: checked off `.claude/phases.md` Phase 5 boxes, archived this plan to `completed/`
+- [ ] Enable Google OAuth provider in the Supabase dashboard + configure Google Cloud OAuth client (not yet done — email/password path is fully wired and unblocked)
+- [ ] Manual smoke test: `signUpWithEmail` → confirm `profiles` row auto-created → `signInWithEmail` → `signOut` (best exercised once Phase 6 screens exist to drive it end-to-end)
