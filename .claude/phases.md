@@ -22,9 +22,9 @@ Each phase should be completed, verified, and checked off before starting the ne
 Category Icon, Button/Primary, Button/Secondary, Button/Icon Only, Button/Google CTA, Input Field, Amount Display, Badge/Amount, Progress Bar, Avatar.
 - [x] Build each atom against all 4 themes, verify against Pencil screenshots (`get_screenshot`) — code built + typecheck/lint/format clean; Pencil-screenshot pixel diff not possible this session (desktop app not attached), see report's Issues Encountered for the gap and follow-up
 
-## Phase 3 — Molecules (12 components)
+## Phase 3 — Molecules (12 components) ✅ complete — report: `.claude/PRPs/reports/phase-3-molecules-report.md`
 Transaction Row, Search Bar, Budget Progress Row, Nav Item, Numpad Key, Numpad Key Row, Form Field Group, Divider/Or, Title+Subtitle, Info Row/Chevron, Step Indicator, Segmented Toggle.
-- [ ] Compose from Phase 2 atoms only — no raw styling duplication
+- [x] Compose from Phase 2 atoms only — no raw styling duplication
 
 ## Phase 4 — Organisms (10 components)
 Nav & List: Bottom Navigation Bar, Transaction List Card, App Bar/Simple Title, App Bar/Back+Title.
