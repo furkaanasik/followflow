@@ -32,6 +32,7 @@ Cards: Budget Card (+ over-limit variant), Net Durum Card, Goal Card, Recurring 
 - [x] Compose from Phase 2/3 only
 
 ## Phase 5 — Supabase Schema & Data Layer
+- [ ] Dev workflow: create Supabase project w/ GitHub-connect (auto-deploy on push). Supabase CLI local, migrations as SQL files in `supabase/migrations/` (source of truth in repo), `supabase link` to project. MCP `supabase` tools used only for inspect/debug (`list_tables`, `get_advisors`, `get_logs`), not for writing schema directly to remote.
 - [ ] Tables: `users`, `income_sources`, `recurring_payments`, `goals`, `budgets`, `transactions`
 - [ ] RLS policies (per-user row access)
 - [ ] Redux slices + RTK Query (or thunks) per entity
