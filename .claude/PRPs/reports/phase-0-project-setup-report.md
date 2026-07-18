@@ -82,4 +82,4 @@ Scaffolded the FollowFlow Expo (managed) + TypeScript app from an empty repo: `c
 
 ## Next Steps
 - [x] Code review via `/code-review` — APPROVE, 0 critical/high, 1 low (intentional TODO placeholders)
-- [ ] Create PR via `/prp-pr`
+- [x] Create PR via `/prp-pr`
