@@ -26,7 +26,7 @@ Category Icon, Button/Primary, Button/Secondary, Button/Icon Only, Button/Google
 Transaction Row, Search Bar, Budget Progress Row, Nav Item, Numpad Key, Numpad Key Row, Form Field Group, Divider/Or, Title+Subtitle, Info Row/Chevron, Step Indicator, Segmented Toggle.
 - [x] Compose from Phase 2 atoms only — no raw styling duplication
 
-## Phase 4 — Organisms (10 components)
+## Phase 4 — Organisms (10 components) 🔄 in-progress — plan: `.claude/PRPs/plans/phase-4-organisms.plan.md`
 Nav & List: Bottom Navigation Bar, Transaction List Card, App Bar/Simple Title, App Bar/Back+Title.
 Cards: Budget Card (+ over-limit variant), Net Durum Card, Goal Card, Recurring Payment Card, Income Source Card.
 - [ ] Compose from Phase 2/3 only
