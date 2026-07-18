@@ -13,10 +13,10 @@ Each phase should be completed, verified, and checked off before starting the ne
 - [x] ESLint + Prettier + TypeScript strict config
 - [x] Font loading: Geist (heading), Inter (body)
 
-## Phase 1 — Design Tokens & Theming 📝 planned — plan: `.claude/PRPs/plans/design-tokens-theming.plan.md`
-- [ ] Port tokens from `design/design.pen` (`get_variables`) into `src/theme/tokens.ts`: colors (per-theme), spacing scale, radius scale
-- [ ] Theme context/provider supporting 4 modes: `dark` (default), `light`, `vibrant`, `vibrant-dark`
-- [ ] Theme persistence (Redux + AsyncStorage or Supabase user prefs)
+## Phase 1 — Design Tokens & Theming ✅ complete — report: `.claude/PRPs/reports/design-tokens-theming-report.md`
+- [x] Port tokens from `design/design.pen` (`get_variables`) into `src/theme/tokens.ts`: colors (per-theme), spacing scale, radius scale
+- [x] Theme context/provider supporting 4 modes: `dark` (default), `light`, `vibrant`, `vibrant-dark`
+- [x] Theme persistence (Redux + AsyncStorage or Supabase user prefs)
 
 ## Phase 2 — Atoms (10 components)
 Category Icon, Button/Primary, Button/Secondary, Button/Icon Only, Button/Google CTA, Input Field, Amount Display, Badge/Amount, Progress Bar, Avatar.
