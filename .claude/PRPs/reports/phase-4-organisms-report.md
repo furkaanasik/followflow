@@ -67,5 +67,5 @@ Full Pencil-screenshot pixel diff (per Validation Commands' Manual/Browser check
 None — no test runner configured in this repo (consistent with Phase 2/3).
 
 ## Next Steps
-- [ ] Code review via `/code-review`
-- [ ] Create PR via `/prp-pr`
+- [x] Code review via `/code-review`
+- [x] Create PR via `/prp-pr`
