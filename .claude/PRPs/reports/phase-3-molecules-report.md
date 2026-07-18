@@ -77,6 +77,6 @@ None — implemented exactly as specified, including the deliberate `NumpadKeyRo
 | — | 0 | No test runner configured in this repo (consistent with Phase 2) |
 
 ## Next Steps
-- [ ] Code review via `/code-review`
-- [ ] Create PR via `/prp-pr`
+- [x] Code review via `/code-review`
+- [x] Create PR via `/prp-pr`
 - [ ] Optional: interactive cross-theme (light/vibrant/vibrant-dark) visual QA once a working browser automation path exists in this environment
