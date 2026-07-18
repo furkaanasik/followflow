@@ -14,6 +14,9 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { Provider } from 'react-redux';
 
+import { supabase } from '@/lib/supabase';
+import { setBootstrapped } from '@/store/slices/appSlice';
+import { setSession } from '@/store/slices/authSlice';
 import { store } from '@/store/store';
 import { ThemeProvider } from '@/theme';
 
@@ -32,6 +35,21 @@ export default function RootLayout() {
   useEffect(() => {
     if (fontsLoaded || fontError) SplashScreen.hideAsync();
   }, [fontsLoaded, fontError]);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      store.dispatch(setSession(session));
+      store.dispatch(setBootstrapped(true));
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      store.dispatch(setSession(session));
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   if (!fontsLoaded && !fontError) return null;
 

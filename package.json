@@ -10,6 +10,7 @@
     "@reduxjs/toolkit": "^2.12.0",
     "@supabase/supabase-js": "^2.110.7",
     "expo": "~57.0.7",
+    "expo-auth-session": "~57.0.4",
     "expo-constants": "~57.0.6",
     "expo-device": "~57.0.1",
     "expo-font": "~57.0.1",
@@ -42,6 +43,7 @@
     "eslint-config-expo": "~57.0.0",
     "eslint-config-prettier": "^10.1.8",
     "prettier": "^3.9.5",
+    "supabase": "^2.109.1",
     "typescript": "~6.0.3"
   },
   "scripts": {
