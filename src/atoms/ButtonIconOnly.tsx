@@ -8,14 +8,19 @@ export interface ButtonIconOnlyProps {
   icon: string;
   onPress: () => void;
   accessibilityLabel: string;
+  variant?: 'accent' | 'surface';
+  size?: number;
 }
 
 export function ButtonIconOnly({
   icon,
   onPress,
   accessibilityLabel,
+  variant = 'accent',
+  size = 40,
 }: ButtonIconOnlyProps) {
   const theme = useTheme();
+  const isSurface = variant === 'surface';
 
   return (
     <Pressable
@@ -25,20 +30,25 @@ export function ButtonIconOnly({
       style={[
         styles.container,
         {
-          borderRadius: theme.radius.full,
-          backgroundColor: theme.colors.accentTeal,
+          width: size,
+          height: size,
+          borderRadius: isSurface ? theme.radius.sm : theme.radius.full,
+          backgroundColor: isSurface
+            ? theme.colors.bgSurfaceAlt
+            : theme.colors.accentTeal,
         },
       ]}
     >
-      {createElement(getIcon(icon), { size: 20, color: theme.colors.bgApp })}
+      {createElement(getIcon(icon), {
+        size: Math.round(size * 0.45),
+        color: isSurface ? theme.colors.textSecondary : theme.colors.bgApp,
+      })}
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    width: 40,
-    height: 40,
     alignItems: 'center',
     justifyContent: 'center',
   },
