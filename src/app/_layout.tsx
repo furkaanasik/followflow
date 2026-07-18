@@ -15,6 +15,7 @@ import { useEffect } from 'react';
 import { Provider } from 'react-redux';
 
 import { store } from '@/store/store';
+import { ThemeProvider } from '@/theme';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -36,9 +37,11 @@ export default function RootLayout() {
 
   return (
     <Provider store={store}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      </Stack>
+      <ThemeProvider>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        </Stack>
+      </ThemeProvider>
     </Provider>
   );
 }
