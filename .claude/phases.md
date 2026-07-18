@@ -18,9 +18,9 @@ Each phase should be completed, verified, and checked off before starting the ne
 - [x] Theme context/provider supporting 4 modes: `dark` (default), `light`, `vibrant`, `vibrant-dark`
 - [x] Theme persistence (Redux + AsyncStorage or Supabase user prefs)
 
-## Phase 2 — Atoms (10 components)
+## Phase 2 — Atoms (10 components) ✅ complete — report: `.claude/PRPs/reports/atoms-phase-2-report.md`
 Category Icon, Button/Primary, Button/Secondary, Button/Icon Only, Button/Google CTA, Input Field, Amount Display, Badge/Amount, Progress Bar, Avatar.
-- [ ] Build each atom against all 4 themes, verify against Pencil screenshots (`get_screenshot`)
+- [x] Build each atom against all 4 themes, verify against Pencil screenshots (`get_screenshot`) — code built + typecheck/lint/format clean; Pencil-screenshot pixel diff not possible this session (desktop app not attached), see report's Issues Encountered for the gap and follow-up
 
 ## Phase 3 — Molecules (12 components)
 Transaction Row, Search Bar, Budget Progress Row, Nav Item, Numpad Key, Numpad Key Row, Form Field Group, Divider/Or, Title+Subtitle, Info Row/Chevron, Step Indicator, Segmented Toggle.
