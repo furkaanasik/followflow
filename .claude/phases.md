@@ -18,7 +18,7 @@ Each phase should be completed, verified, and checked off before starting the ne
 - [x] Theme context/provider supporting 4 modes: `dark` (default), `light`, `vibrant`, `vibrant-dark`
 - [x] Theme persistence (Redux + AsyncStorage or Supabase user prefs)
 
-## Phase 2 — Atoms (10 components)
+## Phase 2 — Atoms (10 components) 🔄 in-progress — plan: `.claude/PRPs/plans/atoms-phase-2.plan.md`
 Category Icon, Button/Primary, Button/Secondary, Button/Icon Only, Button/Google CTA, Input Field, Amount Display, Badge/Amount, Progress Bar, Avatar.
 - [ ] Build each atom against all 4 themes, verify against Pencil screenshots (`get_screenshot`)
 
