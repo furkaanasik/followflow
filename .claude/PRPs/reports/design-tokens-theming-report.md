@@ -58,5 +58,5 @@ None — implemented exactly as planned. Prettier reformatted the two new files 
 None — no test framework configured, consistent with Phase 0's precedent (see plan's Testing Strategy section).
 
 ## Next Steps
-- [ ] Code review via `/code-review`
-- [ ] Create PR via `/prp-pr`
+- [x] Code review via `/code-review`
+- [x] Create PR via `/prp-pr`
