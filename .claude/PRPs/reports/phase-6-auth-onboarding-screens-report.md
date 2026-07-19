@@ -65,6 +65,6 @@ Built the Login screen and the 3-step onboarding flow (income source, recurring 
 None — no test framework exists in this repository (confirmed via full dependency scan, matches plan's Testing Strategy section).
 
 ## Next Steps
-- [ ] Manual device/simulator walkthrough: fresh launch → Login → email sign-up → 3-step onboarding → auto-land on `(tabs)`; verify DB rows via `mcp__supabase__execute_sql`.
-- [ ] Code review via `/code-review`
+- [x] Manual device/simulator walkthrough: fresh launch → Login → email sign-up → 3-step onboarding → auto-land on `(tabs)`; verify DB rows via `mcp__supabase__execute_sql`.
+- [x] Code review via `/code-review`
 - [ ] Create PR via `/prp-pr`
