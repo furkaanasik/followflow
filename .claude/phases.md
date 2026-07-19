@@ -45,7 +45,7 @@ Cards: Budget Card (+ over-limit variant), Net Durum Card, Goal Card, Recurring 
 - [x] Onboarding - Hedef (goal)
 - [x] Wire onboarding data → Supabase writes
 
-## Phase 7 — i18n & Formatting
+## Phase 7 — i18n & Formatting 🚧 in-progress — plan: `.claude/PRPs/plans/i18n-and-formatting.plan.md`
 Do this before building more screens — retrofitting 4 screens now beats retrofitting 13 later.
 - [ ] i18next + react-i18next + expo-localization; `src/i18n/` with `tr.json` (base) + `en.json`
 - [ ] Typed translation keys, device-locale detection, fallback `tr`
