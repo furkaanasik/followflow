@@ -477,19 +477,6 @@
                       ]
                     }
                   ]
-                },
-                {
-                  "type": "text",
-                  "id": "XaqFl",
-                  "name": "Skip Text",
-                  "fill": "$text-tertiary",
-                  "textGrowth": "fixed-width",
-                  "width": "fill_container",
-                  "content": "Şimdi değil, sonra eklerim",
-                  "textAlign": "center",
-                  "fontFamily": "$font-body",
-                  "fontSize": 13,
-                  "fontWeight": "500"
                 }
               ]
             }
@@ -699,19 +686,6 @@
                       ]
                     }
                   ]
-                },
-                {
-                  "type": "text",
-                  "id": "r1dkb3",
-                  "name": "Skip Text",
-                  "fill": "$text-tertiary",
-                  "textGrowth": "fixed-width",
-                  "width": "fill_container",
-                  "content": "Şimdi değil, sonra eklerim",
-                  "textAlign": "center",
-                  "fontFamily": "$font-body",
-                  "fontSize": 13,
-                  "fontWeight": "500"
                 }
               ]
             }
@@ -894,19 +868,6 @@
                       ]
                     }
                   ]
-                },
-                {
-                  "type": "text",
-                  "id": "ZOs5T",
-                  "name": "Skip Text",
-                  "fill": "$text-tertiary",
-                  "textGrowth": "fixed-width",
-                  "width": "fill_container",
-                  "content": "Hedef eklemeden başla",
-                  "textAlign": "center",
-                  "fontFamily": "$font-body",
-                  "fontSize": 13,
-                  "fontWeight": "500"
                 }
               ]
             }
@@ -5310,19 +5271,6 @@
                       ]
                     }
                   ]
-                },
-                {
-                  "type": "text",
-                  "id": "sPGBm",
-                  "name": "Skip Text",
-                  "fill": "$text-tertiary",
-                  "textGrowth": "fixed-width",
-                  "width": "fill_container",
-                  "content": "Şimdi değil, sonra eklerim",
-                  "textAlign": "center",
-                  "fontFamily": "$font-body",
-                  "fontSize": 13,
-                  "fontWeight": "500"
                 }
               ]
             }
@@ -5532,19 +5480,6 @@
                       ]
                     }
                   ]
-                },
-                {
-                  "type": "text",
-                  "id": "CBlji",
-                  "name": "Skip Text",
-                  "fill": "$text-tertiary",
-                  "textGrowth": "fixed-width",
-                  "width": "fill_container",
-                  "content": "Şimdi değil, sonra eklerim",
-                  "textAlign": "center",
-                  "fontFamily": "$font-body",
-                  "fontSize": 13,
-                  "fontWeight": "500"
                 }
               ]
             }
@@ -5727,19 +5662,6 @@
                       ]
                     }
                   ]
-                },
-                {
-                  "type": "text",
-                  "id": "uSRh0",
-                  "name": "Skip Text",
-                  "fill": "$text-tertiary",
-                  "textGrowth": "fixed-width",
-                  "width": "fill_container",
-                  "content": "Hedef eklemeden başla",
-                  "textAlign": "center",
-                  "fontFamily": "$font-body",
-                  "fontSize": 13,
-                  "fontWeight": "500"
                 }
               ]
             }
