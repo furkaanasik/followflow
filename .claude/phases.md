@@ -38,7 +38,7 @@ Cards: Budget Card (+ over-limit variant), Net Durum Card, Goal Card, Recurring 
 - [x] Redux slices + RTK Query (or thunks) per entity
 - [x] Auth flow (email/password + Google OAuth — matches "Button/Google CTA" atom)
 
-## Phase 6 — Auth & Onboarding Screens
+## Phase 6 — Auth & Onboarding Screens ✅ complete — report: `.claude/PRPs/reports/phase-6-auth-onboarding-screens-report.md`
 - [x] Login
 - [x] Onboarding - Gelir Kaynağı (income source)
 - [x] Onboarding - Tekrarlayan Ödeme (recurring payment)
