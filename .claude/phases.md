@@ -45,22 +45,30 @@ Cards: Budget Card (+ over-limit variant), Net Durum Card, Goal Card, Recurring 
 - [x] Onboarding - Hedef (goal)
 - [x] Wire onboarding data → Supabase writes
 
-## Phase 7 — Core Screens
+## Phase 7 — i18n & Formatting
+Do this before building more screens — retrofitting 4 screens now beats retrofitting 13 later.
+- [ ] i18next + react-i18next + expo-localization; `src/i18n/` with `tr.json` (base) + `en.json`
+- [ ] Typed translation keys, device-locale detection, fallback `tr`
+- [ ] Retrofit Phase 6 screens (login + onboarding: labels, placeholders, validation/error/banner strings)
+- [ ] `src/lib/format.ts`: currency/number/date helpers via `Intl` (₺, TR digit grouping) — required by upcoming transaction/budget screens
+- [ ] Language preference plumbing (persisted; switcher UI lands in Ayarlar, Phase 10)
+
+## Phase 8 — Core Screens
 - [ ] Ana Sayfa (home, incl. FAB → opens Yeni İşlem Modal)
 - [ ] İşlemler (transaction list, search/filter via Search Bar molecule)
 - [ ] Yeni İşlem Modal (bottom sheet, numpad input)
 
-## Phase 8 — Budgets & Goals Screens
+## Phase 9 — Budgets & Goals Screens
 - [ ] Bütçeler
 - [ ] Hedefler
 - [ ] Hedef Detay
 
-## Phase 9 — Settings & Management Screens
+## Phase 10 — Settings & Management Screens
 - [ ] Gelir Kaynaklarım
-- [ ] Ayarlar (incl. theme switcher)
+- [ ] Ayarlar (incl. theme switcher + language switcher)
 - [ ] Tekrarlayan Ödemeler
 
-## Phase 10 — Polish & QA
+## Phase 11 — Polish & QA
 - [ ] Cross-theme visual QA (all 4 modes) against Pencil source
 - [ ] Empty states, loading states, error states per screen
 - [ ] Accessibility pass (contrast, tap targets, screen reader labels)
