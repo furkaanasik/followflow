@@ -5,5 +5,6 @@ export * from './BudgetCard';
 export * from './GoalCard';
 export * from './IncomeSourceCard';
 export * from './NetDurumCard';
+export * from './OnboardingTopBar';
 export * from './RecurringPaymentCard';
 export * from './TransactionListCard';

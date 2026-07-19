@@ -11,11 +11,11 @@ Personal finance / budget tracking mobile app (Turkish UI). Repo currently conta
 
 The design system (top-level frame `Design System`) is already organized by atomic-design tiers. When building the codebase, mirror this 1:1 into component folders (`atoms/`, `molecules/`, `organisms/`, `templates|screens/`):
 
-**Atoms** (10) — Category Icon, Button/Primary, Button/Secondary, Button/Icon Only, Button/Google CTA, Input Field, Amount Display, Badge/Amount, Progress Bar, Avatar.
+**Atoms** (11) — Category Icon, Button/Primary, Button/Secondary, Button/Icon Only, Button/Google CTA, Input Field, Amount Display, Badge/Amount, Progress Bar, Avatar, Surface Card.
 
-**Molecules** (12) — Transaction Row, Search Bar, Budget Progress Row, Nav Item, Numpad Key, Numpad Key Row, Form Field Group, Divider/Or, Title+Subtitle, Info Row/Chevron, Step Indicator, Segmented Toggle.
+**Molecules** (14) — Transaction Row, Search Bar, Budget Progress Row, Nav Item, Numpad Key, Numpad Key Row, Form Field Group, Divider/Or, Title+Subtitle, Info Row/Chevron, Step Indicator, Segmented Toggle, Alert Banner (+ Info variant), Step Badge.
 
-**Organisms — Nav & List** (4) — Bottom Navigation Bar, Transaction List Card, App Bar/Simple Title, App Bar/Back+Title.
+**Organisms — Nav & List** (5) — Bottom Navigation Bar, Transaction List Card, App Bar/Simple Title, App Bar/Back+Title, Onboarding Top Bar.
 
 **Organisms — Cards** (6) — Budget Card (+ "Limit Aşıldı" over-limit variant), Net Durum Card (net balance summary), Goal Card, Recurring Payment Card, Income Source Card.
 
@@ -43,7 +43,7 @@ Outside the atomic hierarchy: `Status Bar` (OS chrome, explicitly noted in the f
 - **Fonts**: heading = Geist, body = Inter.
 - **Spacing scale**: `gap-xs`=6, `gap-sm`=10, `gap-md`=16, `gap-lg`=24, `gap-xl`=32.
 - **Radius scale**: `radius-sm`=10, `radius-md`=16, `radius-lg`=22, `radius-full`=999.
-- **Color roles** (per-theme values, see `get_variables` for exact hex): `bg-app`, `bg-surface`, `bg-surface-alt`, `border-subtle`, `text-primary`, `text-secondary`, `text-tertiary`, `accent-teal` / `accent-teal-dim` (brand), `income-green`, `expense-coral` / `expense-coral-dim`, `warning-red` / `warning-bg`.
+- **Color roles** (per-theme values, see `get_variables` for exact hex): `bg-app`, `bg-surface`, `bg-surface-alt`, `border-subtle`, `text-primary`, `text-secondary`, `text-tertiary`, `accent-teal` / `accent-teal-dim` / `accent-teal-border` (20% alpha) / `accent-teal-faint` (15% alpha, decorative rings) (brand), `income-green`, `expense-coral` / `expense-coral-dim`, `warning-red` / `warning-bg`.
 
 Dark theme is teal-accented on near-black surfaces; light theme mirrors it on off-white; vibrant/vibrant-dark swap the brand accent to purple (`#6D4DF2` / `#8B6FF7`).
 

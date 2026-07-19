@@ -7,4 +7,5 @@ export * from './ButtonSecondary';
 export * from './CategoryIcon';
 export * from './InputField';
 export * from './ProgressBar';
+export * from './SurfaceCard';
 export * from './AmountDisplay';

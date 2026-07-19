@@ -1,5 +1,11 @@
 import { createElement, useState } from 'react';
-import { StyleSheet, TextInput, View } from 'react-native';
+import {
+  Pressable,
+  StyleSheet,
+  TextInput,
+  View,
+  type TextInputProps,
+} from 'react-native';
 
 import { getIcon } from '@/lib/icons';
 import { useTheme } from '@/theme';
@@ -9,8 +15,15 @@ export interface InputFieldProps {
   onChangeText: (text: string) => void;
   placeholder?: string;
   icon?: string;
+  rightIcon?: string;
+  onRightIconPress?: () => void;
+  rightIconAccessibilityLabel?: string;
   editable?: boolean;
   error?: boolean;
+  secureTextEntry?: boolean;
+  keyboardType?: TextInputProps['keyboardType'];
+  autoCapitalize?: TextInputProps['autoCapitalize'];
+  autoCorrect?: boolean;
 }
 
 export function InputField({
@@ -18,8 +31,15 @@ export function InputField({
   onChangeText,
   placeholder = 'Ara...',
   icon,
+  rightIcon,
+  onRightIconPress,
+  rightIconAccessibilityLabel,
   editable = true,
   error = false,
+  secureTextEntry = false,
+  keyboardType = 'default',
+  autoCapitalize = 'sentences',
+  autoCorrect = true,
 }: InputFieldProps) {
   const theme = useTheme();
   const [focused, setFocused] = useState(false);
@@ -60,9 +80,27 @@ export function InputField({
         placeholder={placeholder}
         placeholderTextColor={theme.colors.textTertiary}
         editable={editable}
+        secureTextEntry={secureTextEntry}
+        keyboardType={keyboardType}
+        autoCapitalize={autoCapitalize}
+        autoCorrect={autoCorrect}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
       />
+      {rightIcon ? (
+        <Pressable
+          onPress={onRightIconPress}
+          disabled={!onRightIconPress}
+          hitSlop={10}
+          accessibilityRole="button"
+          accessibilityLabel={rightIconAccessibilityLabel}
+        >
+          {createElement(getIcon(rightIcon), {
+            size: 18,
+            color: theme.colors.textTertiary,
+          })}
+        </Pressable>
+      ) : null}
     </View>
   );
 }

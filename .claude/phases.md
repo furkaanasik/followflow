@@ -39,11 +39,11 @@ Cards: Budget Card (+ over-limit variant), Net Durum Card, Goal Card, Recurring 
 - [x] Auth flow (email/password + Google OAuth — matches "Button/Google CTA" atom)
 
 ## Phase 6 — Auth & Onboarding Screens
-- [ ] Login
-- [ ] Onboarding - Gelir Kaynağı (income source)
-- [ ] Onboarding - Tekrarlayan Ödeme (recurring payment)
-- [ ] Onboarding - Hedef (goal)
-- [ ] Wire onboarding data → Supabase writes
+- [x] Login
+- [x] Onboarding - Gelir Kaynağı (income source)
+- [x] Onboarding - Tekrarlayan Ödeme (recurring payment)
+- [x] Onboarding - Hedef (goal)
+- [x] Wire onboarding data → Supabase writes
 
 ## Phase 7 — Core Screens
 - [ ] Ana Sayfa (home, incl. FAB → opens Yeni İşlem Modal)
