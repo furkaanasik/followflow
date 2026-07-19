@@ -45,13 +45,13 @@ Cards: Budget Card (+ over-limit variant), Net Durum Card, Goal Card, Recurring 
 - [x] Onboarding - Hedef (goal)
 - [x] Wire onboarding data → Supabase writes
 
-## Phase 7 — i18n & Formatting 🚧 in-progress — plan: `.claude/PRPs/plans/i18n-and-formatting.plan.md`
+## Phase 7 — i18n & Formatting ✅ complete — report: `.claude/PRPs/reports/i18n-and-formatting-report.md`
 Do this before building more screens — retrofitting 4 screens now beats retrofitting 13 later.
-- [ ] i18next + react-i18next + expo-localization; `src/i18n/` with `tr.json` (base) + `en.json`
-- [ ] Typed translation keys, device-locale detection, fallback `tr`
-- [ ] Retrofit Phase 6 screens (login + onboarding: labels, placeholders, validation/error/banner strings)
-- [ ] `src/lib/format.ts`: currency/number/date helpers via `Intl` (₺, TR digit grouping) — required by upcoming transaction/budget screens
-- [ ] Language preference plumbing (persisted; switcher UI lands in Ayarlar, Phase 10)
+- [x] i18next + react-i18next + expo-localization; `src/i18n/` with `tr.json` (base) + `en.json`
+- [x] Typed translation keys, device-locale detection, fallback `tr`
+- [x] Retrofit Phase 6 screens (login + onboarding: labels, placeholders, validation/error/banner strings)
+- [x] `src/lib/format.ts`: currency/number/date helpers via `Intl` (₺, TR digit grouping) — required by upcoming transaction/budget screens
+- [x] Language preference plumbing (persisted; switcher UI lands in Ayarlar, Phase 10)
 
 ## Phase 8 — Core Screens
 - [ ] Ana Sayfa (home, incl. FAB → opens Yeni İşlem Modal)

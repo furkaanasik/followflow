@@ -1,0 +1,72 @@
+{
+  "common": {
+    "retry": "Try again",
+    "connectionError": "Couldn't connect. Check your internet and try again.",
+    "skip": "Skip",
+    "back": "Back",
+    "or": "or"
+  },
+  "auth": {
+    "tagline": "Your whole financial life, on one screen.",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "createAccount": "Create Account",
+    "signingIn": "Signing in…",
+    "creatingAccount": "Creating account…",
+    "emailLabel": "Email",
+    "emailPlaceholder": "example@email.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "••••••••",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "googleContinue": "Continue with Google",
+    "connecting": "Connecting…",
+    "confirmEmailSent": "We sent a confirmation email to {{email}}. Check your inbox, then sign in here once confirmed."
+  },
+  "validation": {
+    "emailRequired": "Email address is required.",
+    "emailInvalid": "Enter a valid email address.",
+    "passwordRequired": "Password is required.",
+    "passwordMinLength": "Password must be at least {{min}} characters.",
+    "passwordComplexity": "Password must contain at least one letter and one number.",
+    "incomeNameRequired": "Income name is required.",
+    "paymentNameRequired": "Payment name is required.",
+    "amountInvalid": "Enter a valid amount.",
+    "payDayInvalid": "Enter a valid day (1-31)."
+  },
+  "onboarding": {
+    "step": "STEP {{current}}/{{total}}",
+    "saveContinue": "Save and Continue",
+    "saving": "Saving…",
+    "saveFailed": "Couldn't save. Check your connection and try again.",
+    "genericError": "Something went wrong. Try again.",
+    "frequencyLabel": "Frequency",
+    "monthly": "Monthly",
+    "weekly": "Weekly",
+    "amountLabel": "Amount",
+    "amountPlaceholder": "₺0,00",
+    "payDayLabel": "Payment Day (day of month)",
+    "payDayPlaceholder": "1-31",
+    "income": {
+      "title": "Add Income Source",
+      "subtitle": "Add your regular income to make forecasts more accurate.",
+      "nameLabel": "Income Name",
+      "namePlaceholder": "e.g. Salary"
+    },
+    "recurring": {
+      "title": "Add a Recurring Payment",
+      "subtitle": "Add fixed expenses like rent, bills, or subscriptions so you never miss one.",
+      "nameLabel": "Payment Name",
+      "namePlaceholder": "e.g. Rent"
+    },
+    "goal": {
+      "title": "Set a Savings Goal",
+      "subtitle": "Optional — set a goal now, or add one later.",
+      "nameLabel": "Goal Name",
+      "namePlaceholder": "e.g. Vacation",
+      "targetLabel": "Target Amount",
+      "savedLabel": "Current Savings (optional)",
+      "save": "Save Goal and Start"
+    }
+  }
+}

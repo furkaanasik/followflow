@@ -1,0 +1,72 @@
+{
+  "common": {
+    "retry": "Tekrar dene",
+    "connectionError": "Bağlantı kurulamadı. İnternetini kontrol edip tekrar dene.",
+    "skip": "Atla",
+    "back": "Geri",
+    "or": "veya"
+  },
+  "auth": {
+    "tagline": "Bütün finansal hayatın, tek ekranda.",
+    "signIn": "Giriş Yap",
+    "signUp": "Kayıt Ol",
+    "createAccount": "Hesap Oluştur",
+    "signingIn": "Giriş yapılıyor…",
+    "creatingAccount": "Hesap oluşturuluyor…",
+    "emailLabel": "E-posta",
+    "emailPlaceholder": "ornek@eposta.com",
+    "passwordLabel": "Şifre",
+    "passwordPlaceholder": "••••••••",
+    "showPassword": "Şifreyi göster",
+    "hidePassword": "Şifreyi gizle",
+    "googleContinue": "Google ile Devam Et",
+    "connecting": "Bağlanıyor…",
+    "confirmEmailSent": "Onay maili gönderdik: {{email}}. Posta kutunu kontrol et, onayladıktan sonra buradan giriş yap."
+  },
+  "validation": {
+    "emailRequired": "E-posta adresi gerekli.",
+    "emailInvalid": "Geçerli bir e-posta adresi gir.",
+    "passwordRequired": "Şifre gerekli.",
+    "passwordMinLength": "Şifre en az {{min}} karakter olmalı.",
+    "passwordComplexity": "Şifre en az bir harf ve bir rakam içermeli.",
+    "incomeNameRequired": "Gelir adı gerekli.",
+    "paymentNameRequired": "Ödeme adı gerekli.",
+    "amountInvalid": "Geçerli bir tutar gir.",
+    "payDayInvalid": "Geçerli bir gün gir (1-31)."
+  },
+  "onboarding": {
+    "step": "ADIM {{current}}/{{total}}",
+    "saveContinue": "Kaydet ve İlerle",
+    "saving": "Kaydediliyor…",
+    "saveFailed": "Kaydedilemedi. Bağlantını kontrol edip tekrar dene.",
+    "genericError": "Bir şeyler ters gitti. Tekrar dene.",
+    "frequencyLabel": "Tekrar Sıklığı",
+    "monthly": "Aylık",
+    "weekly": "Haftalık",
+    "amountLabel": "Tutar",
+    "amountPlaceholder": "₺0,00",
+    "payDayLabel": "Ödeme Günü (ayın kaçı)",
+    "payDayPlaceholder": "1-31",
+    "income": {
+      "title": "Gelir Kaynağını Ekle",
+      "subtitle": "Düzenli gelirini ekleyerek tahminlerini daha doğru hale getirelim.",
+      "nameLabel": "Gelir Adı",
+      "namePlaceholder": "örn. Maaş"
+    },
+    "recurring": {
+      "title": "Tekrarlayan Ödemeni Ekle",
+      "subtitle": "Kira, fatura veya abonelik gibi sabit giderlerini ekle, yaklaşan ödemeleri unutma.",
+      "nameLabel": "Ödeme Adı",
+      "namePlaceholder": "örn. Kira"
+    },
+    "goal": {
+      "title": "Bir Tasarruf Hedefi Belirle",
+      "subtitle": "Opsiyonel — istersen şimdi bir hedef koy, istersen daha sonra ekle.",
+      "nameLabel": "Hedef Adı",
+      "namePlaceholder": "örn. Tatil",
+      "targetLabel": "Hedef Tutarı",
+      "savedLabel": "Mevcut Birikim (opsiyonel)",
+      "save": "Hedefi Kaydet ve Başla"
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   KeyboardAvoidingView,
   Platform,
@@ -24,13 +25,9 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { updateIncomeDraft } from '@/store/slices/onboardingSlice';
 import { useTheme } from '@/theme';
 
-const FREQUENCY_OPTIONS = [
-  { label: 'Aylık', value: 'monthly' },
-  { label: 'Haftalık', value: 'weekly' },
-];
-
 export function OnboardingIncomeSourceScreen() {
   const theme = useTheme();
+  const { t } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const session = useAppSelector((s) => s.auth.session);
@@ -42,6 +39,11 @@ export function OnboardingIncomeSourceScreen() {
   const [amountError, setAmountError] = useState<string | undefined>();
   const [payDayError, setPayDayError] = useState<string | undefined>();
   const [formError, setFormError] = useState<string | undefined>();
+
+  const frequencyOptions = [
+    { label: t('onboarding.monthly'), value: 'monthly' },
+    { label: t('onboarding.weekly'), value: 'weekly' },
+  ];
 
   function handleSkip() {
     router.push('/(onboarding)/recurring');
@@ -55,7 +57,7 @@ export function OnboardingIncomeSourceScreen() {
 
     let valid = true;
     if (!draft.name.trim()) {
-      setNameError('Gelir adı gerekli.');
+      setNameError(t('validation.incomeNameRequired'));
       valid = false;
     }
     const parsedAmount = Number(draft.amount.replace(',', '.'));
@@ -64,7 +66,7 @@ export function OnboardingIncomeSourceScreen() {
       Number.isNaN(parsedAmount) ||
       parsedAmount <= 0
     ) {
-      setAmountError('Geçerli bir tutar gir.');
+      setAmountError(t('validation.amountInvalid'));
       valid = false;
     }
     const parsedPayDay = Number(draft.payDay);
@@ -74,7 +76,7 @@ export function OnboardingIncomeSourceScreen() {
       parsedPayDay < 1 ||
       parsedPayDay > 31
     ) {
-      setPayDayError('Geçerli bir gün gir (1-31).');
+      setPayDayError(t('validation.payDayInvalid'));
       valid = false;
     }
     if (!valid) return;
@@ -88,7 +90,7 @@ export function OnboardingIncomeSourceScreen() {
         pay_day: parsedPayDay,
       }).unwrap();
     } catch {
-      setFormError('Kaydedilemedi. Bağlantını kontrol edip tekrar dene.');
+      setFormError(t('onboarding.saveFailed'));
       return;
     }
     router.push('/(onboarding)/recurring');
@@ -115,10 +117,13 @@ export function OnboardingIncomeSourceScreen() {
           <OnboardingTopBar step={1} onSkip={handleSkip} />
 
           <View style={{ gap: theme.spacing.sm }}>
-            <StepBadge icon="wallet" label="ADIM 1/3" />
+            <StepBadge
+              icon="wallet"
+              label={t('onboarding.step', { current: 1, total: 3 })}
+            />
             <TitleSubtitle
-              title="Gelir Kaynağını Ekle"
-              subtitle="Düzenli gelirini ekleyerek tahminlerini daha doğru hale getirelim."
+              title={t('onboarding.income.title')}
+              subtitle={t('onboarding.income.subtitle')}
             />
           </View>
 
@@ -126,18 +131,18 @@ export function OnboardingIncomeSourceScreen() {
             {formError ? <AlertBanner message={formError} /> : null}
 
             <FormFieldGroup
-              label="Gelir Adı"
+              label={t('onboarding.income.nameLabel')}
               value={draft.name}
               onChangeText={(name) => dispatch(updateIncomeDraft({ name }))}
-              placeholder="örn. Maaş"
+              placeholder={t('onboarding.income.namePlaceholder')}
               icon="tag"
               error={nameError}
             />
             <FormFieldGroup
-              label="Tutar"
+              label={t('onboarding.amountLabel')}
               value={draft.amount}
               onChangeText={(amount) => dispatch(updateIncomeDraft({ amount }))}
-              placeholder="₺0,00"
+              placeholder={t('onboarding.amountPlaceholder')}
               icon="banknote"
               keyboardType="decimal-pad"
               error={amountError}
@@ -151,10 +156,10 @@ export function OnboardingIncomeSourceScreen() {
                   color: theme.colors.textSecondary,
                 }}
               >
-                Tekrar Sıklığı
+                {t('onboarding.frequencyLabel')}
               </Text>
               <SegmentedToggle
-                options={FREQUENCY_OPTIONS}
+                options={frequencyOptions}
                 value={draft.frequency}
                 onChange={(frequency) =>
                   dispatch(updateIncomeDraft({ frequency }))
@@ -163,17 +168,21 @@ export function OnboardingIncomeSourceScreen() {
             </View>
 
             <FormFieldGroup
-              label="Ödeme Günü (ayın kaçı)"
+              label={t('onboarding.payDayLabel')}
               value={draft.payDay}
               onChangeText={(payDay) => dispatch(updateIncomeDraft({ payDay }))}
-              placeholder="1-31"
+              placeholder={t('onboarding.payDayPlaceholder')}
               icon="calendar"
               keyboardType="number-pad"
               error={payDayError}
             />
 
             <ButtonPrimary
-              label={submitting ? 'Kaydediliyor…' : 'Kaydet ve İlerle'}
+              label={
+                submitting
+                  ? t('onboarding.saving')
+                  : t('onboarding.saveContinue')
+              }
               onPress={handleSave}
               disabled={submitting}
             />
