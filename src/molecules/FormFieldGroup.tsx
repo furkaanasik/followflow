@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import { InputField } from '@/atoms';
+import { InputField, type InputFieldProps } from '@/atoms';
 import { useTheme } from '@/theme';
 
 export interface FormFieldGroupProps {
@@ -9,7 +9,14 @@ export interface FormFieldGroupProps {
   onChangeText: (text: string) => void;
   placeholder?: string;
   icon?: string;
+  rightIcon?: string;
+  onRightIconPress?: () => void;
+  rightIconAccessibilityLabel?: string;
   error?: string;
+  secureTextEntry?: boolean;
+  keyboardType?: InputFieldProps['keyboardType'];
+  autoCapitalize?: InputFieldProps['autoCapitalize'];
+  autoCorrect?: boolean;
 }
 
 export function FormFieldGroup({
@@ -18,7 +25,14 @@ export function FormFieldGroup({
   onChangeText,
   placeholder,
   icon,
+  rightIcon,
+  onRightIconPress,
+  rightIconAccessibilityLabel,
   error,
+  secureTextEntry,
+  keyboardType,
+  autoCapitalize,
+  autoCorrect,
 }: FormFieldGroupProps) {
   const theme = useTheme();
   return (
@@ -37,7 +51,14 @@ export function FormFieldGroup({
         onChangeText={onChangeText}
         placeholder={placeholder}
         icon={icon}
+        rightIcon={rightIcon}
+        onRightIconPress={onRightIconPress}
+        rightIconAccessibilityLabel={rightIconAccessibilityLabel}
         error={Boolean(error)}
+        secureTextEntry={secureTextEntry}
+        keyboardType={keyboardType}
+        autoCapitalize={autoCapitalize}
+        autoCorrect={autoCorrect}
       />
       {error ? (
         <Text

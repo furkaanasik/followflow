@@ -12,15 +12,135 @@ import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+import { ActivityIndicator, Pressable, Text, View } from 'react-native';
 import { Provider } from 'react-redux';
 
 import { supabase } from '@/lib/supabase';
+import { api, AUTH_INVALID_CODE, useGetProfileQuery } from '@/store/api';
+import { useAppSelector } from '@/store/hooks';
 import { setBootstrapped } from '@/store/slices/appSlice';
 import { setSession } from '@/store/slices/authSlice';
+import { resetOnboardingDrafts } from '@/store/slices/onboardingSlice';
 import { store } from '@/store/store';
-import { ThemeProvider } from '@/theme';
+import { ThemeProvider, useTheme } from '@/theme';
 
 SplashScreen.preventAutoHideAsync();
+
+function RootNavigator() {
+  const theme = useTheme();
+  const bootstrapped = useAppSelector((s) => s.app.bootstrapped);
+  const status = useAppSelector((s) => s.auth.status);
+  const {
+    data: profile,
+    isLoading: profileLoading,
+    error: profileError,
+    refetch: refetchProfile,
+  } = useGetProfileQuery(undefined, { skip: status !== 'authenticated' });
+
+  const authInvalid =
+    (profileError as { code?: string } | undefined)?.code === AUTH_INVALID_CODE;
+
+  useEffect(() => {
+    if (bootstrapped && (status !== 'authenticated' || !profileLoading)) {
+      SplashScreen.hideAsync();
+    }
+  }, [bootstrapped, status, profileLoading]);
+
+  // A stored session whose user/profile no longer exists (e.g. deleted from
+  // the dashboard) satisfies none of the route guards below — without this
+  // sign-out the app would render a blank screen forever. Transient network
+  // failures must NOT sign the user out, so only the AUTH_INVALID_CODE error
+  // from the profile query triggers it.
+  useEffect(() => {
+    if (status === 'authenticated' && !profileLoading && authInvalid) {
+      supabase.auth.signOut({ scope: 'local' }).catch(() => {});
+    }
+  }, [status, profileLoading, authInvalid]);
+
+  // Rendering null here flashes white after sign-in/sign-up (the splash
+  // screen only covers the cold start), so show an app-colored loader instead.
+  if (!bootstrapped || (status === 'authenticated' && profileLoading))
+    return (
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: theme.colors.bgApp,
+        }}
+      >
+        <ActivityIndicator color={theme.colors.accentTeal} />
+      </View>
+    );
+
+  if (status === 'authenticated' && profileError && !authInvalid) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: theme.colors.bgApp,
+          padding: 24,
+          gap: 12,
+        }}
+      >
+        <Text
+          style={{
+            fontFamily: theme.fonts.body.medium,
+            fontSize: 14,
+            lineHeight: 20,
+            color: theme.colors.textSecondary,
+            textAlign: 'center',
+          }}
+        >
+          Bağlantı kurulamadı. İnternetini kontrol edip tekrar dene.
+        </Text>
+        <Pressable onPress={() => refetchProfile()} hitSlop={8}>
+          <Text
+            style={{
+              fontFamily: theme.fonts.body.semibold,
+              fontSize: 14,
+              color: theme.colors.accentTeal,
+            }}
+          >
+            Tekrar dene
+          </Text>
+        </Pressable>
+      </View>
+    );
+  }
+
+  return (
+    <Stack
+      screenOptions={{
+        contentStyle: { backgroundColor: theme.colors.bgApp },
+      }}
+    >
+      <Stack.Protected guard={status !== 'authenticated'}>
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+      </Stack.Protected>
+      <Stack.Protected
+        guard={
+          status === 'authenticated' &&
+          !!profile &&
+          !profile.onboarding_completed
+        }
+      >
+        <Stack.Screen name="(onboarding)" options={{ headerShown: false }} />
+      </Stack.Protected>
+      <Stack.Protected
+        guard={
+          status === 'authenticated' &&
+          !!profile &&
+          profile.onboarding_completed
+        }
+      >
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      </Stack.Protected>
+    </Stack>
+  );
+}
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
@@ -33,10 +153,6 @@ export default function RootLayout() {
   });
 
   useEffect(() => {
-    if (fontsLoaded || fontError) SplashScreen.hideAsync();
-  }, [fontsLoaded, fontError]);
-
-  useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       store.dispatch(setSession(session));
       store.dispatch(setBootstrapped(true));
@@ -46,6 +162,13 @@ export default function RootLayout() {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       store.dispatch(setSession(session));
+      // On sign-out, drop all cached query results (a stale AUTH_INVALID
+      // error would instantly kill the next sign-in) and clear onboarding
+      // drafts so nothing leaks into the next account.
+      if (!session) {
+        store.dispatch(api.util.resetApiState());
+        store.dispatch(resetOnboardingDrafts());
+      }
     });
 
     return () => subscription.unsubscribe();
@@ -56,9 +179,7 @@ export default function RootLayout() {
   return (
     <Provider store={store}>
       <ThemeProvider>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        </Stack>
+        <RootNavigator />
       </ThemeProvider>
     </Provider>
   );

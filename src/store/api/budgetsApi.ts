@@ -1,16 +1,12 @@
-import { PostgrestError } from '@supabase/supabase-js';
-
 import { supabase } from '@/lib/supabase';
 import type { Budget, BudgetInsert, BudgetUpdate } from '@/types';
 
-import { api } from './baseApi';
+import { api, toApiError, type ApiError } from './baseApi';
 
-const notFoundError = new PostgrestError({
-  message: 'Row not found or not owned by the current user.',
-  details: '',
-  hint: '',
+const notFoundError: ApiError = {
   code: 'NOT_FOUND',
-});
+  message: 'Row not found or not owned by the current user.',
+};
 
 export const budgetsApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -21,7 +17,7 @@ export const budgetsApi = api.injectEndpoints({
         const { data, error } = await query.order('category_name', {
           ascending: true,
         });
-        if (error) return { error };
+        if (error) return { error: toApiError(error) };
         return { data };
       },
       providesTags: ['Budget'],
@@ -33,7 +29,7 @@ export const budgetsApi = api.injectEndpoints({
           .insert(payload)
           .select()
           .single();
-        if (error) return { error };
+        if (error) return { error: toApiError(error) };
         return { data };
       },
       invalidatesTags: ['Budget'],
@@ -46,7 +42,7 @@ export const budgetsApi = api.injectEndpoints({
           .eq('id', id)
           .select()
           .single();
-        if (error) return { error };
+        if (error) return { error: toApiError(error) };
         return { data };
       },
       invalidatesTags: ['Budget'],
@@ -58,7 +54,7 @@ export const budgetsApi = api.injectEndpoints({
           .delete()
           .eq('id', id)
           .select('id');
-        if (error) return { error };
+        if (error) return { error: toApiError(error) };
         if (!data.length) return { error: notFoundError };
         return { data: { id } };
       },

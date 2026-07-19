@@ -1,5 +1,3 @@
-import { PostgrestError } from '@supabase/supabase-js';
-
 import { supabase } from '@/lib/supabase';
 import type {
   Transaction,
@@ -7,14 +5,12 @@ import type {
   TransactionUpdate,
 } from '@/types';
 
-import { api } from './baseApi';
+import { api, toApiError, type ApiError } from './baseApi';
 
-const notFoundError = new PostgrestError({
-  message: 'Row not found or not owned by the current user.',
-  details: '',
-  hint: '',
+const notFoundError: ApiError = {
   code: 'NOT_FOUND',
-});
+  message: 'Row not found or not owned by the current user.',
+};
 
 export const transactionsApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -24,7 +20,7 @@ export const transactionsApi = api.injectEndpoints({
           .from('transactions')
           .select('*')
           .order('occurred_at', { ascending: false });
-        if (error) return { error };
+        if (error) return { error: toApiError(error) };
         return { data };
       },
       providesTags: ['Transaction'],
@@ -36,7 +32,7 @@ export const transactionsApi = api.injectEndpoints({
           .insert(payload)
           .select()
           .single();
-        if (error) return { error };
+        if (error) return { error: toApiError(error) };
         return { data };
       },
       invalidatesTags: ['Transaction'],
@@ -52,7 +48,7 @@ export const transactionsApi = api.injectEndpoints({
           .eq('id', id)
           .select()
           .single();
-        if (error) return { error };
+        if (error) return { error: toApiError(error) };
         return { data };
       },
       invalidatesTags: ['Transaction'],
@@ -64,7 +60,7 @@ export const transactionsApi = api.injectEndpoints({
           .delete()
           .eq('id', id)
           .select('id');
-        if (error) return { error };
+        if (error) return { error: toApiError(error) };
         if (!data.length) return { error: notFoundError };
         return { data: { id } };
       },

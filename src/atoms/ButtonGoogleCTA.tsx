@@ -5,16 +5,22 @@ import { useTheme } from '@/theme';
 export interface ButtonGoogleCTAProps {
   onPress: () => void;
   label?: string;
+  disabled?: boolean;
 }
 
 export function ButtonGoogleCTA({
   onPress,
   label = 'Google ile Giriş Yap',
+  disabled = false,
 }: ButtonGoogleCTAProps) {
   const theme = useTheme();
 
   return (
-    <Pressable onPress={onPress} style={styles.container}>
+    <Pressable
+      onPress={onPress}
+      disabled={disabled}
+      style={[styles.container, { opacity: disabled ? 0.5 : 1 }]}
+    >
       <Text
         style={{
           fontFamily: theme.fonts.heading.bold,

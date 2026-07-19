@@ -21,6 +21,7 @@
           "name": "Login",
           "clip": true,
           "width": 390,
+          "height": 844,
           "layout": "vertical",
           "children": [
             {
@@ -33,167 +34,249 @@
             {
               "type": "frame",
               "id": "oKND6",
-              "name": "Hero Wrapper",
+              "name": "Content",
               "clip": true,
               "width": "fill_container",
+              "height": "fill_container",
               "fill": "$bg-app",
               "layout": "vertical",
-              "gap": 28,
+              "gap": "$gap-lg",
               "padding": [
                 40,
                 24
               ],
+              "justifyContent": "center",
               "children": [
                 {
-                  "type": "ellipse",
-                  "id": "GB5K7",
-                  "layoutPosition": "absolute",
-                  "x": 35,
-                  "y": 160,
-                  "name": "Ambient Glow",
-                  "fill": "#3ECF9A22",
-                  "width": 320,
-                  "height": 320,
-                  "effect": {
-                    "type": "blur",
-                    "radius": 90
-                  }
-                },
-                {
                   "type": "frame",
-                  "id": "gh4vb",
-                  "name": "Brand Row",
+                  "id": "KlZeK",
+                  "name": "Header",
                   "width": "fill_container",
-                  "gap": 10,
+                  "layout": "vertical",
+                  "gap": "$gap-sm",
                   "alignItems": "center",
                   "children": [
                     {
-                      "id": "Sirgt",
-                      "type": "ref",
-                      "ref": "W7Y8it",
+                      "type": "ellipse",
+                      "id": "ll4sF",
+                      "layoutPosition": "absolute",
+                      "x": 109,
+                      "y": -34,
+                      "name": "Ring 1",
+                      "width": 124,
+                      "height": 124,
+                      "stroke": "$accent-teal-faint",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "zvxwd",
+                      "layoutPosition": "absolute",
+                      "x": 67,
+                      "y": -76,
+                      "name": "Ring 2",
+                      "opacity": 0.66,
+                      "width": 208,
+                      "height": 208,
+                      "stroke": "$accent-teal-faint",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "aygfY",
+                      "layoutPosition": "absolute",
+                      "x": 23,
+                      "y": -120,
+                      "name": "Ring 3",
+                      "opacity": 0.4,
+                      "width": 296,
+                      "height": 296,
+                      "stroke": "$accent-teal-faint",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "AmM3M",
                       "name": "Mark Badge",
-                      "width": 38,
-                      "height": 38,
+                      "width": 56,
+                      "height": 56,
                       "fill": "$accent-teal-dim",
-                      "descendants": {
-                        "UXk2z": {
+                      "cornerRadius": "$radius-md",
+                      "stroke": "$accent-teal-border",
+                      "strokeWidth": 1,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "rxgN2",
+                          "name": "Mark",
+                          "width": 26,
+                          "height": 26,
                           "icon": "waves",
-                          "width": 18,
-                          "height": 18
+                          "library": "lucide",
+                          "fill": "$accent-teal"
                         }
-                      }
+                      ]
                     },
                     {
                       "type": "text",
-                      "id": "cBeV5",
+                      "id": "ufiGi",
                       "name": "Wordmark",
                       "fill": "$text-primary",
                       "content": "FollowFlow",
                       "fontFamily": "$font-heading",
-                      "fontSize": 19,
+                      "fontSize": 26,
                       "fontWeight": "700"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "aKJOk",
-                  "name": "Card Stack",
-                  "width": "fill_container",
-                  "height": 250,
-                  "layout": "none",
-                  "children": [
-                    {
-                      "id": "HFD5V",
-                      "type": "ref",
-                      "ref": "Lkuly",
-                      "name": "Preview Goal Card",
-                      "x": 38,
-                      "y": 6,
-                      "rotation": 352,
-                      "opacity": 0.55,
-                      "width": 280,
-                      "descendants": {
-                        "gn5Cb": {
-                          "content": "Tatilim"
-                        },
-                        "EuUGo": {
-                          "content": "Hedef: ₺60.000"
-                        }
-                      }
                     },
                     {
-                      "id": "m5Ele",
-                      "type": "ref",
-                      "ref": "Eby9s",
-                      "name": "Preview Net Durum",
-                      "x": 10,
-                      "y": 55,
-                      "rotation": 357,
-                      "width": 320,
-                      "effect": {
-                        "type": "shadow",
-                        "shadowType": "outer",
-                        "color": "#00000070",
-                        "offset": {
-                          "x": 0,
-                          "y": 16
-                        },
-                        "blur": 40
-                      }
+                      "type": "text",
+                      "id": "b7NdL",
+                      "name": "Caption",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Bütün finansal hayatın, tek ekranda.",
+                      "textAlign": "center",
+                      "fontFamily": "$font-body",
+                      "fontSize": 15,
+                      "fontWeight": "500"
                     }
                   ]
                 },
                 {
-                  "type": "text",
-                  "id": "b7NdL",
-                  "name": "Caption",
-                  "fill": "$text-secondary",
-                  "textGrowth": "fixed-width",
+                  "id": "F73Rs",
+                  "type": "ref",
+                  "ref": "qJm7X",
+                  "name": "Auth Card",
                   "width": "fill_container",
-                  "content": "Bütün finansal hayatın, tek ekranda.",
-                  "textAlign": "center",
-                  "fontFamily": "$font-body",
-                  "fontSize": 14,
-                  "fontWeight": "500"
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "cWR2X",
+                      "name": "Form",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": "$gap-md",
+                      "children": [
+                        {
+                          "id": "SEZzY",
+                          "type": "ref",
+                          "ref": "CXJSP",
+                          "name": "Auth Mode Toggle",
+                          "width": "fill_container",
+                          "descendants": {
+                            "RVRjg": {
+                              "content": "Giriş Yap"
+                            },
+                            "gNI9B": {
+                              "content": "Kayıt Ol"
+                            }
+                          }
+                        },
+                        {
+                          "id": "SNQw7",
+                          "type": "ref",
+                          "ref": "FL1A7",
+                          "name": "Email Field",
+                          "width": "fill_container",
+                          "descendants": {
+                            "kgcQ2": {
+                              "content": "E-posta"
+                            },
+                            "ta13y/U7hgsA": {
+                              "icon": "mail"
+                            },
+                            "ta13y/k5GvJz": {
+                              "content": "ornek@eposta.com"
+                            }
+                          }
+                        },
+                        {
+                          "id": "zI45i",
+                          "type": "ref",
+                          "ref": "FL1A7",
+                          "name": "Password Field",
+                          "width": "fill_container",
+                          "descendants": {
+                            "kgcQ2": {
+                              "content": "Şifre"
+                            },
+                            "ta13y/U7hgsA": {
+                              "icon": "lock"
+                            },
+                            "ta13y/k5GvJz": {
+                              "type": "frame",
+                              "id": "iss2j",
+                              "name": "Password Row",
+                              "width": "fill_container",
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "m09lN",
+                                  "name": "Dots",
+                                  "fill": "$text-tertiary",
+                                  "content": "••••••••",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "icon",
+                                  "id": "QNcaw",
+                                  "name": "Eye",
+                                  "width": 18,
+                                  "height": 18,
+                                  "icon": "eye",
+                                  "library": "lucide",
+                                  "fill": "$text-tertiary"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "id": "QgaqG",
+                          "type": "ref",
+                          "ref": "NirZj",
+                          "name": "Primary CTA",
+                          "width": "fill_container",
+                          "descendants": {
+                            "ZoKML": {
+                              "content": "Giriş Yap"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
                   "type": "frame",
-                  "id": "ARbrZ",
-                  "name": "Actions",
+                  "id": "O9PkmS",
+                  "name": "Alt Actions",
                   "width": "fill_container",
                   "layout": "vertical",
-                  "gap": 12,
+                  "gap": "$gap-md",
                   "children": [
                     {
-                      "id": "o9plod",
-                      "type": "ref",
-                      "ref": "GLXOa",
-                      "name": "Google CTA",
-                      "width": "fill_container"
-                    },
-                    {
-                      "id": "ECqY3",
+                      "id": "OIfNw",
                       "type": "ref",
                       "ref": "GbAxV",
                       "name": "Divider",
                       "width": "fill_container"
                     },
                     {
-                      "id": "Cp1c8",
+                      "id": "aDsd6",
                       "type": "ref",
-                      "ref": "iKwDe",
-                      "name": "Email CTA",
+                      "ref": "GLXOa",
+                      "name": "Google CTA",
                       "width": "fill_container",
-                      "stroke": "$border-subtle",
                       "descendants": {
-                        "Fc88j": {
-                          "icon": "mail",
-                          "fill": "$text-primary"
-                        },
-                        "pQXDq": {
-                          "content": "E-posta ile Giriş Yap",
-                          "fill": "$text-primary"
+                        "OBeV9": {
+                          "content": "Google ile Devam Et"
                         }
                       }
                     }
@@ -234,144 +317,166 @@
               ],
               "children": [
                 {
-                  "type": "frame",
-                  "id": "zTVXP",
-                  "name": "Top Row",
-                  "width": "fill_container",
-                  "justifyContent": "space_between",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "id": "CDPG0",
-                      "type": "ref",
-                      "ref": "FK7CO",
-                      "name": "Step Indicator"
-                    },
-                    {
-                      "type": "text",
-                      "id": "Xd9i3",
-                      "name": "Skip",
-                      "fill": "$text-tertiary",
-                      "content": "Atla",
-                      "fontFamily": "$font-body",
-                      "fontSize": 13,
-                      "fontWeight": "500"
-                    }
-                  ]
-                },
-                {
-                  "type": "text",
-                  "id": "BbRrp",
-                  "name": "Heading",
-                  "fill": "$text-primary",
-                  "content": "Gelir Kaynağını Ekle",
-                  "fontFamily": "$font-heading",
-                  "fontSize": 22,
-                  "fontWeight": "700"
-                },
-                {
-                  "type": "text",
-                  "id": "qMj60",
-                  "name": "Subheading",
-                  "fill": "$text-secondary",
-                  "textGrowth": "fixed-width",
-                  "width": "fill_container",
-                  "content": "Düzenli gelirini ekleyerek tahminlerini daha doğru hale getirelim.",
-                  "fontFamily": "$font-body",
-                  "fontSize": 13,
-                  "fontWeight": "normal"
-                },
-                {
-                  "id": "j2cTm1",
+                  "id": "rGqkG",
                   "type": "ref",
-                  "ref": "FL1A7",
-                  "name": "Name Field",
+                  "ref": "j87zQR",
+                  "name": "Top Bar",
                   "width": "fill_container",
                   "descendants": {
-                    "kgcQ2": {
-                      "content": "Gelir Adı"
-                    },
-                    "ta13y/U7hgsA": {
-                      "icon": "tag"
-                    },
-                    "ta13y/k5GvJz": {
-                      "content": "örn. Maaş"
-                    }
-                  }
-                },
-                {
-                  "id": "E1gxz",
-                  "type": "ref",
-                  "ref": "FL1A7",
-                  "name": "Amount Field",
-                  "width": "fill_container",
-                  "descendants": {
-                    "kgcQ2": {
-                      "content": "Tutar"
-                    },
-                    "ta13y/U7hgsA": {
-                      "icon": "banknote"
-                    },
-                    "ta13y/k5GvJz": {
-                      "content": "₺0,00"
+                    "pAIpp": {
+                      "enabled": false
                     }
                   }
                 },
                 {
                   "type": "frame",
-                  "id": "PSslM",
-                  "name": "Frequency Block",
+                  "id": "cqQAd",
+                  "name": "Title Block",
                   "width": "fill_container",
                   "layout": "vertical",
-                  "gap": 6,
+                  "gap": "$gap-sm",
                   "children": [
                     {
-                      "type": "text",
-                      "id": "Rkq8d",
-                      "name": "Label",
-                      "fill": "$text-secondary",
-                      "content": "Tekrar Sıklığı",
-                      "fontFamily": "$font-body",
-                      "fontSize": 12,
-                      "fontWeight": "600"
+                      "id": "JAITD",
+                      "type": "ref",
+                      "ref": "N5cF3",
+                      "name": "Step Badge"
                     },
                     {
-                      "id": "kmHCH",
-                      "type": "ref",
-                      "ref": "CXJSP",
-                      "name": "Toggle"
+                      "type": "text",
+                      "id": "BbRrp",
+                      "name": "Heading",
+                      "fill": "$text-primary",
+                      "content": "Gelir Kaynağını Ekle",
+                      "fontFamily": "$font-heading",
+                      "fontSize": 22,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "qMj60",
+                      "name": "Subheading",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Düzenli gelirini ekleyerek tahminlerini daha doğru hale getirelim.",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
                 {
-                  "id": "joavp",
+                  "id": "FLxlU",
                   "type": "ref",
-                  "ref": "FL1A7",
-                  "name": "Day Field",
+                  "ref": "qJm7X",
+                  "name": "Form Card",
                   "width": "fill_container",
-                  "descendants": {
-                    "kgcQ2": {
-                      "content": "Hangi Gün"
-                    },
-                    "ta13y/U7hgsA": {
-                      "icon": "calendar"
-                    },
-                    "ta13y/k5GvJz": {
-                      "content": "örn. Her ayın 1'i"
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "fTpy2",
+                      "name": "Form",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": "$gap-md",
+                      "children": [
+                        {
+                          "id": "yjn3V",
+                          "type": "ref",
+                          "ref": "FL1A7",
+                          "name": "Name Field",
+                          "width": "fill_container",
+                          "descendants": {
+                            "kgcQ2": {
+                              "content": "Gelir Adı"
+                            },
+                            "ta13y/U7hgsA": {
+                              "icon": "tag"
+                            },
+                            "ta13y/k5GvJz": {
+                              "content": "örn. Maaş"
+                            }
+                          }
+                        },
+                        {
+                          "id": "W4nu2",
+                          "type": "ref",
+                          "ref": "FL1A7",
+                          "name": "Amount Field",
+                          "width": "fill_container",
+                          "descendants": {
+                            "kgcQ2": {
+                              "content": "Tutar"
+                            },
+                            "ta13y/U7hgsA": {
+                              "icon": "banknote"
+                            },
+                            "ta13y/k5GvJz": {
+                              "content": "₺0,00"
+                            }
+                          }
+                        },
+                        {
+                          "type": "frame",
+                          "id": "i8MGp",
+                          "name": "Frequency Block",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 6,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "H5BMx",
+                              "name": "Label",
+                              "fill": "$text-secondary",
+                              "content": "Tekrar Sıklığı",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "id": "k4n2q",
+                              "type": "ref",
+                              "ref": "CXJSP",
+                              "name": "Frequency Toggle",
+                              "width": "fill_container"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "V8q3g",
+                          "type": "ref",
+                          "ref": "FL1A7",
+                          "name": "Day Field",
+                          "width": "fill_container",
+                          "descendants": {
+                            "kgcQ2": {
+                              "content": "Ödeme Günü (ayın kaçı)"
+                            },
+                            "ta13y/U7hgsA": {
+                              "icon": "calendar"
+                            },
+                            "ta13y/k5GvJz": {
+                              "content": "1-31"
+                            }
+                          }
+                        },
+                        {
+                          "id": "lcURV",
+                          "type": "ref",
+                          "ref": "NirZj",
+                          "name": "Primary CTA",
+                          "width": "fill_container",
+                          "descendants": {
+                            "ZoKML": {
+                              "content": "Kaydet ve İlerle"
+                            }
+                          }
+                        }
+                      ]
                     }
-                  }
-                },
-                {
-                  "id": "COrZD",
-                  "type": "ref",
-                  "ref": "NirZj",
-                  "name": "Primary CTA",
-                  "width": "fill_container",
-                  "descendants": {
-                    "ZoKML": {
-                      "content": "Kaydet ve İlerle"
-                    }
-                  }
+                  ]
                 },
                 {
                   "type": "text",
@@ -421,154 +526,179 @@
               ],
               "children": [
                 {
-                  "type": "frame",
-                  "id": "vz70B",
-                  "name": "Top Row",
+                  "id": "CM1HV",
+                  "type": "ref",
+                  "ref": "j87zQR",
+                  "name": "Top Bar",
                   "width": "fill_container",
-                  "justifyContent": "space_between",
-                  "alignItems": "center",
+                  "descendants": {
+                    "BRdzJ/hM9wm": {
+                      "width": 8,
+                      "fill": "$border-subtle"
+                    },
+                    "BRdzJ/Tbg3E": {
+                      "width": 24,
+                      "fill": "$accent-teal"
+                    }
+                  }
+                },
+                {
+                  "type": "frame",
+                  "id": "K1tgpw",
+                  "name": "Title Block",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": "$gap-sm",
                   "children": [
                     {
-                      "id": "LQBlY",
+                      "id": "U2FP8I",
                       "type": "ref",
-                      "ref": "FK7CO",
-                      "name": "Step Indicator",
+                      "ref": "N5cF3",
+                      "name": "Step Badge",
                       "descendants": {
-                        "hM9wm": {
-                          "width": 8,
-                          "fill": "$border-subtle"
+                        "t7OMv": {
+                          "icon": "repeat"
                         },
-                        "Tbg3E": {
-                          "width": 24,
-                          "fill": "$accent-teal"
+                        "Gc3PJ": {
+                          "content": "ADIM 2/3"
                         }
                       }
                     },
                     {
                       "type": "text",
-                      "id": "h6Soj",
-                      "name": "Skip",
-                      "fill": "$text-tertiary",
-                      "content": "Atla",
-                      "fontFamily": "$font-body",
-                      "fontSize": 13,
-                      "fontWeight": "500"
-                    }
-                  ]
-                },
-                {
-                  "type": "text",
-                  "id": "WwiiG",
-                  "name": "Heading",
-                  "fill": "$text-primary",
-                  "content": "Tekrarlayan Ödemeni Ekle",
-                  "fontFamily": "$font-heading",
-                  "fontSize": 22,
-                  "fontWeight": "700"
-                },
-                {
-                  "type": "text",
-                  "id": "juXsH",
-                  "name": "Subheading",
-                  "fill": "$text-secondary",
-                  "textGrowth": "fixed-width",
-                  "width": "fill_container",
-                  "content": "Kira, fatura veya abonelik gibi sabit giderlerini ekle, yaklaşan ödemeleri unutma.",
-                  "fontFamily": "$font-body",
-                  "fontSize": 13,
-                  "fontWeight": "normal"
-                },
-                {
-                  "id": "q1wf7",
-                  "type": "ref",
-                  "ref": "FL1A7",
-                  "name": "Name Field",
-                  "width": "fill_container",
-                  "descendants": {
-                    "kgcQ2": {
-                      "content": "Ödeme Adı"
+                      "id": "WwiiG",
+                      "name": "Heading",
+                      "fill": "$text-primary",
+                      "content": "Tekrarlayan Ödemeni Ekle",
+                      "fontFamily": "$font-heading",
+                      "fontSize": 22,
+                      "fontWeight": "700"
                     },
-                    "ta13y/U7hgsA": {
-                      "icon": "tag"
-                    },
-                    "ta13y/k5GvJz": {
-                      "content": "örn. Kira"
-                    }
-                  }
-                },
-                {
-                  "id": "HOskh",
-                  "type": "ref",
-                  "ref": "FL1A7",
-                  "name": "Amount Field",
-                  "width": "fill_container",
-                  "descendants": {
-                    "kgcQ2": {
-                      "content": "Tutar"
-                    },
-                    "ta13y/U7hgsA": {
-                      "icon": "banknote"
-                    },
-                    "ta13y/k5GvJz": {
-                      "content": "₺0,00"
-                    }
-                  }
-                },
-                {
-                  "type": "frame",
-                  "id": "fjR6N",
-                  "name": "Frequency Block",
-                  "width": "fill_container",
-                  "layout": "vertical",
-                  "gap": 6,
-                  "children": [
                     {
                       "type": "text",
-                      "id": "TzNQf",
-                      "name": "Label",
+                      "id": "juXsH",
+                      "name": "Subheading",
                       "fill": "$text-secondary",
-                      "content": "Tekrar Sıklığı",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Kira, fatura veya abonelik gibi sabit giderlerini ekle, yaklaşan ödemeleri unutma.",
                       "fontFamily": "$font-body",
-                      "fontSize": 12,
-                      "fontWeight": "600"
-                    },
-                    {
-                      "id": "ggPB3",
-                      "type": "ref",
-                      "ref": "CXJSP",
-                      "name": "Toggle"
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
                 {
-                  "id": "V5rCR",
+                  "id": "g7Tok",
                   "type": "ref",
-                  "ref": "FL1A7",
-                  "name": "Day Field",
+                  "ref": "qJm7X",
+                  "name": "Form Card",
                   "width": "fill_container",
-                  "descendants": {
-                    "kgcQ2": {
-                      "content": "Ödeme Günü"
-                    },
-                    "ta13y/U7hgsA": {
-                      "icon": "calendar"
-                    },
-                    "ta13y/k5GvJz": {
-                      "content": "örn. Her ayın 5'i"
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "xFa5Z",
+                      "name": "Form",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": "$gap-md",
+                      "children": [
+                        {
+                          "id": "irPpQ",
+                          "type": "ref",
+                          "ref": "FL1A7",
+                          "name": "Name Field",
+                          "width": "fill_container",
+                          "descendants": {
+                            "kgcQ2": {
+                              "content": "Ödeme Adı"
+                            },
+                            "ta13y/U7hgsA": {
+                              "icon": "tag"
+                            },
+                            "ta13y/k5GvJz": {
+                              "content": "örn. Kira"
+                            }
+                          }
+                        },
+                        {
+                          "id": "yPwhX",
+                          "type": "ref",
+                          "ref": "FL1A7",
+                          "name": "Amount Field",
+                          "width": "fill_container",
+                          "descendants": {
+                            "kgcQ2": {
+                              "content": "Tutar"
+                            },
+                            "ta13y/U7hgsA": {
+                              "icon": "banknote"
+                            },
+                            "ta13y/k5GvJz": {
+                              "content": "₺0,00"
+                            }
+                          }
+                        },
+                        {
+                          "type": "frame",
+                          "id": "d0dJD",
+                          "name": "Frequency Block",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 6,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "ZQYiE",
+                              "name": "Label",
+                              "fill": "$text-secondary",
+                              "content": "Tekrar Sıklığı",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "id": "TJ3ch",
+                              "type": "ref",
+                              "ref": "CXJSP",
+                              "name": "Frequency Toggle",
+                              "width": "fill_container"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "ITW32",
+                          "type": "ref",
+                          "ref": "FL1A7",
+                          "name": "Day Field",
+                          "width": "fill_container",
+                          "descendants": {
+                            "kgcQ2": {
+                              "content": "Ödeme Günü (ayın kaçı)"
+                            },
+                            "ta13y/U7hgsA": {
+                              "icon": "calendar"
+                            },
+                            "ta13y/k5GvJz": {
+                              "content": "1-31"
+                            }
+                          }
+                        },
+                        {
+                          "id": "P0b2sk",
+                          "type": "ref",
+                          "ref": "NirZj",
+                          "name": "Primary CTA",
+                          "width": "fill_container",
+                          "descendants": {
+                            "ZoKML": {
+                              "content": "Kaydet ve İlerle"
+                            }
+                          }
+                        }
+                      ]
                     }
-                  }
-                },
-                {
-                  "id": "JcxBE",
-                  "type": "ref",
-                  "ref": "NirZj",
-                  "name": "Primary CTA",
-                  "width": "fill_container",
-                  "descendants": {
-                    "ZoKML": {
-                      "content": "Kaydet ve İlerle"
-                    }
-                  }
+                  ]
                 },
                 {
                   "type": "text",
@@ -618,128 +748,152 @@
               ],
               "children": [
                 {
-                  "type": "frame",
-                  "id": "SS0ZJ",
-                  "name": "Top Row",
+                  "id": "EcfOw",
+                  "type": "ref",
+                  "ref": "j87zQR",
+                  "name": "Top Bar",
                   "width": "fill_container",
-                  "justifyContent": "space_between",
-                  "alignItems": "center",
+                  "descendants": {
+                    "BRdzJ/hM9wm": {
+                      "width": 8,
+                      "fill": "$border-subtle"
+                    },
+                    "BRdzJ/N6Tqho": {
+                      "width": 24,
+                      "fill": "$accent-teal"
+                    }
+                  }
+                },
+                {
+                  "type": "frame",
+                  "id": "ub08A",
+                  "name": "Title Block",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": "$gap-sm",
                   "children": [
                     {
-                      "id": "E8j6WK",
+                      "id": "R7w8Pv",
                       "type": "ref",
-                      "ref": "FK7CO",
-                      "name": "Step Indicator",
+                      "ref": "N5cF3",
+                      "name": "Step Badge",
                       "descendants": {
-                        "hM9wm": {
-                          "width": 8,
-                          "fill": "$border-subtle"
+                        "t7OMv": {
+                          "icon": "target"
                         },
-                        "N6Tqho": {
-                          "width": 24,
-                          "fill": "$accent-teal"
+                        "Gc3PJ": {
+                          "content": "ADIM 3/3"
                         }
                       }
                     },
                     {
                       "type": "text",
-                      "id": "i2rn7",
-                      "name": "Skip",
-                      "fill": "$text-tertiary",
-                      "content": "Atla",
+                      "id": "x3gB1",
+                      "name": "Heading",
+                      "fill": "$text-primary",
+                      "content": "Bir Tasarruf Hedefi Belirle",
+                      "fontFamily": "$font-heading",
+                      "fontSize": 22,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "y2BbG",
+                      "name": "Subheading",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Opsiyonel — istersen şimdi bir hedef koy, istersen daha sonra ekle.",
                       "fontFamily": "$font-body",
                       "fontSize": 13,
-                      "fontWeight": "500"
+                      "fontWeight": "normal"
                     }
                   ]
                 },
                 {
-                  "type": "text",
-                  "id": "x3gB1",
-                  "name": "Heading",
-                  "fill": "$text-primary",
-                  "content": "Bir Tasarruf Hedefi Belirle",
-                  "fontFamily": "$font-heading",
-                  "fontSize": 22,
-                  "fontWeight": "700"
-                },
-                {
-                  "type": "text",
-                  "id": "y2BbG",
-                  "name": "Subheading",
-                  "fill": "$text-secondary",
-                  "textGrowth": "fixed-width",
-                  "width": "fill_container",
-                  "content": "Opsiyonel — istersen şimdi bir hedef koy, istersen daha sonra ekle.",
-                  "fontFamily": "$font-body",
-                  "fontSize": 13,
-                  "fontWeight": "normal"
-                },
-                {
-                  "id": "yrXhy",
+                  "id": "S7vJo",
                   "type": "ref",
-                  "ref": "FL1A7",
-                  "name": "Name Field",
+                  "ref": "qJm7X",
+                  "name": "Form Card",
                   "width": "fill_container",
-                  "descendants": {
-                    "kgcQ2": {
-                      "content": "Hedef Adı"
-                    },
-                    "ta13y/U7hgsA": {
-                      "icon": "target"
-                    },
-                    "ta13y/k5GvJz": {
-                      "content": "örn. Tatil"
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "c6zssP",
+                      "name": "Form",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": "$gap-md",
+                      "children": [
+                        {
+                          "id": "GENxz",
+                          "type": "ref",
+                          "ref": "FL1A7",
+                          "name": "Name Field",
+                          "width": "fill_container",
+                          "descendants": {
+                            "kgcQ2": {
+                              "content": "Hedef Adı"
+                            },
+                            "ta13y/U7hgsA": {
+                              "icon": "target"
+                            },
+                            "ta13y/k5GvJz": {
+                              "content": "örn. Tatil"
+                            }
+                          }
+                        },
+                        {
+                          "id": "PSjAl",
+                          "type": "ref",
+                          "ref": "FL1A7",
+                          "name": "Target Field",
+                          "width": "fill_container",
+                          "descendants": {
+                            "kgcQ2": {
+                              "content": "Hedef Tutarı"
+                            },
+                            "ta13y/U7hgsA": {
+                              "icon": "banknote"
+                            },
+                            "ta13y/k5GvJz": {
+                              "content": "₺0,00"
+                            }
+                          }
+                        },
+                        {
+                          "id": "SARNj",
+                          "type": "ref",
+                          "ref": "FL1A7",
+                          "name": "Saved Field",
+                          "width": "fill_container",
+                          "descendants": {
+                            "kgcQ2": {
+                              "content": "Mevcut Birikim (opsiyonel)"
+                            },
+                            "ta13y/U7hgsA": {
+                              "icon": "piggy-bank"
+                            },
+                            "ta13y/k5GvJz": {
+                              "content": "₺0,00"
+                            }
+                          }
+                        },
+                        {
+                          "id": "rIcpy",
+                          "type": "ref",
+                          "ref": "NirZj",
+                          "name": "Primary CTA",
+                          "width": "fill_container",
+                          "descendants": {
+                            "ZoKML": {
+                              "content": "Hedefi Kaydet ve Başla"
+                            }
+                          }
+                        }
+                      ]
                     }
-                  }
-                },
-                {
-                  "id": "bujBX",
-                  "type": "ref",
-                  "ref": "FL1A7",
-                  "name": "Target Field",
-                  "width": "fill_container",
-                  "descendants": {
-                    "kgcQ2": {
-                      "content": "Hedef Tutarı"
-                    },
-                    "ta13y/U7hgsA": {
-                      "icon": "banknote"
-                    },
-                    "ta13y/k5GvJz": {
-                      "content": "₺0,00"
-                    }
-                  }
-                },
-                {
-                  "id": "SOJ2M",
-                  "type": "ref",
-                  "ref": "FL1A7",
-                  "name": "Saved Field",
-                  "width": "fill_container",
-                  "descendants": {
-                    "kgcQ2": {
-                      "content": "Mevcut Birikim (opsiyonel)"
-                    },
-                    "ta13y/U7hgsA": {
-                      "icon": "piggy-bank"
-                    },
-                    "ta13y/k5GvJz": {
-                      "content": "₺0,00"
-                    }
-                  }
-                },
-                {
-                  "id": "UTZQt",
-                  "type": "ref",
-                  "ref": "NirZj",
-                  "name": "Primary CTA",
-                  "width": "fill_container",
-                  "descendants": {
-                    "ZoKML": {
-                      "content": "Hedefi Kaydet ve Başla"
-                    }
-                  }
+                  ]
                 },
                 {
                   "type": "text",
@@ -4700,6 +4854,7 @@
           "name": "Login",
           "clip": true,
           "width": 390,
+          "height": 844,
           "layout": "vertical",
           "children": [
             {
@@ -4712,167 +4867,249 @@
             {
               "type": "frame",
               "id": "cGK77",
-              "name": "Hero Wrapper",
+              "name": "Content",
               "clip": true,
               "width": "fill_container",
+              "height": "fill_container",
               "fill": "$bg-app",
               "layout": "vertical",
-              "gap": 28,
+              "gap": "$gap-lg",
               "padding": [
                 40,
                 24
               ],
+              "justifyContent": "center",
               "children": [
                 {
-                  "type": "ellipse",
-                  "id": "o5bzB",
-                  "layoutPosition": "absolute",
-                  "x": 35,
-                  "y": 160,
-                  "name": "Ambient Glow",
-                  "fill": "#3ECF9A22",
-                  "width": 320,
-                  "height": 320,
-                  "effect": {
-                    "type": "blur",
-                    "radius": 90
-                  }
-                },
-                {
                   "type": "frame",
-                  "id": "h7FBb",
-                  "name": "Brand Row",
+                  "id": "gARWU",
+                  "name": "Header",
                   "width": "fill_container",
-                  "gap": 10,
+                  "layout": "vertical",
+                  "gap": "$gap-sm",
                   "alignItems": "center",
                   "children": [
                     {
-                      "id": "z7Llj",
-                      "type": "ref",
-                      "ref": "W7Y8it",
+                      "type": "ellipse",
+                      "id": "bViqU",
+                      "layoutPosition": "absolute",
+                      "x": 109,
+                      "y": -34,
+                      "name": "Ring 1",
+                      "width": 124,
+                      "height": 124,
+                      "stroke": "$accent-teal-faint",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "n4bgo",
+                      "layoutPosition": "absolute",
+                      "x": 67,
+                      "y": -76,
+                      "name": "Ring 2",
+                      "opacity": 0.66,
+                      "width": 208,
+                      "height": 208,
+                      "stroke": "$accent-teal-faint",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "a1M4Gn",
+                      "layoutPosition": "absolute",
+                      "x": 23,
+                      "y": -120,
+                      "name": "Ring 3",
+                      "opacity": 0.4,
+                      "width": 296,
+                      "height": 296,
+                      "stroke": "$accent-teal-faint",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "BFtLV",
                       "name": "Mark Badge",
-                      "width": 38,
-                      "height": 38,
+                      "width": 56,
+                      "height": 56,
                       "fill": "$accent-teal-dim",
-                      "descendants": {
-                        "UXk2z": {
+                      "cornerRadius": "$radius-md",
+                      "stroke": "$accent-teal-border",
+                      "strokeWidth": 1,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "V1Ur2s",
+                          "name": "Mark",
+                          "width": 26,
+                          "height": 26,
                           "icon": "waves",
-                          "width": 18,
-                          "height": 18
+                          "library": "lucide",
+                          "fill": "$accent-teal"
                         }
-                      }
+                      ]
                     },
                     {
                       "type": "text",
-                      "id": "xEGZy",
+                      "id": "IyQIS",
                       "name": "Wordmark",
                       "fill": "$text-primary",
                       "content": "FollowFlow",
                       "fontFamily": "$font-heading",
-                      "fontSize": 19,
+                      "fontSize": 26,
                       "fontWeight": "700"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "G5nBPg",
-                  "name": "Card Stack",
-                  "width": "fill_container",
-                  "height": 250,
-                  "layout": "none",
-                  "children": [
-                    {
-                      "id": "gzNSM",
-                      "type": "ref",
-                      "ref": "Lkuly",
-                      "name": "Preview Goal Card",
-                      "x": 38,
-                      "y": 6,
-                      "rotation": 352,
-                      "opacity": 0.55,
-                      "width": 280,
-                      "descendants": {
-                        "gn5Cb": {
-                          "content": "Tatilim"
-                        },
-                        "EuUGo": {
-                          "content": "Hedef: ₺60.000"
-                        }
-                      }
                     },
                     {
-                      "id": "mEnGf",
-                      "type": "ref",
-                      "ref": "Eby9s",
-                      "name": "Preview Net Durum",
-                      "x": 10,
-                      "y": 55,
-                      "rotation": 357,
-                      "width": 320,
-                      "effect": {
-                        "type": "shadow",
-                        "shadowType": "outer",
-                        "color": "#00000070",
-                        "offset": {
-                          "x": 0,
-                          "y": 16
-                        },
-                        "blur": 40
-                      }
+                      "type": "text",
+                      "id": "cNzja",
+                      "name": "Caption",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Bütün finansal hayatın, tek ekranda.",
+                      "textAlign": "center",
+                      "fontFamily": "$font-body",
+                      "fontSize": 15,
+                      "fontWeight": "500"
                     }
                   ]
                 },
                 {
-                  "type": "text",
-                  "id": "cNzja",
-                  "name": "Caption",
-                  "fill": "$text-secondary",
-                  "textGrowth": "fixed-width",
+                  "id": "VkTa5",
+                  "type": "ref",
+                  "ref": "qJm7X",
+                  "name": "Auth Card",
                   "width": "fill_container",
-                  "content": "Bütün finansal hayatın, tek ekranda.",
-                  "textAlign": "center",
-                  "fontFamily": "$font-body",
-                  "fontSize": 14,
-                  "fontWeight": "500"
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "j0jxi",
+                      "name": "Form",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": "$gap-md",
+                      "children": [
+                        {
+                          "id": "p5WF4",
+                          "type": "ref",
+                          "ref": "CXJSP",
+                          "name": "Auth Mode Toggle",
+                          "width": "fill_container",
+                          "descendants": {
+                            "RVRjg": {
+                              "content": "Giriş Yap"
+                            },
+                            "gNI9B": {
+                              "content": "Kayıt Ol"
+                            }
+                          }
+                        },
+                        {
+                          "id": "uGKSr",
+                          "type": "ref",
+                          "ref": "FL1A7",
+                          "name": "Email Field",
+                          "width": "fill_container",
+                          "descendants": {
+                            "kgcQ2": {
+                              "content": "E-posta"
+                            },
+                            "ta13y/U7hgsA": {
+                              "icon": "mail"
+                            },
+                            "ta13y/k5GvJz": {
+                              "content": "ornek@eposta.com"
+                            }
+                          }
+                        },
+                        {
+                          "id": "qn1Ry",
+                          "type": "ref",
+                          "ref": "FL1A7",
+                          "name": "Password Field",
+                          "width": "fill_container",
+                          "descendants": {
+                            "kgcQ2": {
+                              "content": "Şifre"
+                            },
+                            "ta13y/U7hgsA": {
+                              "icon": "lock"
+                            },
+                            "ta13y/k5GvJz": {
+                              "type": "frame",
+                              "id": "dVCFQ",
+                              "name": "Password Row",
+                              "width": "fill_container",
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "hWFcC",
+                                  "name": "Dots",
+                                  "fill": "$text-tertiary",
+                                  "content": "••••••••",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "icon",
+                                  "id": "NbQL6",
+                                  "name": "Eye",
+                                  "width": 18,
+                                  "height": 18,
+                                  "icon": "eye",
+                                  "library": "lucide",
+                                  "fill": "$text-tertiary"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "id": "MzTQi",
+                          "type": "ref",
+                          "ref": "NirZj",
+                          "name": "Primary CTA",
+                          "width": "fill_container",
+                          "descendants": {
+                            "ZoKML": {
+                              "content": "Giriş Yap"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
                   "type": "frame",
-                  "id": "YmWc8",
-                  "name": "Actions",
+                  "id": "vYLXH",
+                  "name": "Alt Actions",
                   "width": "fill_container",
                   "layout": "vertical",
-                  "gap": 12,
+                  "gap": "$gap-md",
                   "children": [
                     {
-                      "id": "I1PLsT",
-                      "type": "ref",
-                      "ref": "GLXOa",
-                      "name": "Google CTA",
-                      "width": "fill_container"
-                    },
-                    {
-                      "id": "pZUPM",
+                      "id": "u7iMD",
                       "type": "ref",
                       "ref": "GbAxV",
                       "name": "Divider",
                       "width": "fill_container"
                     },
                     {
-                      "id": "veITR",
+                      "id": "sQ84b",
                       "type": "ref",
-                      "ref": "iKwDe",
-                      "name": "Email CTA",
+                      "ref": "GLXOa",
+                      "name": "Google CTA",
                       "width": "fill_container",
-                      "stroke": "$border-subtle",
                       "descendants": {
-                        "Fc88j": {
-                          "icon": "mail",
-                          "fill": "$text-primary"
-                        },
-                        "pQXDq": {
-                          "content": "E-posta ile Giriş Yap",
-                          "fill": "$text-primary"
+                        "OBeV9": {
+                          "content": "Google ile Devam Et"
                         }
                       }
                     }
@@ -4913,144 +5150,166 @@
               ],
               "children": [
                 {
-                  "type": "frame",
-                  "id": "UyKNY",
-                  "name": "Top Row",
-                  "width": "fill_container",
-                  "justifyContent": "space_between",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "id": "RGaWS",
-                      "type": "ref",
-                      "ref": "FK7CO",
-                      "name": "Step Indicator"
-                    },
-                    {
-                      "type": "text",
-                      "id": "KbhWl",
-                      "name": "Skip",
-                      "fill": "$text-tertiary",
-                      "content": "Atla",
-                      "fontFamily": "$font-body",
-                      "fontSize": 13,
-                      "fontWeight": "500"
-                    }
-                  ]
-                },
-                {
-                  "type": "text",
-                  "id": "ohTWH",
-                  "name": "Heading",
-                  "fill": "$text-primary",
-                  "content": "Gelir Kaynağını Ekle",
-                  "fontFamily": "$font-heading",
-                  "fontSize": 22,
-                  "fontWeight": "700"
-                },
-                {
-                  "type": "text",
-                  "id": "rpX0a",
-                  "name": "Subheading",
-                  "fill": "$text-secondary",
-                  "textGrowth": "fixed-width",
-                  "width": "fill_container",
-                  "content": "Düzenli gelirini ekleyerek tahminlerini daha doğru hale getirelim.",
-                  "fontFamily": "$font-body",
-                  "fontSize": 13,
-                  "fontWeight": "normal"
-                },
-                {
-                  "id": "jvOTN",
+                  "id": "GoIIX",
                   "type": "ref",
-                  "ref": "FL1A7",
-                  "name": "Name Field",
+                  "ref": "j87zQR",
+                  "name": "Top Bar",
                   "width": "fill_container",
                   "descendants": {
-                    "kgcQ2": {
-                      "content": "Gelir Adı"
-                    },
-                    "ta13y/U7hgsA": {
-                      "icon": "tag"
-                    },
-                    "ta13y/k5GvJz": {
-                      "content": "örn. Maaş"
-                    }
-                  }
-                },
-                {
-                  "id": "qfwzm",
-                  "type": "ref",
-                  "ref": "FL1A7",
-                  "name": "Amount Field",
-                  "width": "fill_container",
-                  "descendants": {
-                    "kgcQ2": {
-                      "content": "Tutar"
-                    },
-                    "ta13y/U7hgsA": {
-                      "icon": "banknote"
-                    },
-                    "ta13y/k5GvJz": {
-                      "content": "₺0,00"
+                    "pAIpp": {
+                      "enabled": false
                     }
                   }
                 },
                 {
                   "type": "frame",
-                  "id": "q1Ch4",
-                  "name": "Frequency Block",
+                  "id": "yGr7s",
+                  "name": "Title Block",
                   "width": "fill_container",
                   "layout": "vertical",
-                  "gap": 6,
+                  "gap": "$gap-sm",
                   "children": [
                     {
-                      "type": "text",
-                      "id": "pufTy",
-                      "name": "Label",
-                      "fill": "$text-secondary",
-                      "content": "Tekrar Sıklığı",
-                      "fontFamily": "$font-body",
-                      "fontSize": 12,
-                      "fontWeight": "600"
+                      "id": "TpPGC",
+                      "type": "ref",
+                      "ref": "N5cF3",
+                      "name": "Step Badge"
                     },
                     {
-                      "id": "kJln9",
-                      "type": "ref",
-                      "ref": "CXJSP",
-                      "name": "Toggle"
+                      "type": "text",
+                      "id": "ohTWH",
+                      "name": "Heading",
+                      "fill": "$text-primary",
+                      "content": "Gelir Kaynağını Ekle",
+                      "fontFamily": "$font-heading",
+                      "fontSize": 22,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "rpX0a",
+                      "name": "Subheading",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Düzenli gelirini ekleyerek tahminlerini daha doğru hale getirelim.",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
                 {
-                  "id": "gOEVY",
+                  "id": "o3X5Kk",
                   "type": "ref",
-                  "ref": "FL1A7",
-                  "name": "Day Field",
+                  "ref": "qJm7X",
+                  "name": "Form Card",
                   "width": "fill_container",
-                  "descendants": {
-                    "kgcQ2": {
-                      "content": "Hangi Gün"
-                    },
-                    "ta13y/U7hgsA": {
-                      "icon": "calendar"
-                    },
-                    "ta13y/k5GvJz": {
-                      "content": "örn. Her ayın 1'i"
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "UHl59",
+                      "name": "Form",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": "$gap-md",
+                      "children": [
+                        {
+                          "id": "Uj0Cn",
+                          "type": "ref",
+                          "ref": "FL1A7",
+                          "name": "Name Field",
+                          "width": "fill_container",
+                          "descendants": {
+                            "kgcQ2": {
+                              "content": "Gelir Adı"
+                            },
+                            "ta13y/U7hgsA": {
+                              "icon": "tag"
+                            },
+                            "ta13y/k5GvJz": {
+                              "content": "örn. Maaş"
+                            }
+                          }
+                        },
+                        {
+                          "id": "c02qj",
+                          "type": "ref",
+                          "ref": "FL1A7",
+                          "name": "Amount Field",
+                          "width": "fill_container",
+                          "descendants": {
+                            "kgcQ2": {
+                              "content": "Tutar"
+                            },
+                            "ta13y/U7hgsA": {
+                              "icon": "banknote"
+                            },
+                            "ta13y/k5GvJz": {
+                              "content": "₺0,00"
+                            }
+                          }
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ZIsOW",
+                          "name": "Frequency Block",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 6,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "QhJSh",
+                              "name": "Label",
+                              "fill": "$text-secondary",
+                              "content": "Tekrar Sıklığı",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "id": "JosB2",
+                              "type": "ref",
+                              "ref": "CXJSP",
+                              "name": "Frequency Toggle",
+                              "width": "fill_container"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "eyNaa",
+                          "type": "ref",
+                          "ref": "FL1A7",
+                          "name": "Day Field",
+                          "width": "fill_container",
+                          "descendants": {
+                            "kgcQ2": {
+                              "content": "Ödeme Günü (ayın kaçı)"
+                            },
+                            "ta13y/U7hgsA": {
+                              "icon": "calendar"
+                            },
+                            "ta13y/k5GvJz": {
+                              "content": "1-31"
+                            }
+                          }
+                        },
+                        {
+                          "id": "CPUOe",
+                          "type": "ref",
+                          "ref": "NirZj",
+                          "name": "Primary CTA",
+                          "width": "fill_container",
+                          "descendants": {
+                            "ZoKML": {
+                              "content": "Kaydet ve İlerle"
+                            }
+                          }
+                        }
+                      ]
                     }
-                  }
-                },
-                {
-                  "id": "UFiVZ",
-                  "type": "ref",
-                  "ref": "NirZj",
-                  "name": "Primary CTA",
-                  "width": "fill_container",
-                  "descendants": {
-                    "ZoKML": {
-                      "content": "Kaydet ve İlerle"
-                    }
-                  }
+                  ]
                 },
                 {
                   "type": "text",
@@ -5100,154 +5359,179 @@
               ],
               "children": [
                 {
-                  "type": "frame",
-                  "id": "w0Eeg4",
-                  "name": "Top Row",
+                  "id": "YFMs9",
+                  "type": "ref",
+                  "ref": "j87zQR",
+                  "name": "Top Bar",
                   "width": "fill_container",
-                  "justifyContent": "space_between",
-                  "alignItems": "center",
+                  "descendants": {
+                    "BRdzJ/hM9wm": {
+                      "width": 8,
+                      "fill": "$border-subtle"
+                    },
+                    "BRdzJ/Tbg3E": {
+                      "width": 24,
+                      "fill": "$accent-teal"
+                    }
+                  }
+                },
+                {
+                  "type": "frame",
+                  "id": "Og4fn",
+                  "name": "Title Block",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": "$gap-sm",
                   "children": [
                     {
-                      "id": "oK49K",
+                      "id": "Sga1s",
                       "type": "ref",
-                      "ref": "FK7CO",
-                      "name": "Step Indicator",
+                      "ref": "N5cF3",
+                      "name": "Step Badge",
                       "descendants": {
-                        "hM9wm": {
-                          "width": 8,
-                          "fill": "$border-subtle"
+                        "t7OMv": {
+                          "icon": "repeat"
                         },
-                        "Tbg3E": {
-                          "width": 24,
-                          "fill": "$accent-teal"
+                        "Gc3PJ": {
+                          "content": "ADIM 2/3"
                         }
                       }
                     },
                     {
                       "type": "text",
-                      "id": "f68YVq",
-                      "name": "Skip",
-                      "fill": "$text-tertiary",
-                      "content": "Atla",
-                      "fontFamily": "$font-body",
-                      "fontSize": 13,
-                      "fontWeight": "500"
-                    }
-                  ]
-                },
-                {
-                  "type": "text",
-                  "id": "qVEif",
-                  "name": "Heading",
-                  "fill": "$text-primary",
-                  "content": "Tekrarlayan Ödemeni Ekle",
-                  "fontFamily": "$font-heading",
-                  "fontSize": 22,
-                  "fontWeight": "700"
-                },
-                {
-                  "type": "text",
-                  "id": "SdrPT",
-                  "name": "Subheading",
-                  "fill": "$text-secondary",
-                  "textGrowth": "fixed-width",
-                  "width": "fill_container",
-                  "content": "Kira, fatura veya abonelik gibi sabit giderlerini ekle, yaklaşan ödemeleri unutma.",
-                  "fontFamily": "$font-body",
-                  "fontSize": 13,
-                  "fontWeight": "normal"
-                },
-                {
-                  "id": "vMbcU",
-                  "type": "ref",
-                  "ref": "FL1A7",
-                  "name": "Name Field",
-                  "width": "fill_container",
-                  "descendants": {
-                    "kgcQ2": {
-                      "content": "Ödeme Adı"
+                      "id": "qVEif",
+                      "name": "Heading",
+                      "fill": "$text-primary",
+                      "content": "Tekrarlayan Ödemeni Ekle",
+                      "fontFamily": "$font-heading",
+                      "fontSize": 22,
+                      "fontWeight": "700"
                     },
-                    "ta13y/U7hgsA": {
-                      "icon": "tag"
-                    },
-                    "ta13y/k5GvJz": {
-                      "content": "örn. Kira"
-                    }
-                  }
-                },
-                {
-                  "id": "CKSL4",
-                  "type": "ref",
-                  "ref": "FL1A7",
-                  "name": "Amount Field",
-                  "width": "fill_container",
-                  "descendants": {
-                    "kgcQ2": {
-                      "content": "Tutar"
-                    },
-                    "ta13y/U7hgsA": {
-                      "icon": "banknote"
-                    },
-                    "ta13y/k5GvJz": {
-                      "content": "₺0,00"
-                    }
-                  }
-                },
-                {
-                  "type": "frame",
-                  "id": "sAtBc",
-                  "name": "Frequency Block",
-                  "width": "fill_container",
-                  "layout": "vertical",
-                  "gap": 6,
-                  "children": [
                     {
                       "type": "text",
-                      "id": "Cc0bu",
-                      "name": "Label",
+                      "id": "SdrPT",
+                      "name": "Subheading",
                       "fill": "$text-secondary",
-                      "content": "Tekrar Sıklığı",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Kira, fatura veya abonelik gibi sabit giderlerini ekle, yaklaşan ödemeleri unutma.",
                       "fontFamily": "$font-body",
-                      "fontSize": 12,
-                      "fontWeight": "600"
-                    },
-                    {
-                      "id": "oqijm",
-                      "type": "ref",
-                      "ref": "CXJSP",
-                      "name": "Toggle"
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
                 {
-                  "id": "gN7le",
+                  "id": "TqkXw",
                   "type": "ref",
-                  "ref": "FL1A7",
-                  "name": "Day Field",
+                  "ref": "qJm7X",
+                  "name": "Form Card",
                   "width": "fill_container",
-                  "descendants": {
-                    "kgcQ2": {
-                      "content": "Ödeme Günü"
-                    },
-                    "ta13y/U7hgsA": {
-                      "icon": "calendar"
-                    },
-                    "ta13y/k5GvJz": {
-                      "content": "örn. Her ayın 5'i"
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "iIEWk",
+                      "name": "Form",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": "$gap-md",
+                      "children": [
+                        {
+                          "id": "MhGht",
+                          "type": "ref",
+                          "ref": "FL1A7",
+                          "name": "Name Field",
+                          "width": "fill_container",
+                          "descendants": {
+                            "kgcQ2": {
+                              "content": "Ödeme Adı"
+                            },
+                            "ta13y/U7hgsA": {
+                              "icon": "tag"
+                            },
+                            "ta13y/k5GvJz": {
+                              "content": "örn. Kira"
+                            }
+                          }
+                        },
+                        {
+                          "id": "yEg1U",
+                          "type": "ref",
+                          "ref": "FL1A7",
+                          "name": "Amount Field",
+                          "width": "fill_container",
+                          "descendants": {
+                            "kgcQ2": {
+                              "content": "Tutar"
+                            },
+                            "ta13y/U7hgsA": {
+                              "icon": "banknote"
+                            },
+                            "ta13y/k5GvJz": {
+                              "content": "₺0,00"
+                            }
+                          }
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ruVn9",
+                          "name": "Frequency Block",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 6,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "x3ymJ0",
+                              "name": "Label",
+                              "fill": "$text-secondary",
+                              "content": "Tekrar Sıklığı",
+                              "fontFamily": "$font-body",
+                              "fontSize": 12,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "id": "lLJ6N",
+                              "type": "ref",
+                              "ref": "CXJSP",
+                              "name": "Frequency Toggle",
+                              "width": "fill_container"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "bAgaf",
+                          "type": "ref",
+                          "ref": "FL1A7",
+                          "name": "Day Field",
+                          "width": "fill_container",
+                          "descendants": {
+                            "kgcQ2": {
+                              "content": "Ödeme Günü (ayın kaçı)"
+                            },
+                            "ta13y/U7hgsA": {
+                              "icon": "calendar"
+                            },
+                            "ta13y/k5GvJz": {
+                              "content": "1-31"
+                            }
+                          }
+                        },
+                        {
+                          "id": "GFOf2",
+                          "type": "ref",
+                          "ref": "NirZj",
+                          "name": "Primary CTA",
+                          "width": "fill_container",
+                          "descendants": {
+                            "ZoKML": {
+                              "content": "Kaydet ve İlerle"
+                            }
+                          }
+                        }
+                      ]
                     }
-                  }
-                },
-                {
-                  "id": "CpgzF",
-                  "type": "ref",
-                  "ref": "NirZj",
-                  "name": "Primary CTA",
-                  "width": "fill_container",
-                  "descendants": {
-                    "ZoKML": {
-                      "content": "Kaydet ve İlerle"
-                    }
-                  }
+                  ]
                 },
                 {
                   "type": "text",
@@ -5297,128 +5581,152 @@
               ],
               "children": [
                 {
-                  "type": "frame",
-                  "id": "kLIM9",
-                  "name": "Top Row",
+                  "id": "Xg0w8",
+                  "type": "ref",
+                  "ref": "j87zQR",
+                  "name": "Top Bar",
                   "width": "fill_container",
-                  "justifyContent": "space_between",
-                  "alignItems": "center",
+                  "descendants": {
+                    "BRdzJ/hM9wm": {
+                      "width": 8,
+                      "fill": "$border-subtle"
+                    },
+                    "BRdzJ/N6Tqho": {
+                      "width": 24,
+                      "fill": "$accent-teal"
+                    }
+                  }
+                },
+                {
+                  "type": "frame",
+                  "id": "cfOpE",
+                  "name": "Title Block",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": "$gap-sm",
                   "children": [
                     {
-                      "id": "cuqdY",
+                      "id": "w4eggK",
                       "type": "ref",
-                      "ref": "FK7CO",
-                      "name": "Step Indicator",
+                      "ref": "N5cF3",
+                      "name": "Step Badge",
                       "descendants": {
-                        "hM9wm": {
-                          "width": 8,
-                          "fill": "$border-subtle"
+                        "t7OMv": {
+                          "icon": "target"
                         },
-                        "N6Tqho": {
-                          "width": 24,
-                          "fill": "$accent-teal"
+                        "Gc3PJ": {
+                          "content": "ADIM 3/3"
                         }
                       }
                     },
                     {
                       "type": "text",
-                      "id": "irNhu",
-                      "name": "Skip",
-                      "fill": "$text-tertiary",
-                      "content": "Atla",
+                      "id": "cxkvD",
+                      "name": "Heading",
+                      "fill": "$text-primary",
+                      "content": "Bir Tasarruf Hedefi Belirle",
+                      "fontFamily": "$font-heading",
+                      "fontSize": 22,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "eiFBZ",
+                      "name": "Subheading",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Opsiyonel — istersen şimdi bir hedef koy, istersen daha sonra ekle.",
                       "fontFamily": "$font-body",
                       "fontSize": 13,
-                      "fontWeight": "500"
+                      "fontWeight": "normal"
                     }
                   ]
                 },
                 {
-                  "type": "text",
-                  "id": "cxkvD",
-                  "name": "Heading",
-                  "fill": "$text-primary",
-                  "content": "Bir Tasarruf Hedefi Belirle",
-                  "fontFamily": "$font-heading",
-                  "fontSize": 22,
-                  "fontWeight": "700"
-                },
-                {
-                  "type": "text",
-                  "id": "eiFBZ",
-                  "name": "Subheading",
-                  "fill": "$text-secondary",
-                  "textGrowth": "fixed-width",
-                  "width": "fill_container",
-                  "content": "Opsiyonel — istersen şimdi bir hedef koy, istersen daha sonra ekle.",
-                  "fontFamily": "$font-body",
-                  "fontSize": 13,
-                  "fontWeight": "normal"
-                },
-                {
-                  "id": "LaglT",
+                  "id": "m56L66",
                   "type": "ref",
-                  "ref": "FL1A7",
-                  "name": "Name Field",
+                  "ref": "qJm7X",
+                  "name": "Form Card",
                   "width": "fill_container",
-                  "descendants": {
-                    "kgcQ2": {
-                      "content": "Hedef Adı"
-                    },
-                    "ta13y/U7hgsA": {
-                      "icon": "target"
-                    },
-                    "ta13y/k5GvJz": {
-                      "content": "örn. Tatil"
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "dfp7W",
+                      "name": "Form",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": "$gap-md",
+                      "children": [
+                        {
+                          "id": "dWzTK",
+                          "type": "ref",
+                          "ref": "FL1A7",
+                          "name": "Name Field",
+                          "width": "fill_container",
+                          "descendants": {
+                            "kgcQ2": {
+                              "content": "Hedef Adı"
+                            },
+                            "ta13y/U7hgsA": {
+                              "icon": "target"
+                            },
+                            "ta13y/k5GvJz": {
+                              "content": "örn. Tatil"
+                            }
+                          }
+                        },
+                        {
+                          "id": "C87kO",
+                          "type": "ref",
+                          "ref": "FL1A7",
+                          "name": "Target Field",
+                          "width": "fill_container",
+                          "descendants": {
+                            "kgcQ2": {
+                              "content": "Hedef Tutarı"
+                            },
+                            "ta13y/U7hgsA": {
+                              "icon": "banknote"
+                            },
+                            "ta13y/k5GvJz": {
+                              "content": "₺0,00"
+                            }
+                          }
+                        },
+                        {
+                          "id": "ciQre",
+                          "type": "ref",
+                          "ref": "FL1A7",
+                          "name": "Saved Field",
+                          "width": "fill_container",
+                          "descendants": {
+                            "kgcQ2": {
+                              "content": "Mevcut Birikim (opsiyonel)"
+                            },
+                            "ta13y/U7hgsA": {
+                              "icon": "piggy-bank"
+                            },
+                            "ta13y/k5GvJz": {
+                              "content": "₺0,00"
+                            }
+                          }
+                        },
+                        {
+                          "id": "T4BnzC",
+                          "type": "ref",
+                          "ref": "NirZj",
+                          "name": "Primary CTA",
+                          "width": "fill_container",
+                          "descendants": {
+                            "ZoKML": {
+                              "content": "Hedefi Kaydet ve Başla"
+                            }
+                          }
+                        }
+                      ]
                     }
-                  }
-                },
-                {
-                  "id": "w1kos",
-                  "type": "ref",
-                  "ref": "FL1A7",
-                  "name": "Target Field",
-                  "width": "fill_container",
-                  "descendants": {
-                    "kgcQ2": {
-                      "content": "Hedef Tutarı"
-                    },
-                    "ta13y/U7hgsA": {
-                      "icon": "banknote"
-                    },
-                    "ta13y/k5GvJz": {
-                      "content": "₺0,00"
-                    }
-                  }
-                },
-                {
-                  "id": "c6HATL",
-                  "type": "ref",
-                  "ref": "FL1A7",
-                  "name": "Saved Field",
-                  "width": "fill_container",
-                  "descendants": {
-                    "kgcQ2": {
-                      "content": "Mevcut Birikim (opsiyonel)"
-                    },
-                    "ta13y/U7hgsA": {
-                      "icon": "piggy-bank"
-                    },
-                    "ta13y/k5GvJz": {
-                      "content": "₺0,00"
-                    }
-                  }
-                },
-                {
-                  "id": "tLbym",
-                  "type": "ref",
-                  "ref": "NirZj",
-                  "name": "Primary CTA",
-                  "width": "fill_container",
-                  "descendants": {
-                    "ZoKML": {
-                      "content": "Hedefi Kaydet ve Başla"
-                    }
-                  }
+                  ]
                 },
                 {
                   "type": "text",
@@ -9368,7 +9676,7 @@
       "x": 6582,
       "y": -1140,
       "name": "Design System",
-      "width": 3065,
+      "width": 3844,
       "fill": "$bg-app",
       "cornerRadius": 12,
       "layout": "vertical",
@@ -9700,6 +10008,43 @@
                   "icon": "user",
                   "library": "lucide",
                   "fill": "$text-secondary"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "qJm7X",
+              "name": "Surface Card",
+              "reusable": true,
+              "width": 320,
+              "fill": "$bg-surface",
+              "cornerRadius": "$radius-lg",
+              "stroke": "$border-subtle",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": "$gap-md",
+              "padding": "$gap-lg",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "WFlIW",
+                  "name": "Content",
+                  "slot": [],
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": "$gap-md",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "mSvkU",
+                      "name": "Placeholder",
+                      "fill": "$text-secondary",
+                      "content": "Kart içeriği",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
                 }
               ]
             }
@@ -10298,6 +10643,103 @@
                   ]
                 }
               ]
+            },
+            {
+              "type": "frame",
+              "id": "wXc1A",
+              "name": "Alert Banner",
+              "reusable": true,
+              "width": 280,
+              "fill": "$warning-bg",
+              "cornerRadius": "$radius-sm",
+              "gap": "$gap-xs",
+              "padding": "$gap-sm",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "L4og3",
+                  "name": "Icon",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "circle-alert",
+                  "library": "lucide",
+                  "fill": "$warning-red"
+                },
+                {
+                  "type": "text",
+                  "id": "INLuG",
+                  "name": "Message",
+                  "fill": "$warning-red",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Kaydedilemedi. Bağlantını kontrol edip tekrar dene.",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "id": "vPKgn",
+              "type": "ref",
+              "ref": "wXc1A",
+              "name": "Alert Banner - Info",
+              "fill": "$accent-teal-dim",
+              "descendants": {
+                "L4og3": {
+                  "icon": "mail-check",
+                  "fill": "$accent-teal"
+                },
+                "INLuG": {
+                  "content": "Onay maili gönderdik: ornek@eposta.com. Posta kutunu kontrol et.",
+                  "fill": "$accent-teal"
+                }
+              }
+            },
+            {
+              "type": "frame",
+              "id": "N5cF3",
+              "name": "Step Badge",
+              "reusable": true,
+              "gap": "$gap-sm",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "OjLYo",
+                  "name": "Icon Box",
+                  "width": 40,
+                  "height": 40,
+                  "fill": "$accent-teal-dim",
+                  "cornerRadius": "$radius-sm",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "t7OMv",
+                      "name": "Icon",
+                      "width": 18,
+                      "height": 18,
+                      "icon": "wallet",
+                      "library": "lucide",
+                      "fill": "$accent-teal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "Gc3PJ",
+                  "name": "Label",
+                  "fill": "$accent-teal",
+                  "content": "ADIM 1/3",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12,
+                  "fontWeight": "600",
+                  "letterSpacing": 0.8
+                }
+              ]
             }
           ]
         },
@@ -10585,6 +11027,68 @@
                   "fontFamily": "$font-heading",
                   "fontSize": 16,
                   "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "j87zQR",
+              "name": "Onboarding Top Bar",
+              "reusable": true,
+              "width": 350,
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Z2LpJI",
+                  "name": "Left",
+                  "width": 64,
+                  "height": 40,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "id": "pAIpp",
+                      "type": "ref",
+                      "ref": "F6BF6",
+                      "name": "Back Button",
+                      "fill": "$bg-surface-alt",
+                      "cornerRadius": "$radius-sm",
+                      "descendants": {
+                        "QlDbT": {
+                          "icon": "arrow-left",
+                          "fill": "$text-secondary"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "BRdzJ",
+                  "type": "ref",
+                  "ref": "FK7CO",
+                  "name": "Steps"
+                },
+                {
+                  "type": "frame",
+                  "id": "DlTsD",
+                  "name": "Right",
+                  "width": 64,
+                  "height": 40,
+                  "justifyContent": "end",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "YCYlS",
+                      "name": "Skip",
+                      "fill": "$text-secondary",
+                      "content": "Atla",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
                 }
               ]
             }
@@ -13049,6 +13553,64 @@
     "gap-xl": {
       "type": "number",
       "value": 32
+    },
+    "accent-teal-border": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#3ECF9A33",
+          "theme": {
+            "mode": "dark"
+          }
+        },
+        {
+          "value": "#1E9E7533",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#6D4DF233",
+          "theme": {
+            "mode": "vibrant"
+          }
+        },
+        {
+          "value": "#8B6FF733",
+          "theme": {
+            "mode": "vibrant-dark"
+          }
+        }
+      ]
+    },
+    "accent-teal-faint": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#3ECF9A26",
+          "theme": {
+            "mode": "dark"
+          }
+        },
+        {
+          "value": "#1E9E7526",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#6D4DF226",
+          "theme": {
+            "mode": "vibrant"
+          }
+        },
+        {
+          "value": "#8B6FF726",
+          "theme": {
+            "mode": "vibrant-dark"
+          }
+        }
+      ]
     }
   },
   "fileToken": "946e7ac4-b765-4dce-b4f7-3730a14010f0"
