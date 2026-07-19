@@ -4,6 +4,7 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 import { api } from './api/baseApi';
 import appReducer from './slices/appSlice';
 import authReducer from './slices/authSlice';
+import languageReducer from './slices/languageSlice';
 import onboardingReducer from './slices/onboardingSlice';
 import themeReducer from './slices/themeSlice';
 
@@ -11,6 +12,7 @@ export const store = configureStore({
   reducer: {
     app: appReducer,
     auth: authReducer,
+    language: languageReducer,
     onboarding: onboardingReducer,
     theme: themeReducer,
     [api.reducerPath]: api.reducer,

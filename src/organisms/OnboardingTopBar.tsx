@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { ButtonIconOnly } from '@/atoms';
@@ -18,10 +19,11 @@ export function OnboardingTopBar({
   totalSteps = 3,
   onBack,
   onSkip,
-  skipLabel = 'Atla',
+  skipLabel,
   skipDisabled = false,
 }: OnboardingTopBarProps) {
   const theme = useTheme();
+  const { t } = useTranslation();
   return (
     <View style={styles.container}>
       <View style={styles.side}>
@@ -29,7 +31,7 @@ export function OnboardingTopBar({
           <ButtonIconOnly
             icon="arrow-left"
             variant="surface"
-            accessibilityLabel="Geri"
+            accessibilityLabel={t('common.back')}
             onPress={onBack}
           />
         ) : null}
@@ -49,7 +51,7 @@ export function OnboardingTopBar({
               color: theme.colors.textSecondary,
             }}
           >
-            {skipLabel}
+            {skipLabel ?? t('common.skip')}
           </Text>
         </Pressable>
       </View>

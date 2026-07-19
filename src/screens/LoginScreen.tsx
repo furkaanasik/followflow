@@ -1,4 +1,5 @@
 import { createElement, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   KeyboardAvoidingView,
   Platform,
@@ -76,6 +77,7 @@ function RippleRings({ color }: { color: string }) {
 
 export function LoginScreen() {
   const theme = useTheme();
+  const { t } = useTranslation();
   const [authMode, setAuthMode] = useState<AuthMode>('signIn');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -115,24 +117,26 @@ export function LoginScreen() {
 
     let valid = true;
     if (!email.trim()) {
-      setEmailError('E-posta adresi gerekli.');
+      setEmailError(t('validation.emailRequired'));
       valid = false;
     } else if (!EMAIL_PATTERN.test(email.trim())) {
-      setEmailError('Geçerli bir e-posta adresi gir.');
+      setEmailError(t('validation.emailInvalid'));
       valid = false;
     }
     if (!password.trim()) {
-      setPasswordError('Şifre gerekli.');
+      setPasswordError(t('validation.passwordRequired'));
       valid = false;
     } else if (authMode === 'signUp') {
       if (password.length < PASSWORD_MIN_LENGTH) {
-        setPasswordError(`Şifre en az ${PASSWORD_MIN_LENGTH} karakter olmalı.`);
+        setPasswordError(
+          t('validation.passwordMinLength', { min: PASSWORD_MIN_LENGTH }),
+        );
         valid = false;
       } else if (
         !PASSWORD_LETTER_PATTERN.test(password) ||
         !PASSWORD_DIGIT_PATTERN.test(password)
       ) {
-        setPasswordError('Şifre en az bir harf ve bir rakam içermeli.');
+        setPasswordError(t('validation.passwordComplexity'));
         valid = false;
       }
     }
@@ -146,9 +150,7 @@ export function LoginScreen() {
         const data = await signUpWithEmail(email.trim(), password);
         // No session means Supabase requires email confirmation first.
         if (!data.session) {
-          setInfoMessage(
-            `Onay maili gönderdik: ${email.trim()}. Posta kutunu kontrol et, onayladıktan sonra buradan giriş yap.`,
-          );
+          setInfoMessage(t('auth.confirmEmailSent', { email: email.trim() }));
           setAuthMode('signIn');
         }
       }
@@ -161,11 +163,11 @@ export function LoginScreen() {
 
   const primaryLabel = submittingEmail
     ? authMode === 'signIn'
-      ? 'Giriş yapılıyor…'
-      : 'Hesap oluşturuluyor…'
+      ? t('auth.signingIn')
+      : t('auth.creatingAccount')
     : authMode === 'signIn'
-      ? 'Giriş Yap'
-      : 'Hesap Oluştur';
+      ? t('auth.signIn')
+      : t('auth.createAccount');
 
   return (
     <SafeAreaView
@@ -217,15 +219,15 @@ export function LoginScreen() {
                 textAlign: 'center',
               }}
             >
-              Bütün finansal hayatın, tek ekranda.
+              {t('auth.tagline')}
             </Text>
           </View>
 
           <SurfaceCard style={{ marginTop: theme.spacing.xl }}>
             <SegmentedToggle
               options={[
-                { label: 'Giriş Yap', value: 'signIn' },
-                { label: 'Kayıt Ol', value: 'signUp' },
+                { label: t('auth.signIn'), value: 'signIn' },
+                { label: t('auth.signUp'), value: 'signUp' },
               ]}
               value={authMode}
               onChange={changeAuthMode}
@@ -242,10 +244,10 @@ export function LoginScreen() {
             {formError ? <AlertBanner message={formError} /> : null}
 
             <FormFieldGroup
-              label="E-posta"
+              label={t('auth.emailLabel')}
               value={email}
               onChangeText={setEmail}
-              placeholder="ornek@eposta.com"
+              placeholder={t('auth.emailPlaceholder')}
               icon="mail"
               keyboardType="email-address"
               autoCapitalize="none"
@@ -253,15 +255,15 @@ export function LoginScreen() {
               error={emailError}
             />
             <FormFieldGroup
-              label="Şifre"
+              label={t('auth.passwordLabel')}
               value={password}
               onChangeText={setPassword}
-              placeholder="••••••••"
+              placeholder={t('auth.passwordPlaceholder')}
               icon="lock"
               rightIcon={showPassword ? 'eye-off' : 'eye'}
               onRightIconPress={() => setShowPassword((prev) => !prev)}
               rightIconAccessibilityLabel={
-                showPassword ? 'Şifreyi gizle' : 'Şifreyi göster'
+                showPassword ? t('auth.hidePassword') : t('auth.showPassword')
               }
               secureTextEntry={!showPassword}
               autoCapitalize="none"
@@ -279,7 +281,11 @@ export function LoginScreen() {
             <DividerOr />
             <ButtonGoogleCTA
               onPress={handleGoogleSignIn}
-              label={submittingGoogle ? 'Bağlanıyor…' : 'Google ile Devam Et'}
+              label={
+                submittingGoogle
+                  ? t('auth.connecting')
+                  : t('auth.googleContinue')
+              }
               disabled={submittingGoogle}
             />
           </View>

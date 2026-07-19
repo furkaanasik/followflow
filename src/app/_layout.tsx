@@ -12,9 +12,12 @@ import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, Pressable, Text, View } from 'react-native';
 import { Provider } from 'react-redux';
 
+import '@/i18n';
+import { LanguageProvider } from '@/i18n/LanguageProvider';
 import { supabase } from '@/lib/supabase';
 import { api, AUTH_INVALID_CODE, useGetProfileQuery } from '@/store/api';
 import { useAppSelector } from '@/store/hooks';
@@ -28,6 +31,7 @@ SplashScreen.preventAutoHideAsync();
 
 function RootNavigator() {
   const theme = useTheme();
+  const { t } = useTranslation();
   const bootstrapped = useAppSelector((s) => s.app.bootstrapped);
   const status = useAppSelector((s) => s.auth.status);
   const {
@@ -94,7 +98,7 @@ function RootNavigator() {
             textAlign: 'center',
           }}
         >
-          Bağlantı kurulamadı. İnternetini kontrol edip tekrar dene.
+          {t('common.connectionError')}
         </Text>
         <Pressable onPress={() => refetchProfile()} hitSlop={8}>
           <Text
@@ -104,7 +108,7 @@ function RootNavigator() {
               color: theme.colors.accentTeal,
             }}
           >
-            Tekrar dene
+            {t('common.retry')}
           </Text>
         </Pressable>
       </View>
@@ -179,7 +183,9 @@ export default function RootLayout() {
   return (
     <Provider store={store}>
       <ThemeProvider>
-        <RootNavigator />
+        <LanguageProvider>
+          <RootNavigator />
+        </LanguageProvider>
       </ThemeProvider>
     </Provider>
   );

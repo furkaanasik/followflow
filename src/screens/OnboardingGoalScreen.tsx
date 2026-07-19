@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   KeyboardAvoidingView,
   Platform,
@@ -27,6 +28,7 @@ import { useTheme } from '@/theme';
 
 export function OnboardingGoalScreen() {
   const theme = useTheme();
+  const { t } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const session = useAppSelector((s) => s.auth.session);
@@ -58,7 +60,7 @@ export function OnboardingGoalScreen() {
       await updateProfile({ onboarding_completed: true }).unwrap();
       dispatch(resetOnboardingDrafts());
     } catch {
-      setFormError('Bir şeyler ters gitti. Tekrar dene.');
+      setFormError(t('onboarding.genericError'));
     }
   }
 
@@ -74,7 +76,7 @@ export function OnboardingGoalScreen() {
       ) {
         const parsedTarget = Number(draft.targetAmount.replace(',', '.'));
         if (Number.isNaN(parsedTarget) || parsedTarget <= 0) {
-          setTargetAmountError('Geçerli bir tutar gir.');
+          setTargetAmountError(t('validation.amountInvalid'));
           return;
         }
         await createGoal({
@@ -91,7 +93,7 @@ export function OnboardingGoalScreen() {
       await updateProfile({ onboarding_completed: true }).unwrap();
       dispatch(resetOnboardingDrafts());
     } catch {
-      setFormError('Kaydedilemedi. Bağlantını kontrol edip tekrar dene.');
+      setFormError(t('onboarding.saveFailed'));
     }
   }
 
@@ -121,10 +123,13 @@ export function OnboardingGoalScreen() {
           />
 
           <View style={{ gap: theme.spacing.sm }}>
-            <StepBadge icon="target" label="ADIM 3/3" />
+            <StepBadge
+              icon="target"
+              label={t('onboarding.step', { current: 3, total: 3 })}
+            />
             <TitleSubtitle
-              title="Bir Tasarruf Hedefi Belirle"
-              subtitle="Opsiyonel — istersen şimdi bir hedef koy, istersen daha sonra ekle."
+              title={t('onboarding.goal.title')}
+              subtitle={t('onboarding.goal.subtitle')}
             />
           </View>
 
@@ -132,36 +137,38 @@ export function OnboardingGoalScreen() {
             {formError ? <AlertBanner message={formError} /> : null}
 
             <FormFieldGroup
-              label="Hedef Adı"
+              label={t('onboarding.goal.nameLabel')}
               value={draft.name}
               onChangeText={(name) => dispatch(updateGoalDraft({ name }))}
-              placeholder="örn. Tatil"
+              placeholder={t('onboarding.goal.namePlaceholder')}
               icon="target"
             />
             <FormFieldGroup
-              label="Hedef Tutarı"
+              label={t('onboarding.goal.targetLabel')}
               value={draft.targetAmount}
               onChangeText={(targetAmount) =>
                 dispatch(updateGoalDraft({ targetAmount }))
               }
-              placeholder="₺0,00"
+              placeholder={t('onboarding.amountPlaceholder')}
               icon="banknote"
               keyboardType="decimal-pad"
               error={targetAmountError}
             />
             <FormFieldGroup
-              label="Mevcut Birikim (opsiyonel)"
+              label={t('onboarding.goal.savedLabel')}
               value={draft.savedAmount}
               onChangeText={(savedAmount) =>
                 dispatch(updateGoalDraft({ savedAmount }))
               }
-              placeholder="₺0,00"
+              placeholder={t('onboarding.amountPlaceholder')}
               icon="piggy-bank"
               keyboardType="decimal-pad"
             />
 
             <ButtonPrimary
-              label={submitting ? 'Kaydediliyor…' : 'Hedefi Kaydet ve Başla'}
+              label={
+                submitting ? t('onboarding.saving') : t('onboarding.goal.save')
+              }
               onPress={handleSave}
               disabled={submitting}
             />

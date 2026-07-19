@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   KeyboardAvoidingView,
   Platform,
@@ -25,13 +26,9 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { updateRecurringDraft } from '@/store/slices/onboardingSlice';
 import { useTheme } from '@/theme';
 
-const FREQUENCY_OPTIONS = [
-  { label: 'Aylık', value: 'monthly' },
-  { label: 'Haftalık', value: 'weekly' },
-];
-
 export function OnboardingRecurringPaymentScreen() {
   const theme = useTheme();
+  const { t } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const session = useAppSelector((s) => s.auth.session);
@@ -43,6 +40,11 @@ export function OnboardingRecurringPaymentScreen() {
   const [amountError, setAmountError] = useState<string | undefined>();
   const [payDayError, setPayDayError] = useState<string | undefined>();
   const [formError, setFormError] = useState<string | undefined>();
+
+  const frequencyOptions = [
+    { label: t('onboarding.monthly'), value: 'monthly' },
+    { label: t('onboarding.weekly'), value: 'weekly' },
+  ];
 
   function handleBack() {
     router.push({
@@ -63,7 +65,7 @@ export function OnboardingRecurringPaymentScreen() {
 
     let valid = true;
     if (!draft.name.trim()) {
-      setNameError('Ödeme adı gerekli.');
+      setNameError(t('validation.paymentNameRequired'));
       valid = false;
     }
     const parsedAmount = Number(draft.amount.replace(',', '.'));
@@ -72,7 +74,7 @@ export function OnboardingRecurringPaymentScreen() {
       Number.isNaN(parsedAmount) ||
       parsedAmount <= 0
     ) {
-      setAmountError('Geçerli bir tutar gir.');
+      setAmountError(t('validation.amountInvalid'));
       valid = false;
     }
     const parsedPayDay = Number(draft.payDay);
@@ -82,7 +84,7 @@ export function OnboardingRecurringPaymentScreen() {
       parsedPayDay < 1 ||
       parsedPayDay > 31
     ) {
-      setPayDayError('Geçerli bir gün gir (1-31).');
+      setPayDayError(t('validation.payDayInvalid'));
       valid = false;
     }
     if (!valid) return;
@@ -97,7 +99,7 @@ export function OnboardingRecurringPaymentScreen() {
         next_payment_date: computeNextPaymentDate(parsedPayDay),
       }).unwrap();
     } catch {
-      setFormError('Kaydedilemedi. Bağlantını kontrol edip tekrar dene.');
+      setFormError(t('onboarding.saveFailed'));
       return;
     }
     router.push('/(onboarding)/goal');
@@ -124,10 +126,13 @@ export function OnboardingRecurringPaymentScreen() {
           <OnboardingTopBar step={2} onBack={handleBack} onSkip={handleSkip} />
 
           <View style={{ gap: theme.spacing.sm }}>
-            <StepBadge icon="repeat" label="ADIM 2/3" />
+            <StepBadge
+              icon="repeat"
+              label={t('onboarding.step', { current: 2, total: 3 })}
+            />
             <TitleSubtitle
-              title="Tekrarlayan Ödemeni Ekle"
-              subtitle="Kira, fatura veya abonelik gibi sabit giderlerini ekle, yaklaşan ödemeleri unutma."
+              title={t('onboarding.recurring.title')}
+              subtitle={t('onboarding.recurring.subtitle')}
             />
           </View>
 
@@ -135,20 +140,20 @@ export function OnboardingRecurringPaymentScreen() {
             {formError ? <AlertBanner message={formError} /> : null}
 
             <FormFieldGroup
-              label="Ödeme Adı"
+              label={t('onboarding.recurring.nameLabel')}
               value={draft.name}
               onChangeText={(name) => dispatch(updateRecurringDraft({ name }))}
-              placeholder="örn. Kira"
+              placeholder={t('onboarding.recurring.namePlaceholder')}
               icon="tag"
               error={nameError}
             />
             <FormFieldGroup
-              label="Tutar"
+              label={t('onboarding.amountLabel')}
               value={draft.amount}
               onChangeText={(amount) =>
                 dispatch(updateRecurringDraft({ amount }))
               }
-              placeholder="₺0,00"
+              placeholder={t('onboarding.amountPlaceholder')}
               icon="banknote"
               keyboardType="decimal-pad"
               error={amountError}
@@ -162,10 +167,10 @@ export function OnboardingRecurringPaymentScreen() {
                   color: theme.colors.textSecondary,
                 }}
               >
-                Tekrar Sıklığı
+                {t('onboarding.frequencyLabel')}
               </Text>
               <SegmentedToggle
-                options={FREQUENCY_OPTIONS}
+                options={frequencyOptions}
                 value={draft.frequency}
                 onChange={(frequency) =>
                   dispatch(updateRecurringDraft({ frequency }))
@@ -174,19 +179,23 @@ export function OnboardingRecurringPaymentScreen() {
             </View>
 
             <FormFieldGroup
-              label="Ödeme Günü (ayın kaçı)"
+              label={t('onboarding.payDayLabel')}
               value={draft.payDay}
               onChangeText={(payDay) =>
                 dispatch(updateRecurringDraft({ payDay }))
               }
-              placeholder="1-31"
+              placeholder={t('onboarding.payDayPlaceholder')}
               icon="calendar"
               keyboardType="number-pad"
               error={payDayError}
             />
 
             <ButtonPrimary
-              label={submitting ? 'Kaydediliyor…' : 'Kaydet ve İlerle'}
+              label={
+                submitting
+                  ? t('onboarding.saving')
+                  : t('onboarding.saveContinue')
+              }
               onPress={handleSave}
               disabled={submitting}
             />
