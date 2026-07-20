@@ -9,9 +9,14 @@ import type { ColorTokens } from '@/theme/tokens';
 export interface CategoryIconProps {
   icon: string;
   tint?: keyof ColorTokens;
+  size?: number;
 }
 
-export function CategoryIcon({ icon, tint = 'accentTeal' }: CategoryIconProps) {
+export function CategoryIcon({
+  icon,
+  tint = 'accentTeal',
+  size = 44,
+}: CategoryIconProps) {
   const theme = useTheme();
   const tintColor = theme.colors[tint];
 
@@ -20,20 +25,23 @@ export function CategoryIcon({ icon, tint = 'accentTeal' }: CategoryIconProps) {
       style={[
         styles.container,
         {
+          width: size,
+          height: size,
           borderRadius: theme.radius.full,
           backgroundColor: withAlpha(tintColor, '26'),
         },
       ]}
     >
-      {createElement(getIcon(icon), { size: 20, color: tintColor })}
+      {createElement(getIcon(icon), {
+        size: Math.round(size * 0.45),
+        color: tintColor,
+      })}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    width: 44,
-    height: 44,
     alignItems: 'center',
     justifyContent: 'center',
   },

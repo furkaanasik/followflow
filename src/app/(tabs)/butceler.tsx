@@ -1,17 +1,3 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { BudgetsScreen } from '@/screens';
 
-export default function ButcelerScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>Bütçeler</Text>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default BudgetsScreen;

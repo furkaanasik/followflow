@@ -4,6 +4,7 @@ export * from './BottomNavigationBar';
 export * from './BudgetCard';
 export * from './CategoryBreakdownCard';
 export * from './GoalCard';
+export * from './GoalProgressChart';
 export * from './IncomeSourceCard';
 export * from './NetDurumCard';
 export * from './OnboardingTopBar';

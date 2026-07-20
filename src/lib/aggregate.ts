@@ -1,5 +1,7 @@
 import type {
   Budget,
+  Goal,
+  GoalContribution,
   IncomeSource,
   RecurringPayment,
   Transaction,
@@ -123,6 +125,67 @@ export function nextUpcomingPayment(
     if (!next || daysLeft < next.daysLeft) next = { payment, daysLeft };
   }
   return next;
+}
+
+export function goalPercent(goal: Goal): number {
+  return goal.target_amount > 0
+    ? Math.min(
+        100,
+        Math.max(0, (goal.current_amount / goal.target_amount) * 100),
+      )
+    : 0;
+}
+
+export interface MonthContribution {
+  key: string; // YYYY-MM
+  monthIndex: number;
+  year: number;
+  total: number;
+  current: boolean;
+}
+
+export function monthlyContributionSeries(
+  contribs: GoalContribution[],
+  months = 6,
+  ref = new Date(),
+): MonthContribution[] {
+  const series: MonthContribution[] = [];
+  for (let i = months - 1; i >= 0; i--) {
+    const d = new Date(ref.getFullYear(), ref.getMonth() - i, 1);
+    series.push({
+      key: `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`,
+      monthIndex: d.getMonth(),
+      year: d.getFullYear(),
+      total: 0,
+      current: i === 0,
+    });
+  }
+  const byKey = new Map(series.map((m) => [m.key, m]));
+  for (const c of contribs) {
+    const d = new Date(c.occurred_at);
+    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+    const bucket = byKey.get(key);
+    if (bucket) bucket.total += c.amount;
+  }
+  return series;
+}
+
+export function averageMonthlyContribution(
+  contribs: GoalContribution[],
+  months = 6,
+  ref = new Date(),
+): number {
+  const series = monthlyContributionSeries(contribs, months, ref);
+  const active = series.filter((m) => m.total > 0);
+  if (active.length === 0) return 0;
+  return active.reduce((sum, m) => sum + m.total, 0) / active.length;
+}
+
+export function goalProjectionMonths(
+  remaining: number,
+  rate: number,
+): number | null {
+  return rate > 0 ? Math.ceil(remaining / rate) : null;
 }
 
 export type DateBucket = 'today' | 'yesterday' | 'thisWeek' | 'earlier';

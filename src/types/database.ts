@@ -135,6 +135,30 @@ export interface Database {
         Update: Partial<Database['public']['Tables']['budgets']['Insert']>;
         Relationships: [];
       };
+      goal_contributions: {
+        Row: {
+          id: string;
+          user_id: string;
+          goal_id: string;
+          amount: number;
+          note: string | null;
+          occurred_at: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          goal_id: string;
+          amount: number;
+          note?: string | null;
+          occurred_at?: string;
+          created_at?: string;
+        };
+        Update: Partial<
+          Database['public']['Tables']['goal_contributions']['Insert']
+        >;
+        Relationships: [];
+      };
       transactions: {
         Row: {
           id: string;
@@ -167,6 +191,22 @@ export interface Database {
       };
     };
     Views: Record<string, never>;
-    Functions: Record<string, never>;
+    Functions: {
+      add_goal_contribution: {
+        Args: {
+          p_goal_id: string;
+          p_amount: number;
+          p_note?: string | null;
+          p_occurred_at?: string;
+        };
+        Returns: Database['public']['Tables']['goals']['Row'];
+      };
+      remove_goal_contribution: {
+        Args: {
+          p_contribution_id: string;
+        };
+        Returns: Database['public']['Tables']['goals']['Row'];
+      };
+    };
   };
 }

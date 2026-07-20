@@ -24,6 +24,13 @@ export type Goal = Database['public']['Tables']['goals']['Row'];
 export type GoalInsert = Database['public']['Tables']['goals']['Insert'];
 export type GoalUpdate = Database['public']['Tables']['goals']['Update'];
 
+export type GoalContribution =
+  Database['public']['Tables']['goal_contributions']['Row'];
+export type GoalContributionInsert =
+  Database['public']['Tables']['goal_contributions']['Insert'];
+export type GoalContributionUpdate =
+  Database['public']['Tables']['goal_contributions']['Update'];
+
 export type Budget = Database['public']['Tables']['budgets']['Row'];
 export type BudgetInsert = Database['public']['Tables']['budgets']['Insert'];
 export type BudgetUpdate = Database['public']['Tables']['budgets']['Update'];

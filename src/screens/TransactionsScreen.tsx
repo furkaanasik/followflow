@@ -1,9 +1,9 @@
-import { useRouter } from 'expo-router';
-import { useState } from 'react';
+import { useFocusEffect, useRouter } from 'expo-router';
+import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Alert,
-  RefreshControl,
+  InteractionManager,
   ScrollView,
   StyleSheet,
   Text,
@@ -34,10 +34,17 @@ export function TransactionsScreen() {
     'all',
   );
 
-  const [refreshing, setRefreshing] = useState(false);
-
   const { data: transactions = [], refetch } = useListTransactionsQuery();
   const [deleteTransaction] = useDeleteTransactionMutation();
+
+  // Reload when the tab regains focus instead of pull-to-refresh; deferred
+  // so the tab switch renders instantly and the refetch runs after.
+  useFocusEffect(
+    useCallback(() => {
+      const task = InteractionManager.runAfterInteractions(() => refetch());
+      return () => task.cancel();
+    }, [refetch]),
+  );
 
   function confirmDelete(id: string) {
     Alert.alert(
@@ -58,15 +65,6 @@ export function TransactionsScreen() {
         },
       ],
     );
-  }
-
-  async function handleRefresh() {
-    setRefreshing(true);
-    try {
-      await refetch();
-    } finally {
-      setRefreshing(false);
-    }
   }
 
   function categoryLabel(txn: Transaction) {
@@ -109,14 +107,6 @@ export function TransactionsScreen() {
         contentContainerStyle={[styles.content, { gap: theme.spacing.md }]}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={handleRefresh}
-            tintColor={theme.colors.accentTeal}
-            colors={[theme.colors.accentTeal]}
-          />
-        }
       >
         <View style={styles.header}>
           <AppBarSimpleTitle title={t('transactions.title')} />

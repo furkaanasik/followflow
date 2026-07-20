@@ -6,6 +6,7 @@ import { TAB_ROUTES } from '@/navigation/tabs';
 export default function TabLayout() {
   return (
     <Tabs
+      initialRouteName="index"
       tabBar={(props) => <AppTabBar {...props} />}
       screenOptions={{ headerShown: false }}
     >

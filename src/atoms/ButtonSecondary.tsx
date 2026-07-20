@@ -7,13 +7,14 @@ import {
   type ViewStyle,
 } from 'react-native';
 
+import { withAlpha } from '@/lib/color';
 import { getIcon } from '@/lib/icons';
 import { useTheme } from '@/theme';
 
 export interface ButtonSecondaryProps {
   label: string;
   icon?: string;
-  tone?: 'neutral' | 'destructive';
+  tone?: 'neutral' | 'destructive' | 'accent';
   onPress: () => void;
   style?: StyleProp<ViewStyle>;
 }
@@ -29,7 +30,9 @@ export function ButtonSecondary({
   const contentColor =
     tone === 'destructive'
       ? theme.colors.expenseCoral
-      : theme.colors.textPrimary;
+      : tone === 'accent'
+        ? theme.colors.accentTeal
+        : theme.colors.textPrimary;
 
   return (
     <Pressable
@@ -38,7 +41,12 @@ export function ButtonSecondary({
         styles.container,
         {
           borderRadius: theme.radius.sm,
-          borderColor: theme.colors.borderSubtle,
+          borderColor:
+            tone === 'accent'
+              ? withAlpha(theme.colors.accentTeal, '3D')
+              : theme.colors.borderSubtle,
+          backgroundColor:
+            tone === 'accent' ? theme.colors.accentTealDim : 'transparent',
         },
         style,
       ]}

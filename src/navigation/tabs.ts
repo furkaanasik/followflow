@@ -1,5 +1,6 @@
+// Ana Sayfa sits center as the hub; money flows on its left, targets on its
+// right, settings at the edge.
 export const TAB_ROUTES = [
-  { name: 'index', title: 'Ana Sayfa', titleKey: 'nav.home', icon: 'home' },
   {
     name: 'islemler',
     title: 'İşlemler',
@@ -12,6 +13,7 @@ export const TAB_ROUTES = [
     titleKey: 'nav.budgets',
     icon: 'wallet',
   },
+  { name: 'index', title: 'Ana Sayfa', titleKey: 'nav.home', icon: 'home' },
   {
     name: 'hedefler',
     title: 'Hedefler',
