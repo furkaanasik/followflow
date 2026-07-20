@@ -3,11 +3,13 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { getIcon } from '@/lib/icons';
 import { useTheme } from '@/theme';
+import type { ColorTokens } from '@/theme/tokens';
 
 export interface InfoRowChevronProps {
   icon: string;
   label: string;
   value: string;
+  valueColor?: keyof ColorTokens;
   onPress: () => void;
 }
 
@@ -15,6 +17,7 @@ export function InfoRowChevron({
   icon,
   label,
   value,
+  valueColor = 'textPrimary',
   onPress,
 }: InfoRowChevronProps) {
   const theme = useTheme();
@@ -49,7 +52,7 @@ export function InfoRowChevron({
             style={{
               fontFamily: theme.fonts.body.semibold,
               fontSize: 12,
-              color: theme.colors.textPrimary,
+              color: theme.colors[valueColor],
             }}
           >
             {value}

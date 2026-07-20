@@ -1,5 +1,6 @@
 export * from './AlertBanner';
 export * from './BudgetProgressRow';
+export * from './CategoryChip';
 export * from './DividerOr';
 export * from './FormFieldGroup';
 export * from './InfoRowChevron';
@@ -9,6 +10,7 @@ export * from './NumpadKeyRow';
 export * from './SearchBar';
 export * from './SegmentedToggle';
 export * from './StepBadge';
+export * from './SwipeableRow';
 export * from './StepIndicator';
 export * from './TitleSubtitle';
 export * from './TransactionRow';

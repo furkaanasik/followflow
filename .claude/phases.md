@@ -53,10 +53,10 @@ Do this before building more screens — retrofitting 4 screens now beats retrof
 - [x] `src/lib/format.ts`: currency/number/date helpers via `Intl` (₺, TR digit grouping) — required by upcoming transaction/budget screens
 - [x] Language preference plumbing (persisted; switcher UI lands in Ayarlar, Phase 10)
 
-## Phase 8 — Core Screens 🚧 in-progress — plan: `.claude/PRPs/plans/phase-8-core-screens.plan.md`
-- [ ] Ana Sayfa (home, incl. FAB → opens Yeni İşlem Modal)
-- [ ] İşlemler (transaction list, search/filter via Search Bar molecule)
-- [ ] Yeni İşlem Modal (bottom sheet, numpad input)
+## Phase 8 — Core Screens ✅ complete — report: `.claude/PRPs/reports/phase-8-core-screens-report.md`
+- [x] Ana Sayfa (home, incl. FAB → opens Yeni İşlem Modal)
+- [x] İşlemler (transaction list, search/filter via Search Bar molecule)
+- [x] Yeni İşlem Modal (bottom sheet, numpad input)
 
 ## Phase 9 — Budgets & Goals Screens
 - [ ] Bütçeler

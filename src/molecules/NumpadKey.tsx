@@ -10,7 +10,18 @@ export interface NumpadKeyProps {
 export function NumpadKey({ label, onPress }: NumpadKeyProps) {
   const theme = useTheme();
   return (
-    <Pressable onPress={onPress} style={styles.container}>
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={label}
+      style={({ pressed }) => [
+        styles.container,
+        {
+          borderRadius: theme.radius.sm,
+          backgroundColor: pressed ? theme.colors.bgSurfaceAlt : 'transparent',
+        },
+      ]}
+    >
       <Text
         style={{
           fontFamily: theme.fonts.heading.semibold,
@@ -26,8 +37,8 @@ export function NumpadKey({ label, onPress }: NumpadKeyProps) {
 
 const styles = StyleSheet.create({
   container: {
-    height: 52,
-    width: 64,
+    height: 48,
+    width: 72,
     alignItems: 'center',
     justifyContent: 'center',
   },

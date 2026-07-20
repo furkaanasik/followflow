@@ -7,6 +7,7 @@ import type { ColorTokens } from '@/theme/tokens';
 export interface BudgetProgressRowProps {
   name: string;
   subtitle: string;
+  subtitleColor?: keyof ColorTokens;
   progress: number;
   progressColor?: keyof ColorTokens;
 }
@@ -14,6 +15,7 @@ export interface BudgetProgressRowProps {
 export function BudgetProgressRow({
   name,
   subtitle,
+  subtitleColor = 'textSecondary',
   progress,
   progressColor = 'accentTeal',
 }: BudgetProgressRowProps) {
@@ -34,7 +36,7 @@ export function BudgetProgressRow({
           style={{
             fontFamily: theme.fonts.body.medium,
             fontSize: 12,
-            color: theme.colors.textSecondary,
+            color: theme.colors[subtitleColor],
           }}
         >
           {subtitle}

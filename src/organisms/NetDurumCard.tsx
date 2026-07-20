@@ -2,7 +2,6 @@ import { createElement } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { getIcon } from '@/lib/icons';
-import { elevatedShadow } from '@/lib/shadow';
 import { useTheme } from '@/theme';
 
 export interface NetDurumCardProps {
@@ -10,6 +9,8 @@ export interface NetDurumCardProps {
   amount: string;
   incomeAmount: string;
   expenseAmount: string;
+  incomeLabel?: string;
+  expenseLabel?: string;
 }
 
 export function NetDurumCard({
@@ -17,6 +18,8 @@ export function NetDurumCard({
   amount,
   incomeAmount,
   expenseAmount,
+  incomeLabel = 'Gelir',
+  expenseLabel = 'Gider',
 }: NetDurumCardProps) {
   const theme = useTheme();
   return (
@@ -27,7 +30,8 @@ export function NetDurumCard({
           borderRadius: theme.radius.lg,
           backgroundColor: theme.colors.bgSurface,
           padding: theme.spacing.lg,
-          ...elevatedShadow('#000000', 0.19, 8, 20),
+          borderWidth: 1,
+          borderColor: theme.colors.borderSubtle,
         },
       ]}
     >
@@ -54,7 +58,7 @@ export function NetDurumCard({
         <StatCol
           icon="arrow-up"
           iconColor={theme.colors.incomeGreen}
-          label="Gelir"
+          label={incomeLabel}
           value={incomeAmount}
           valueColor={theme.colors.incomeGreen}
         />
@@ -67,7 +71,7 @@ export function NetDurumCard({
         <StatCol
           icon="arrow-down"
           iconColor={theme.colors.expenseCoral}
-          label="Gider"
+          label={expenseLabel}
           value={expenseAmount}
           valueColor={theme.colors.expenseCoral}
         />

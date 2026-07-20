@@ -14,6 +14,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, Pressable, Text, View } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Provider } from 'react-redux';
 
 import '@/i18n';
@@ -141,6 +142,16 @@ function RootNavigator() {
         }
       >
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="yeni-islem"
+          options={{
+            presentation: 'formSheet',
+            sheetAllowedDetents: [0.92],
+            sheetGrabberVisible: true,
+            headerShown: false,
+            contentStyle: { backgroundColor: theme.colors.bgSurface },
+          }}
+        />
       </Stack.Protected>
     </Stack>
   );
@@ -181,12 +192,14 @@ export default function RootLayout() {
   if (!fontsLoaded && !fontError) return null;
 
   return (
-    <Provider store={store}>
-      <ThemeProvider>
-        <LanguageProvider>
-          <RootNavigator />
-        </LanguageProvider>
-      </ThemeProvider>
-    </Provider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Provider store={store}>
+        <ThemeProvider>
+          <LanguageProvider>
+            <RootNavigator />
+          </LanguageProvider>
+        </ThemeProvider>
+      </Provider>
+    </GestureHandlerRootView>
   );
 }

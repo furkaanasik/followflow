@@ -1,7 +1,6 @@
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 
 import { withAlpha } from '@/lib/color';
-import { elevatedShadow } from '@/lib/shadow';
 import { NavItem } from '@/molecules';
 import { useTheme } from '@/theme';
 
@@ -24,12 +23,15 @@ export function BottomNavigationBar({ items }: BottomNavigationBarProps) {
         styles.container,
         {
           borderRadius: theme.radius.full,
-          backgroundColor: withAlpha(theme.colors.bgSurface, 'E6'),
+          backgroundColor: withAlpha(theme.colors.bgSurface, 'F2'),
           borderColor: theme.colors.borderSubtle,
           paddingVertical: theme.spacing.xs,
           paddingHorizontal: theme.spacing.sm,
-          ...elevatedShadow('#000000', 0.4, 8, 24),
         },
+        // Android elevation renders a murky block behind the translucent
+        // pill, so the lift comes from the border there; iOS gets a soft
+        // shadow matching the design.
+        Platform.OS === 'ios' ? styles.iosShadow : null,
       ]}
     >
       {items.map((item) => (
@@ -45,5 +47,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 10,
     borderWidth: 1,
+  },
+  iosShadow: {
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.25,
+    shadowRadius: 16,
   },
 });

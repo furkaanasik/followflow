@@ -6,8 +6,9 @@ import { useTheme } from '@/theme';
 export interface SearchBarProps {
   value: string;
   onChangeText: (text: string) => void;
-  onFilterPress: () => void;
+  onFilterPress?: () => void;
   placeholder?: string;
+  filterLabel?: string;
 }
 
 export function SearchBar({
@@ -15,6 +16,7 @@ export function SearchBar({
   onChangeText,
   onFilterPress,
   placeholder = 'İşlem ara...',
+  filterLabel = 'Filtrele',
 }: SearchBarProps) {
   const theme = useTheme();
   return (
@@ -27,13 +29,15 @@ export function SearchBar({
           icon="search"
         />
       </View>
-      <ButtonIconOnly
-        icon="sliders-horizontal"
-        variant="surface"
-        size={44}
-        onPress={onFilterPress}
-        accessibilityLabel="Filtrele"
-      />
+      {onFilterPress ? (
+        <ButtonIconOnly
+          icon="sliders-horizontal"
+          variant="surface"
+          size={44}
+          onPress={onFilterPress}
+          accessibilityLabel={filterLabel}
+        />
+      ) : null}
     </View>
   );
 }

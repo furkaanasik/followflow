@@ -4,7 +4,10 @@
     "connectionError": "Couldn't connect. Check your internet and try again.",
     "skip": "Skip",
     "back": "Back",
-    "or": "or"
+    "cancel": "Cancel",
+    "or": "or",
+    "gelir": "Income",
+    "gider": "Expense"
   },
   "auth": {
     "tagline": "Your whole financial life, on one screen.",
@@ -32,7 +35,9 @@
     "incomeNameRequired": "Income name is required.",
     "paymentNameRequired": "Payment name is required.",
     "amountInvalid": "Enter a valid amount.",
-    "payDayInvalid": "Enter a valid day (1-31)."
+    "payDayInvalid": "Enter a valid day (1-31).",
+    "amountRequired": "Enter an amount.",
+    "categoryRequired": "Pick a category."
   },
   "onboarding": {
     "step": "STEP {{current}}/{{total}}",
@@ -68,5 +73,78 @@
       "savedLabel": "Current Savings (optional)",
       "save": "Save Goal and Start"
     }
+  },
+  "nav": {
+    "home": "Home",
+    "transactions": "Transactions",
+    "budgets": "Budgets",
+    "goals": "Goals",
+    "settings": "Settings"
+  },
+  "home": {
+    "greeting": "Hi, {{name}}",
+    "greetingFallback": "Hi",
+    "subtitle": "How's it going today?",
+    "netStatus": "NET THIS MONTH",
+    "regularIncome": "Your regular income this month:",
+    "upcomingPayment": "Upcoming: {{name}}, in {{days}} days",
+    "upcomingPaymentToday": "Upcoming: {{name}}, today",
+    "categoryBreakdown": "Category Breakdown",
+    "spending": "spent",
+    "budgetTracking": "Budget Progress",
+    "overBy": "{{amount}} over",
+    "recentTransactions": "Recent Transactions",
+    "seeAll": "See All",
+    "addTransaction": "Add transaction",
+    "settings": "Settings",
+    "empty": "No transactions yet",
+    "noData": "No data for this month"
+  },
+  "transactions": {
+    "title": "Transactions",
+    "searchPlaceholder": "Search transactions…",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "thisWeek": "This Week",
+    "earlier": "Earlier",
+    "empty": "No transactions yet",
+    "filter": "Filter",
+    "filterAll": "All",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteTitle": "Delete Transaction",
+    "deleteMessage": "This transaction will be permanently deleted.",
+    "deleteFailed": "Couldn't delete. Check your connection and try again."
+  },
+  "newTransaction": {
+    "title": "New Transaction",
+    "editTitle": "Edit Transaction",
+    "income": "Income",
+    "expense": "Expense",
+    "today": "Today",
+    "dateLabel": "Date",
+    "notePlaceholder": "Add a note (optional)",
+    "save": "Save",
+    "saving": "Saving…",
+    "saveFailed": "Couldn't save. Check your connection and try again.",
+    "close": "Close"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language"
+  },
+  "categories": {
+    "market": "Groceries",
+    "kira": "Rent",
+    "kafe": "Café",
+    "ulasim": "Transport",
+    "saglik": "Health",
+    "fatura": "Bills",
+    "eglence": "Entertainment",
+    "giyim": "Clothing",
+    "egitim": "Education",
+    "diger": "Other",
+    "maas": "Salary",
+    "freelance": "Freelance"
   }
 }

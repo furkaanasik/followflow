@@ -2,6 +2,7 @@ export * from './AppBarBackTitle';
 export * from './AppBarSimpleTitle';
 export * from './BottomNavigationBar';
 export * from './BudgetCard';
+export * from './CategoryBreakdownCard';
 export * from './GoalCard';
 export * from './IncomeSourceCard';
 export * from './NetDurumCard';
