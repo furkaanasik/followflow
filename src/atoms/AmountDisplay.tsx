@@ -22,7 +22,7 @@ export function AmountDisplay({
   return (
     <View style={styles.container}>
       <Text
-        style={{ fontFamily: theme.fonts.heading.bold, fontSize: 40, color }}
+        style={{ fontFamily: theme.fonts.heading.bold, fontSize: 36, color }}
       >
         {amount}
       </Text>
@@ -32,7 +32,7 @@ export function AmountDisplay({
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 8,
+    paddingVertical: 4,
     alignItems: 'center',
     justifyContent: 'center',
   },

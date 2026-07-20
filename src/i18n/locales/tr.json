@@ -4,7 +4,10 @@
     "connectionError": "Bağlantı kurulamadı. İnternetini kontrol edip tekrar dene.",
     "skip": "Atla",
     "back": "Geri",
-    "or": "veya"
+    "cancel": "Vazgeç",
+    "or": "veya",
+    "gelir": "Gelir",
+    "gider": "Gider"
   },
   "auth": {
     "tagline": "Bütün finansal hayatın, tek ekranda.",
@@ -32,7 +35,9 @@
     "incomeNameRequired": "Gelir adı gerekli.",
     "paymentNameRequired": "Ödeme adı gerekli.",
     "amountInvalid": "Geçerli bir tutar gir.",
-    "payDayInvalid": "Geçerli bir gün gir (1-31)."
+    "payDayInvalid": "Geçerli bir gün gir (1-31).",
+    "amountRequired": "Bir tutar gir.",
+    "categoryRequired": "Bir kategori seç."
   },
   "onboarding": {
     "step": "ADIM {{current}}/{{total}}",
@@ -68,5 +73,78 @@
       "savedLabel": "Mevcut Birikim (opsiyonel)",
       "save": "Hedefi Kaydet ve Başla"
     }
+  },
+  "nav": {
+    "home": "Ana Sayfa",
+    "transactions": "İşlemler",
+    "budgets": "Bütçeler",
+    "goals": "Hedefler",
+    "settings": "Ayarlar"
+  },
+  "home": {
+    "greeting": "Merhaba, {{name}}",
+    "greetingFallback": "Merhaba",
+    "subtitle": "Bugün nasıl gidiyor?",
+    "netStatus": "BU AY NET DURUM",
+    "regularIncome": "Bu ayki düzenli gelirin:",
+    "upcomingPayment": "Yaklaşan ödeme: {{name}}, {{days}} gün içinde",
+    "upcomingPaymentToday": "Yaklaşan ödeme: {{name}}, bugün",
+    "categoryBreakdown": "Kategori Dağılımı",
+    "spending": "harcama",
+    "budgetTracking": "Bütçe İlerleme",
+    "overBy": "{{amount}} aşıldı",
+    "recentTransactions": "Son İşlemler",
+    "seeAll": "Tümünü Gör",
+    "addTransaction": "İşlem ekle",
+    "settings": "Ayarlar",
+    "empty": "Henüz işlem yok",
+    "noData": "Bu ay için veri yok"
+  },
+  "transactions": {
+    "title": "İşlemler",
+    "searchPlaceholder": "İşlem ara…",
+    "today": "Bugün",
+    "yesterday": "Dün",
+    "thisWeek": "Bu Hafta",
+    "earlier": "Daha Önce",
+    "empty": "Henüz işlem yok",
+    "filter": "Filtrele",
+    "filterAll": "Tümü",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "deleteTitle": "İşlemi Sil",
+    "deleteMessage": "Bu işlem kalıcı olarak silinecek.",
+    "deleteFailed": "Silinemedi. Bağlantını kontrol edip tekrar dene."
+  },
+  "newTransaction": {
+    "title": "Yeni İşlem",
+    "editTitle": "İşlemi Düzenle",
+    "income": "Gelir",
+    "expense": "Gider",
+    "today": "Bugün",
+    "dateLabel": "Tarih",
+    "notePlaceholder": "Not ekle (opsiyonel)",
+    "save": "Kaydet",
+    "saving": "Kaydediliyor…",
+    "saveFailed": "Kaydedilemedi. Bağlantını kontrol edip tekrar dene.",
+    "close": "Kapat"
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "language": "Dil"
+  },
+  "categories": {
+    "market": "Market",
+    "kira": "Kira",
+    "kafe": "Kafe",
+    "ulasim": "Ulaşım",
+    "saglik": "Sağlık",
+    "fatura": "Fatura",
+    "eglence": "Eğlence",
+    "giyim": "Giyim",
+    "egitim": "Eğitim",
+    "diger": "Diğer",
+    "maas": "Maaş",
+    "freelance": "Freelance"
   }
 }
