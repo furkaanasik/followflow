@@ -79,6 +79,6 @@ None unresolved. All static checks green after the deviations above.
 None — no runner configured (matches Phases 2–7). `aggregate.ts` and `categories.ts` were kept pure to enable future unit tests.
 
 ## Next Steps
-- [ ] Manual device validation via `npx expo start` (home summary/donut/budgets/recent, İşlemler search, FAB→sheet create round-trip, custom pill nav on all tabs, light/vibrant themes)
-- [ ] Code review via `/code-review`
-- [ ] Create PR via `/prp-pr`
+- [x] Manual device validation via `npx expo start` (home summary/donut/budgets/recent, İşlemler search, FAB→sheet create round-trip, custom pill nav on all tabs, light/vibrant themes)
+- [x] Code review via `/code-review`
+- [x] Create PR via `/prp-pr`
