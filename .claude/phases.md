@@ -58,7 +58,7 @@ Do this before building more screens — retrofitting 4 screens now beats retrof
 - [x] İşlemler (transaction list, search/filter via Search Bar molecule)
 - [x] Yeni İşlem Modal (bottom sheet, numpad input)
 
-## Phase 9 — Budgets & Goals Screens
+## Phase 9 — Budgets & Goals Screens 🚧 in-progress — plan: `.claude/PRPs/plans/phase-9-budgets-goals-screens.plan.md`
 - [ ] Bütçeler
 - [ ] Hedefler
 - [ ] Hedef Detay
