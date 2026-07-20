@@ -78,7 +78,9 @@ export function SwipeableRow({
         </View>
       )}
     >
-      {children}
+      {/* Solid backdrop: the action buttons render underneath the row, and a
+          transparent row would show them through when closed. */}
+      <View style={{ backgroundColor: theme.colors.bgApp }}>{children}</View>
     </ReanimatedSwipeable>
   );
 }

@@ -5,6 +5,7 @@
     "skip": "Skip",
     "back": "Back",
     "cancel": "Cancel",
+    "delete": "Delete",
     "or": "or",
     "gelir": "Income",
     "gider": "Expense"
@@ -34,6 +35,7 @@
     "passwordComplexity": "Password must contain at least one letter and one number.",
     "incomeNameRequired": "Income name is required.",
     "paymentNameRequired": "Payment name is required.",
+    "goalNameRequired": "Goal name is required.",
     "amountInvalid": "Enter a valid amount.",
     "payDayInvalid": "Enter a valid day (1-31).",
     "amountRequired": "Enter an amount.",
@@ -132,6 +134,81 @@
   "settings": {
     "title": "Settings",
     "language": "Language"
+  },
+  "budgets": {
+    "title": "Budgets",
+    "subtitle": "{{month}} · {{count}} categories",
+    "remaining": "{{amount}} left",
+    "overBy": "{{amount}} over limit",
+    "empty": "No budgets yet.",
+    "add": "Add budget"
+  },
+  "goals": {
+    "title": "Goals",
+    "subtitle": "You've saved {{total}} across {{count}} goals",
+    "target": "Target: {{amount}}",
+    "completed": "completed",
+    "eta": "Est.: {{date}}",
+    "noEta": "No date set",
+    "addGoal": "Add New Goal",
+    "empty": "No goals yet."
+  },
+  "goalDetail": {
+    "title": "Goal Detail",
+    "completedPct": "{{pct}}% completed",
+    "saved": "Saved",
+    "target": "Target",
+    "monthlyProgress": "Monthly Progress",
+    "chartEmpty": "No contributions yet",
+    "projection": "At this pace, done in {{months}} months",
+    "assumption": "Based on your {{amount}} average monthly contribution",
+    "reached": "Goal reached 🎉",
+    "addMoney": "Add Money to This Goal",
+    "notFound": "Goal not found.",
+    "edit": "Edit goal",
+    "contributions": "Contributions",
+    "removeContribution": "Delete",
+    "removeContributionTitle": "Delete Contribution",
+    "removeContributionMessage": "This amount will be subtracted from the goal's savings.",
+    "removeContributionFailed": "Couldn't delete. Check your connection and try again."
+  },
+  "newBudget": {
+    "title": "New Budget",
+    "editTitle": "Edit Budget",
+    "categoryLabel": "Category",
+    "limitLabel": "Monthly limit",
+    "save": "Save",
+    "saving": "Saving…",
+    "delete": "Delete Budget",
+    "deleteTitle": "Delete Budget",
+    "deleteMessage": "This budget will be permanently deleted.",
+    "duplicate": "A budget for this category already exists this month.",
+    "saveFailed": "Couldn't save. Check your connection and try again."
+  },
+  "newGoal": {
+    "title": "New Goal",
+    "editTitle": "Edit Goal",
+    "nameLabel": "Goal name",
+    "namePlaceholder": "e.g. My Vacation",
+    "targetLabel": "Target amount",
+    "savedLabel": "Starting savings (optional)",
+    "dateLabel": "Target date (optional)",
+    "datePlaceholder": "Pick a date",
+    "iconLabel": "Icon",
+    "save": "Save",
+    "saving": "Saving…",
+    "delete": "Delete Goal",
+    "deleteTitle": "Delete Goal",
+    "deleteMessage": "This goal and its entire contribution history will be permanently deleted.",
+    "saveFailed": "Couldn't save. Check your connection and try again."
+  },
+  "goalDeposit": {
+    "title": "Add Money",
+    "subtitle": "{{name}} · {{remaining}} left",
+    "notePlaceholder": "Note (optional)",
+    "save": "Add",
+    "saving": "Adding…",
+    "saveFailed": "Couldn't add. Check your connection and try again."
   },
   "categories": {
     "market": "Groceries",

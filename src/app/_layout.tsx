@@ -152,6 +152,43 @@ function RootNavigator() {
             contentStyle: { backgroundColor: theme.colors.bgSurface },
           }}
         />
+        <Stack.Screen
+          name="hedef/[id]"
+          options={{
+            headerShown: false,
+            contentStyle: { backgroundColor: theme.colors.bgApp },
+          }}
+        />
+        <Stack.Screen
+          name="yeni-butce"
+          options={{
+            presentation: 'formSheet',
+            sheetAllowedDetents: [0.75],
+            sheetGrabberVisible: true,
+            headerShown: false,
+            contentStyle: { backgroundColor: theme.colors.bgSurface },
+          }}
+        />
+        <Stack.Screen
+          name="yeni-hedef"
+          options={{
+            presentation: 'formSheet',
+            sheetAllowedDetents: [0.92],
+            sheetGrabberVisible: true,
+            headerShown: false,
+            contentStyle: { backgroundColor: theme.colors.bgSurface },
+          }}
+        />
+        <Stack.Screen
+          name="hedef-para-ekle"
+          options={{
+            presentation: 'formSheet',
+            sheetAllowedDetents: [0.6],
+            sheetGrabberVisible: true,
+            headerShown: false,
+            contentStyle: { backgroundColor: theme.colors.bgSurface },
+          }}
+        />
       </Stack.Protected>
     </Stack>
   );

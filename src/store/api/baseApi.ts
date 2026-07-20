@@ -22,6 +22,7 @@ export const api = createApi({
     'IncomeSource',
     'RecurringPayment',
     'Goal',
+    'GoalContribution',
     'Budget',
     'Transaction',
     'Profile',

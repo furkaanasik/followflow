@@ -5,6 +5,7 @@
     "skip": "Atla",
     "back": "Geri",
     "cancel": "Vazgeç",
+    "delete": "Sil",
     "or": "veya",
     "gelir": "Gelir",
     "gider": "Gider"
@@ -34,6 +35,7 @@
     "passwordComplexity": "Şifre en az bir harf ve bir rakam içermeli.",
     "incomeNameRequired": "Gelir adı gerekli.",
     "paymentNameRequired": "Ödeme adı gerekli.",
+    "goalNameRequired": "Hedef adı gerekli.",
     "amountInvalid": "Geçerli bir tutar gir.",
     "payDayInvalid": "Geçerli bir gün gir (1-31).",
     "amountRequired": "Bir tutar gir.",
@@ -132,6 +134,81 @@
   "settings": {
     "title": "Ayarlar",
     "language": "Dil"
+  },
+  "budgets": {
+    "title": "Bütçeler",
+    "subtitle": "{{month}} · {{count}} kategori",
+    "remaining": "Kalan {{amount}}",
+    "overBy": "{{amount}} limiti aşıldı",
+    "empty": "Henüz bütçe eklemedin.",
+    "add": "Bütçe ekle"
+  },
+  "goals": {
+    "title": "Hedefler",
+    "subtitle": "{{count}} hedefte toplam {{total}} biriktirdin",
+    "target": "Hedef: {{amount}}",
+    "completed": "tamamlandı",
+    "eta": "Tahmini: {{date}}",
+    "noEta": "Tarih belirlenmedi",
+    "addGoal": "Yeni Hedef Ekle",
+    "empty": "Henüz hedef eklemedin."
+  },
+  "goalDetail": {
+    "title": "Hedef Detayı",
+    "completedPct": "%{{pct}} tamamlandı",
+    "saved": "Biriktirilen",
+    "target": "Hedef",
+    "monthlyProgress": "Aylık İlerleme",
+    "chartEmpty": "Henüz katkı yok",
+    "projection": "Bu hızda {{months}} ayda tamamlanır",
+    "assumption": "Aylık {{amount}} ortalama katkına göre hesaplandı",
+    "reached": "Hedefe ulaşıldı 🎉",
+    "addMoney": "Bu Hedefe Para Ekle",
+    "notFound": "Hedef bulunamadı.",
+    "edit": "Hedefi düzenle",
+    "contributions": "Katkılar",
+    "removeContribution": "Sil",
+    "removeContributionTitle": "Katkıyı Sil",
+    "removeContributionMessage": "Bu tutar hedefin birikiminden düşülecek.",
+    "removeContributionFailed": "Silinemedi. Bağlantını kontrol edip tekrar dene."
+  },
+  "newBudget": {
+    "title": "Yeni Bütçe",
+    "editTitle": "Bütçeyi Düzenle",
+    "categoryLabel": "Kategori",
+    "limitLabel": "Aylık limit",
+    "save": "Kaydet",
+    "saving": "Kaydediliyor…",
+    "delete": "Bütçeyi Sil",
+    "deleteTitle": "Bütçeyi Sil",
+    "deleteMessage": "Bu bütçe kalıcı olarak silinecek.",
+    "duplicate": "Bu kategori için bu ay zaten bütçe var.",
+    "saveFailed": "Kaydedilemedi. Bağlantını kontrol edip tekrar dene."
+  },
+  "newGoal": {
+    "title": "Yeni Hedef",
+    "editTitle": "Hedefi Düzenle",
+    "nameLabel": "Hedef adı",
+    "namePlaceholder": "Örn. Tatilim",
+    "targetLabel": "Hedef tutar",
+    "savedLabel": "Başlangıç birikimi (opsiyonel)",
+    "dateLabel": "Hedef tarihi (opsiyonel)",
+    "datePlaceholder": "Tarih seç",
+    "iconLabel": "Simge",
+    "save": "Kaydet",
+    "saving": "Kaydediliyor…",
+    "delete": "Hedefi Sil",
+    "deleteTitle": "Hedefi Sil",
+    "deleteMessage": "Bu hedef ve tüm katkı geçmişi kalıcı olarak silinecek.",
+    "saveFailed": "Kaydedilemedi. Bağlantını kontrol edip tekrar dene."
+  },
+  "goalDeposit": {
+    "title": "Para Ekle",
+    "subtitle": "{{name}} · Kalan {{remaining}}",
+    "notePlaceholder": "Not (opsiyonel)",
+    "save": "Ekle",
+    "saving": "Ekleniyor…",
+    "saveFailed": "Eklenemedi. Bağlantını kontrol edip tekrar dene."
   },
   "categories": {
     "market": "Market",
