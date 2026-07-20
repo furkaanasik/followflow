@@ -87,6 +87,6 @@ Built the three Phase 9 screens — Bütçeler (budget list), Hedefler (goal lis
 None — repo has no unit-test harness (no jest/test script). Pure helpers in `aggregate.ts` are the designated target if a harness lands later.
 
 ## Next Steps
-- [ ] Manual walk-through on device/simulator: budget create/edit/delete + duplicate error, goal create/edit/delete, deposit round-trip (progress + chart update), cold deep-link to `hedef/[id]`, tr↔en toggle
-- [ ] Code review via `/code-review`
-- [ ] Create PR via `/prp-pr`
+- [x] Manual walk-through on device/simulator: budget create/edit/delete + duplicate error, goal create/edit/delete, deposit round-trip (progress + chart update), cold deep-link to `hedef/[id]`, tr↔en toggle
+- [x] Code review via `/code-review`
+- [x] Create PR via `/prp-pr`
