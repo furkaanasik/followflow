@@ -84,10 +84,14 @@ export function CategoryBreakdownCard({
         </Svg>
         <View style={styles.center} pointerEvents="none">
           <Text
+            numberOfLines={1}
+            adjustsFontSizeToFit
+            minimumFontScale={0.5}
             style={{
               fontFamily: theme.fonts.heading.bold,
               fontSize: 18,
               color: theme.colors.textPrimary,
+              textAlign: 'center',
             }}
           >
             {totalLabel}
@@ -152,6 +156,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 2,
+    // Keep the label inside the donut hole (ring stroke eats STROKE px per side).
+    paddingHorizontal: STROKE + 4,
   },
   legend: { flex: 1, gap: 10 },
   legendRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },

@@ -1,7 +1,7 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import {
@@ -122,7 +122,11 @@ export function NewBudgetScreen() {
     <View
       style={[styles.container, { backgroundColor: theme.colors.bgSurface }]}
     >
-      <View style={[styles.content, { gap: 10 }]}>
+      <ScrollView
+        style={styles.scroll}
+        contentContainerStyle={[styles.content, { gap: 10 }]}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.header}>
           <Text
             style={{
@@ -202,7 +206,7 @@ export function NewBudgetScreen() {
             onPress={confirmDelete}
           />
         ) : null}
-      </View>
+      </ScrollView>
 
       <View
         style={[styles.footer, { paddingBottom: Math.max(insets.bottom, 16) }]}
@@ -228,8 +232,9 @@ export function NewBudgetScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
+  scroll: { flex: 1 },
   content: {
-    flex: 1,
+    flexGrow: 1,
     paddingTop: 12,
     paddingHorizontal: 24,
     paddingBottom: 8,

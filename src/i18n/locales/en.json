@@ -6,6 +6,7 @@
     "back": "Back",
     "cancel": "Cancel",
     "delete": "Delete",
+    "edit": "Edit",
     "or": "or",
     "gelir": "Income",
     "gider": "Expense"
@@ -133,7 +134,62 @@
   },
   "settings": {
     "title": "Settings",
-    "language": "Language"
+    "language": "Language",
+    "management": "Management",
+    "incomeSources": "My Income Sources",
+    "recurringPayments": "Recurring Payments",
+    "appearance": "Appearance",
+    "themeDark": "Dark",
+    "themeLight": "Light",
+    "themeVibrant": "Vibrant",
+    "themeVibrantDark": "V. Dark",
+    "signOut": "Sign Out",
+    "signOutFailed": "Couldn't sign out. Try again."
+  },
+  "frequency": {
+    "weekly": "Weekly",
+    "biweekly": "Biweekly",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "one-time": "One-time"
+  },
+  "incomeSources": {
+    "title": "My Income Sources",
+    "subtitle": "Monthly total {{total}} · {{count}} sources",
+    "empty": "No income sources yet.",
+    "add": "Add Income Source",
+    "payDay": "Day {{day}} of each month"
+  },
+  "recurringPayments": {
+    "title": "Recurring Payments",
+    "subtitle": "Monthly total {{total}} · {{count}} payments",
+    "empty": "No recurring payments yet.",
+    "add": "Add Payment",
+    "next": "Next: {{date}}"
+  },
+  "newIncome": {
+    "title": "New Income Source",
+    "editTitle": "Edit Income Source",
+    "nameLabel": "Income Name",
+    "namePlaceholder": "e.g. Salary",
+    "save": "Save",
+    "saving": "Saving…",
+    "delete": "Delete Income Source",
+    "deleteTitle": "Delete Income Source",
+    "deleteMessage": "This income source will be permanently deleted.",
+    "saveFailed": "Couldn't save. Check your connection and try again."
+  },
+  "newRecurring": {
+    "title": "New Recurring Payment",
+    "editTitle": "Edit Payment",
+    "nameLabel": "Payment Name",
+    "namePlaceholder": "e.g. Rent",
+    "save": "Save",
+    "saving": "Saving…",
+    "delete": "Delete Payment",
+    "deleteTitle": "Delete Payment",
+    "deleteMessage": "This recurring payment will be permanently deleted.",
+    "saveFailed": "Couldn't save. Check your connection and try again."
   },
   "budgets": {
     "title": "Budgets",

@@ -6,6 +6,7 @@
     "back": "Geri",
     "cancel": "Vazgeç",
     "delete": "Sil",
+    "edit": "Düzenle",
     "or": "veya",
     "gelir": "Gelir",
     "gider": "Gider"
@@ -133,7 +134,62 @@
   },
   "settings": {
     "title": "Ayarlar",
-    "language": "Dil"
+    "language": "Dil",
+    "management": "Yönetim",
+    "incomeSources": "Gelir Kaynaklarım",
+    "recurringPayments": "Tekrarlayan Ödemeler",
+    "appearance": "Görünüm",
+    "themeDark": "Koyu",
+    "themeLight": "Açık",
+    "themeVibrant": "Canlı",
+    "themeVibrantDark": "C. Koyu",
+    "signOut": "Çıkış Yap",
+    "signOutFailed": "Çıkış yapılamadı. Tekrar deneyin."
+  },
+  "frequency": {
+    "weekly": "Haftalık",
+    "biweekly": "İki Haftada Bir",
+    "monthly": "Aylık",
+    "yearly": "Yıllık",
+    "one-time": "Tek Seferlik"
+  },
+  "incomeSources": {
+    "title": "Gelir Kaynaklarım",
+    "subtitle": "Aylık toplam {{total}} · {{count}} kaynak",
+    "empty": "Henüz gelir kaynağı yok.",
+    "add": "Gelir Kaynağı Ekle",
+    "payDay": "Her ayın {{day}}'i"
+  },
+  "recurringPayments": {
+    "title": "Tekrarlayan Ödemeler",
+    "subtitle": "Aylık toplam {{total}} · {{count}} ödeme",
+    "empty": "Henüz tekrarlayan ödeme yok.",
+    "add": "Ödeme Ekle",
+    "next": "Sonraki: {{date}}"
+  },
+  "newIncome": {
+    "title": "Yeni Gelir Kaynağı",
+    "editTitle": "Gelir Kaynağını Düzenle",
+    "nameLabel": "Gelir Adı",
+    "namePlaceholder": "örn. Maaş",
+    "save": "Kaydet",
+    "saving": "Kaydediliyor…",
+    "delete": "Gelir Kaynağını Sil",
+    "deleteTitle": "Gelir Kaynağını Sil",
+    "deleteMessage": "Bu gelir kaynağı kalıcı olarak silinecek.",
+    "saveFailed": "Kaydedilemedi. Bağlantını kontrol edip tekrar dene."
+  },
+  "newRecurring": {
+    "title": "Yeni Tekrarlayan Ödeme",
+    "editTitle": "Ödemeyi Düzenle",
+    "nameLabel": "Ödeme Adı",
+    "namePlaceholder": "örn. Kira",
+    "save": "Kaydet",
+    "saving": "Kaydediliyor…",
+    "delete": "Ödemeyi Sil",
+    "deleteTitle": "Ödemeyi Sil",
+    "deleteMessage": "Bu tekrarlayan ödeme kalıcı olarak silinecek.",
+    "saveFailed": "Kaydedilemedi. Bağlantını kontrol edip tekrar dene."
   },
   "budgets": {
     "title": "Bütçeler",
