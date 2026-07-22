@@ -163,7 +163,7 @@ function RootNavigator() {
           name="yeni-butce"
           options={{
             presentation: 'formSheet',
-            sheetAllowedDetents: [0.75],
+            sheetAllowedDetents: [0.85],
             sheetGrabberVisible: true,
             headerShown: false,
             contentStyle: { backgroundColor: theme.colors.bgSurface },
@@ -184,6 +184,40 @@ function RootNavigator() {
           options={{
             presentation: 'formSheet',
             sheetAllowedDetents: [0.6],
+            sheetGrabberVisible: true,
+            headerShown: false,
+            contentStyle: { backgroundColor: theme.colors.bgSurface },
+          }}
+        />
+        <Stack.Screen
+          name="gelir-kaynaklarim"
+          options={{
+            headerShown: false,
+            contentStyle: { backgroundColor: theme.colors.bgApp },
+          }}
+        />
+        <Stack.Screen
+          name="tekrarlayan-odemeler"
+          options={{
+            headerShown: false,
+            contentStyle: { backgroundColor: theme.colors.bgApp },
+          }}
+        />
+        <Stack.Screen
+          name="yeni-gelir"
+          options={{
+            presentation: 'formSheet',
+            sheetAllowedDetents: [0.85],
+            sheetGrabberVisible: true,
+            headerShown: false,
+            contentStyle: { backgroundColor: theme.colors.bgSurface },
+          }}
+        />
+        <Stack.Screen
+          name="yeni-tekrarlayan"
+          options={{
+            presentation: 'formSheet',
+            sheetAllowedDetents: [0.85],
             sheetGrabberVisible: true,
             headerShown: false,
             contentStyle: { backgroundColor: theme.colors.bgSurface },

@@ -12,3 +12,7 @@ export * from './NewBudgetScreen';
 export * from './NewGoalScreen';
 export * from './GoalDepositScreen';
 export * from './SettingsScreen';
+export * from './IncomeSourcesScreen';
+export * from './RecurringPaymentsScreen';
+export * from './NewIncomeSourceScreen';
+export * from './NewRecurringPaymentScreen';

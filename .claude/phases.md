@@ -63,10 +63,10 @@ Do this before building more screens — retrofitting 4 screens now beats retrof
 - [x] Hedefler
 - [x] Hedef Detay
 
-## Phase 10 — Settings & Management Screens
-- [ ] Gelir Kaynaklarım
-- [ ] Ayarlar (incl. theme switcher + language switcher)
-- [ ] Tekrarlayan Ödemeler
+## Phase 10 — Settings & Management Screens ✅ complete — report: `.claude/PRPs/reports/phase-10-settings-management-screens-report.md`
+- [x] Gelir Kaynaklarım
+- [x] Ayarlar (incl. theme switcher + language switcher)
+- [x] Tekrarlayan Ödemeler
 
 ## Phase 11 — Polish & QA
 - [ ] Cross-theme visual QA (all 4 modes) against Pencil source

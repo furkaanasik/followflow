@@ -1,14 +1,7 @@
 import { useFocusEffect, useRouter } from 'expo-router';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  InteractionManager,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ButtonSecondary } from '@/atoms';
@@ -31,8 +24,8 @@ export function GoalsScreen() {
   // so the tab switch renders instantly and the refetch runs after.
   useFocusEffect(
     useCallback(() => {
-      const task = InteractionManager.runAfterInteractions(() => refetch());
-      return () => task.cancel();
+      const handle = requestIdleCallback(() => refetch());
+      return () => cancelIdleCallback(handle);
     }, [refetch]),
   );
 
