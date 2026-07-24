@@ -37,6 +37,7 @@ export function ButtonSecondary({
   return (
     <Pressable
       onPress={onPress}
+      accessibilityRole="button"
       style={[
         styles.container,
         {

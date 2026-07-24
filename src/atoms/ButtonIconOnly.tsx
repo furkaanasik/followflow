@@ -19,7 +19,7 @@ export function ButtonIconOnly({
   onPress,
   accessibilityLabel,
   variant = 'accent',
-  size = 40,
+  size = 44,
   iconColor,
 }: ButtonIconOnlyProps) {
   const theme = useTheme();
@@ -28,6 +28,7 @@ export function ButtonIconOnly({
   return (
     <Pressable
       onPress={onPress}
+      accessibilityRole="button"
       accessibilityLabel={accessibilityLabel}
       hitSlop={{ top: 4, right: 4, bottom: 4, left: 4 }}
       style={[

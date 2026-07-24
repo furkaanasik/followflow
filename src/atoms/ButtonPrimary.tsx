@@ -31,6 +31,8 @@ export function ButtonPrimary({
     <Pressable
       onPress={onPress}
       disabled={disabled}
+      accessibilityRole="button"
+      accessibilityState={{ disabled }}
       style={[
         styles.container,
         {

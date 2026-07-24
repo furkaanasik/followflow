@@ -15,6 +15,8 @@ export function Avatar({ size = 52, imageUri }: AvatarProps) {
 
   return (
     <View
+      accessible={false}
+      importantForAccessibility="no-hide-descendants"
       style={[
         styles.container,
         {

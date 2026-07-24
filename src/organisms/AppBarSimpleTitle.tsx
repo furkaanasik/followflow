@@ -11,6 +11,7 @@ export function AppBarSimpleTitle({ title }: AppBarSimpleTitleProps) {
   return (
     <View style={styles.container}>
       <Text
+        accessibilityRole="header"
         style={{
           fontFamily: theme.fonts.heading.bold,
           fontSize: 22,

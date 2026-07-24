@@ -12,6 +12,7 @@ export function TitleSubtitle({ title, subtitle }: TitleSubtitleProps) {
   return (
     <View style={styles.container}>
       <Text
+        accessibilityRole="header"
         style={{
           fontFamily: theme.fonts.heading.bold,
           fontSize: 24,

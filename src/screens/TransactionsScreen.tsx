@@ -1,14 +1,14 @@
 import { useFocusEffect, useRouter } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Alert, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ButtonIconOnly } from '@/atoms';
 import { groupByDate } from '@/lib/aggregate';
 import { categoryByKey } from '@/lib/categories';
 import { formatCurrency, formatDate } from '@/lib/format';
-import { SearchBar, SegmentedToggle } from '@/molecules';
+import { SearchBar, SegmentedToggle, StateView } from '@/molecules';
 import { AppBarSimpleTitle, TransactionListCard } from '@/organisms';
 import {
   useDeleteTransactionMutation,
@@ -27,7 +27,12 @@ export function TransactionsScreen() {
     'all',
   );
 
-  const { data: transactions = [], refetch } = useListTransactionsQuery();
+  const {
+    data: transactions = [],
+    isLoading,
+    isError,
+    refetch,
+  } = useListTransactionsQuery();
   const [deleteTransaction] = useDeleteTransactionMutation();
 
   // Reload when the tab regains focus instead of pull-to-refresh; deferred
@@ -130,7 +135,11 @@ export function TransactionsScreen() {
           }
         />
 
-        {groups.length > 0 ? (
+        {isLoading ? (
+          <StateView variant="loading" />
+        ) : isError ? (
+          <StateView variant="error" onRetry={refetch} />
+        ) : groups.length > 0 ? (
           groups.map((group) => (
             <TransactionListCard
               key={group.bucket}
@@ -145,16 +154,11 @@ export function TransactionsScreen() {
             />
           ))
         ) : (
-          <Text
-            style={{
-              fontFamily: theme.fonts.body.medium,
-              fontSize: 13,
-              color: theme.colors.textTertiary,
-              paddingTop: theme.spacing.lg,
-            }}
-          >
-            {t('transactions.empty')}
-          </Text>
+          <StateView
+            variant="empty"
+            icon="receipt"
+            message={t('transactions.empty')}
+          />
         )}
       </ScrollView>
     </SafeAreaView>

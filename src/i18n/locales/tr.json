@@ -1,5 +1,6 @@
 {
   "common": {
+    "loading": "Yükleniyor…",
     "retry": "Tekrar dene",
     "connectionError": "Bağlantı kurulamadı. İnternetini kontrol edip tekrar dene.",
     "skip": "Atla",
@@ -10,6 +11,9 @@
     "or": "veya",
     "gelir": "Gelir",
     "gider": "Gider"
+  },
+  "a11y": {
+    "seeAll": "Tüm işlemleri gör"
   },
   "auth": {
     "tagline": "Bütün finansal hayatın, tek ekranda.",

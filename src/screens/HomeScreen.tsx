@@ -1,13 +1,6 @@
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import {
-  ActivityIndicator,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import {
   SafeAreaView,
   useSafeAreaInsets,
@@ -27,7 +20,12 @@ import {
 import { categoryByKey } from '@/lib/categories';
 import { formatCurrency, formatDate } from '@/lib/format';
 import { elevatedShadow } from '@/lib/shadow';
-import { BudgetProgressRow, InfoRowChevron, TransactionRow } from '@/molecules';
+import {
+  BudgetProgressRow,
+  InfoRowChevron,
+  StateView,
+  TransactionRow,
+} from '@/molecules';
 import {
   CategoryBreakdownCard,
   NetDurumCard,
@@ -45,21 +43,30 @@ import { useTheme } from '@/theme';
 import type { ColorTokens } from '@/theme/tokens';
 import type { Transaction } from '@/types';
 
-// Fixed chart palette from the design file (rank order, largest slice first);
-// the last gray is reserved for the aggregated "Diğer" slice.
-const CHART_PALETTE = ['#3ECF9A', '#6FA8DC', '#E0A458', '#B39DDB'];
-const CHART_OTHER_COLOR = '#5C6C71';
-
 export function HomeScreen() {
   const theme = useTheme();
   const { t } = useTranslation();
   const router = useRouter();
   const insets = useSafeAreaInsets();
 
+  // Rank-ordered palette (largest slice first); last token reserved for the
+  // aggregated "Diğer" slice. Derived per render so theme switches recolor.
+  const CHART_PALETTE = [
+    theme.colors.accentTeal,
+    theme.colors.incomeGreen,
+    theme.colors.expenseCoral,
+    theme.colors.textSecondary,
+  ];
+  const CHART_OTHER_COLOR = theme.colors.textTertiary;
+
   const session = useAppSelector((s) => s.auth.session);
   const { data: profile } = useGetProfileQuery();
-  const { data: transactions = [], isLoading: txnsLoading } =
-    useListTransactionsQuery();
+  const {
+    data: transactions = [],
+    isLoading: txnsLoading,
+    isError: txnsError,
+    refetch: refetchTxns,
+  } = useListTransactionsQuery();
   const { data: budgets = [] } = useListBudgetsQuery(currentPeriodMonth());
   const { data: incomeSources = [] } = useListIncomeSourcesQuery();
   const { data: recurringPayments = [] } = useListRecurringPaymentsQuery();
@@ -135,13 +142,17 @@ export function HomeScreen() {
     };
   }
 
-  if (txnsLoading) {
+  if (txnsLoading || txnsError) {
     return (
       <SafeAreaView
         edges={['top', 'bottom']}
         style={[styles.loader, { backgroundColor: theme.colors.bgApp }]}
       >
-        <ActivityIndicator color={theme.colors.accentTeal} />
+        {txnsLoading ? (
+          <StateView variant="loading" />
+        ) : (
+          <StateView variant="error" onRetry={refetchTxns} />
+        )}
       </SafeAreaView>
     );
   }
@@ -271,6 +282,8 @@ export function HomeScreen() {
             <Pressable
               onPress={() => router.push('/(tabs)/islemler')}
               hitSlop={8}
+              accessibilityRole="button"
+              accessibilityLabel={t('a11y.seeAll')}
             >
               <Text
                 style={{
@@ -324,6 +337,7 @@ function SectionTitle({ title }: { title: string }) {
   const theme = useTheme();
   return (
     <Text
+      accessibilityRole="header"
       style={{
         fontFamily: theme.fonts.heading.semibold,
         fontSize: 16,

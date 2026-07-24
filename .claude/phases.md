@@ -68,11 +68,11 @@ Do this before building more screens — retrofitting 4 screens now beats retrof
 - [x] Ayarlar (incl. theme switcher + language switcher)
 - [x] Tekrarlayan Ödemeler
 
-## Phase 11 — Polish & QA
-- [ ] Cross-theme visual QA (all 4 modes) against Pencil source
-- [ ] Empty states, loading states, error states per screen
-- [ ] Accessibility pass (contrast, tap targets, screen reader labels)
-- [ ] E2E smoke test of core loop: add income source → log transaction → check budget/goal progress
+## Phase 11 — Polish & QA ✅ complete — report: `.claude/PRPs/reports/phase-11-polish-qa-report.md`
+- [x] Cross-theme visual QA (all 4 modes) against Pencil source
+- [x] Empty states, loading states, error states per screen
+- [x] Accessibility pass (contrast, tap targets, screen reader labels)
+- [x] E2E smoke test of core loop: add income source → log transaction → check budget/goal progress
 
 ## Notes
 - Domain loop: income sources & recurring payments captured at onboarding → transactions logged → tracked against budgets and goals.

@@ -1,5 +1,6 @@
 {
   "common": {
+    "loading": "Loading…",
     "retry": "Try again",
     "connectionError": "Couldn't connect. Check your internet and try again.",
     "skip": "Skip",
@@ -10,6 +11,9 @@
     "or": "or",
     "gelir": "Income",
     "gider": "Expense"
+  },
+  "a11y": {
+    "seeAll": "See all transactions"
   },
   "auth": {
     "tagline": "Your whole financial life, on one screen.",
