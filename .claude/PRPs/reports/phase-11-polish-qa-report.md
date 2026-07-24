@@ -102,5 +102,5 @@ Element dump confirms roles/labels landed: settings/see-all/FAB/rows now expose 
 None — repo has no unit-test harness (consistent with phases 0–10); validation was static analysis + live emulator QA.
 
 ## Next Steps
-- [ ] Code review via `/code-review`
-- [ ] Create PR via `/prp-pr`
+- [x] Code review via `/code-review`
+- [x] Create PR via `/prp-pr`

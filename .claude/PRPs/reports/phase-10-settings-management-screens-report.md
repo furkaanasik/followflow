@@ -70,6 +70,6 @@ None — repo has no automated test harness (validated via tsc/eslint/prettier/i
 - `profiles.theme_mode` sync — theme intentionally persists locally only (AsyncStorage); writing the column would be half-wired.
 
 ## Next Steps
-- [ ] Manual device walkthrough of the test matrix in the plan
-- [ ] Code review via `/code-review`
-- [ ] Create PR via `/prp-pr`
+- [x] Manual device walkthrough of the test matrix in the plan
+- [x] Code review via `/code-review`
+- [x] Create PR via `/prp-pr`

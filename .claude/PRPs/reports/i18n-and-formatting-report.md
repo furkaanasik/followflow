@@ -78,5 +78,5 @@ None beyond the deviations above.
 - [ ] Localized connection-error + retry on network kill
 
 ## Next Steps
-- [ ] Code review via `/code-review`
-- [ ] Create PR via `/prp-pr`
+- [x] Code review via `/code-review`
+- [x] Create PR via `/prp-pr`
