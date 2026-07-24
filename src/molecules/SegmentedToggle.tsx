@@ -137,5 +137,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 10,
+    // Guarantee a >=44dp tap target (WCAG 2.2 / platform minimum).
+    minHeight: 44,
   },
 });
