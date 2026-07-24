@@ -47,6 +47,69 @@ export function CategoryBreakdownCard({
     );
   }
 
+  // A single category renders as a full ring, which reads as a plain circle
+  // with no comparison to make. Fall back to a labelled full-width bar that
+  // states the category, its amount, and the running total instead.
+  if (slices.length === 1) {
+    const slice = slices[0];
+    return (
+      <View style={styles.single}>
+        <View style={styles.singleTop}>
+          <View style={styles.singleLabel}>
+            <View style={[styles.dot, { backgroundColor: slice.color }]} />
+            <Text
+              numberOfLines={1}
+              style={{
+                flex: 1,
+                fontFamily: theme.fonts.body.semibold,
+                fontSize: 14,
+                color: theme.colors.textPrimary,
+              }}
+            >
+              {slice.label}
+            </Text>
+          </View>
+          <Text
+            style={{
+              fontFamily: theme.fonts.heading.bold,
+              fontSize: 16,
+              color: theme.colors.textPrimary,
+            }}
+          >
+            {slice.amount}
+          </Text>
+        </View>
+        <View
+          style={[
+            styles.singleTrack,
+            {
+              borderRadius: theme.radius.full,
+              backgroundColor: theme.colors.bgSurfaceAlt,
+            },
+          ]}
+        >
+          <View
+            style={{
+              height: '100%',
+              width: '100%',
+              borderRadius: theme.radius.full,
+              backgroundColor: slice.color,
+            }}
+          />
+        </View>
+        <Text
+          style={{
+            fontFamily: theme.fonts.body.regular,
+            fontSize: 11,
+            color: theme.colors.textTertiary,
+          }}
+        >
+          {caption}
+        </Text>
+      </View>
+    );
+  }
+
   const dashes = slices.map((slice) => (slice.total / total) * CIRCUMFERENCE);
   const offsets = dashes.reduce<number[]>((acc, _dash, index) => {
     acc.push(index === 0 ? 0 : acc[index - 1] + dashes[index - 1]);
@@ -159,6 +222,20 @@ const styles = StyleSheet.create({
     // Keep the label inside the donut hole (ring stroke eats STROKE px per side).
     paddingHorizontal: STROKE + 4,
   },
+  single: { gap: 8 },
+  singleTop: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: 12,
+  },
+  singleLabel: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  singleTrack: { height: 10, width: '100%', overflow: 'hidden' },
   legend: { flex: 1, gap: 10 },
   legendRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   dot: { width: 8, height: 8, borderRadius: 4 },

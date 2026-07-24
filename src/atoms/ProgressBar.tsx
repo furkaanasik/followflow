@@ -13,6 +13,9 @@ export function ProgressBar({ value, color = 'accentTeal' }: ProgressBarProps) {
   const clamped = Number.isFinite(value)
     ? Math.min(100, Math.max(0, value))
     : 0;
+  // A sub-1% value would render as an invisible sliver; floor any real spend
+  // to a legible minimum so the bar never reads as empty when it isn't.
+  const width = clamped > 0 ? Math.max(clamped, 3) : 0;
 
   return (
     <View
@@ -21,19 +24,25 @@ export function ProgressBar({ value, color = 'accentTeal' }: ProgressBarProps) {
         {
           borderRadius: theme.radius.full,
           backgroundColor: theme.colors.bgSurfaceAlt,
+          // Hairline outline keeps the empty (0%) track visible against
+          // low-contrast surfaces so the bar is legible before any spend.
+          borderWidth: StyleSheet.hairlineWidth,
+          borderColor: theme.colors.borderSubtle,
         },
       ]}
     >
-      <View
-        style={[
-          styles.fill,
-          {
-            borderRadius: theme.radius.full,
-            backgroundColor: theme.colors[color],
-            width: `${clamped}%`,
-          },
-        ]}
-      />
+      {width > 0 ? (
+        <View
+          style={[
+            styles.fill,
+            {
+              borderRadius: theme.radius.full,
+              backgroundColor: theme.colors[color],
+              width: `${width}%`,
+            },
+          ]}
+        />
+      ) : null}
     </View>
   );
 }

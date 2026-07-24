@@ -24,13 +24,16 @@ export function ButtonIconOnly({
 }: ButtonIconOnlyProps) {
   const theme = useTheme();
   const isSurface = variant === 'surface';
+  // Extend the touchable area so buttons smaller than 44dp (e.g. the 32dp
+  // contribution delete) still meet the minimum tap target.
+  const slop = Math.max(4, Math.ceil((44 - size) / 2));
 
   return (
     <Pressable
       onPress={onPress}
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel}
-      hitSlop={{ top: 4, right: 4, bottom: 4, left: 4 }}
+      hitSlop={{ top: slop, right: slop, bottom: slop, left: slop }}
       style={[
         styles.container,
         {

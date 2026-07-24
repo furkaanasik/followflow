@@ -18,6 +18,7 @@ import {
   type DateBucket,
 } from '@/lib/aggregate';
 import { categoryByKey } from '@/lib/categories';
+import { CHART_PALETTE } from '@/lib/color';
 import { formatCurrency, formatDate } from '@/lib/format';
 import { elevatedShadow } from '@/lib/shadow';
 import {
@@ -51,12 +52,6 @@ export function HomeScreen() {
 
   // Rank-ordered palette (largest slice first); last token reserved for the
   // aggregated "Diğer" slice. Derived per render so theme switches recolor.
-  const CHART_PALETTE = [
-    theme.colors.accentTeal,
-    theme.colors.incomeGreen,
-    theme.colors.expenseCoral,
-    theme.colors.textSecondary,
-  ];
   const CHART_OTHER_COLOR = theme.colors.textTertiary;
 
   const session = useAppSelector((s) => s.auth.session);
