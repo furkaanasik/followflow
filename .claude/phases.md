@@ -1,5 +1,8 @@
 # FollowFlow — Development Phases
 
+> **v1 kapsamı tamamlandı (Phase 0–11).** Bu dosya dondurulmuş tarihsel kayıttır — düzenlemeyin.
+> Yeni işler [`backlog.md`](./backlog.md) içinde izlenir.
+
 React Native (Expo) build of the FollowFlow design (`design/design.pen`). Stack: **Expo** + **Supabase** (auth/DB/realtime) + **Redux Toolkit** (state).
 
 Each phase should be completed, verified, and checked off before starting the next. Mark phases with `[x]` when done.
