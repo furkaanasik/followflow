@@ -1,14 +1,7 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { createElement, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  ActivityIndicator,
-  Alert,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
 import {
   SafeAreaView,
   useSafeAreaInsets,
@@ -28,6 +21,7 @@ import {
 } from '@/lib/aggregate';
 import { formatCurrency, formatDate } from '@/lib/format';
 import { getIcon } from '@/lib/icons';
+import { StateView } from '@/molecules';
 import { AppBarBackTitle, GoalProgressChart } from '@/organisms';
 import {
   useListGoalContributionsQuery,
@@ -43,7 +37,12 @@ export function GoalDetailScreen() {
   const insets = useSafeAreaInsets();
   const { id } = useLocalSearchParams<{ id: string }>();
 
-  const { data: goals = [], isLoading: goalsLoading } = useListGoalsQuery();
+  const {
+    data: goals = [],
+    isLoading: goalsLoading,
+    isError: goalsError,
+    refetch: refetchGoals,
+  } = useListGoalsQuery();
   const { data: contribs = [] } = useListGoalContributionsQuery(id!, {
     skip: !id,
   });
@@ -74,7 +73,7 @@ export function GoalDetailScreen() {
 
   // Deleted from the edit sheet (or bad deep link): pop back to the list
   // instead of stranding the user on the not-found fallback.
-  const missing = !goalsLoading && !goal;
+  const missing = !goalsLoading && !goalsError && !goal;
   useEffect(() => {
     if (missing && router.canGoBack()) router.back();
   }, [missing, router]);
@@ -86,17 +85,15 @@ export function GoalDetailScreen() {
         style={[styles.loader, { backgroundColor: theme.colors.bgApp }]}
       >
         {goalsLoading ? (
-          <ActivityIndicator color={theme.colors.accentTeal} />
+          <StateView variant="loading" />
+        ) : goalsError ? (
+          <StateView variant="error" onRetry={refetchGoals} />
         ) : (
-          <Text
-            style={{
-              fontFamily: theme.fonts.body.medium,
-              fontSize: 13,
-              color: theme.colors.textTertiary,
-            }}
-          >
-            {t('goalDetail.notFound')}
-          </Text>
+          <StateView
+            variant="empty"
+            icon="target"
+            message={t('goalDetail.notFound')}
+          />
         )}
       </SafeAreaView>
     );

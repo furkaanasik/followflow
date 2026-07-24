@@ -43,6 +43,9 @@ export function OnboardingTopBar({
           hitSlop={8}
           style={styles.skipTap}
           disabled={skipDisabled}
+          accessibilityRole="button"
+          accessibilityLabel={skipLabel ?? t('common.skip')}
+          accessibilityState={{ disabled: skipDisabled }}
         >
           <Text
             style={{

@@ -95,6 +95,9 @@ export function SegmentedToggle({
           <Pressable
             key={option.value}
             onPress={() => onChange(option.value)}
+            accessibilityRole="button"
+            accessibilityState={{ selected }}
+            accessibilityLabel={option.label}
             style={styles.option}
           >
             <Text

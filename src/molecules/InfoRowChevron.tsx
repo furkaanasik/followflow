@@ -24,6 +24,8 @@ export function InfoRowChevron({
   return (
     <Pressable
       onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={`${label} ${value}`}
       style={[
         styles.container,
         {

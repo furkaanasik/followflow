@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { ButtonIconOnly } from '@/atoms';
@@ -10,17 +11,19 @@ export interface AppBarBackTitleProps {
 
 export function AppBarBackTitle({ title, onBack }: AppBarBackTitleProps) {
   const theme = useTheme();
+  const { t } = useTranslation();
   return (
     <View style={styles.container}>
       <ButtonIconOnly
         icon="arrow-left"
         onPress={onBack}
-        accessibilityLabel="Geri"
+        accessibilityLabel={t('common.back')}
         variant="surface"
         size={36}
         iconColor="textPrimary"
       />
       <Text
+        accessibilityRole="header"
         style={{
           fontFamily: theme.fonts.heading.bold,
           fontSize: 16,

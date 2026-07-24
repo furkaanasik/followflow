@@ -1,14 +1,14 @@
 import { useFocusEffect, useRouter } from 'expo-router';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ButtonIconOnly } from '@/atoms';
 import { budgetProgress, currentPeriodMonth } from '@/lib/aggregate';
 import { categoryByKey } from '@/lib/categories';
 import { formatCurrency, formatDate } from '@/lib/format';
-import { TitleSubtitle } from '@/molecules';
+import { StateView, TitleSubtitle } from '@/molecules';
 import { BudgetCard } from '@/organisms';
 import { useListBudgetsQuery, useListTransactionsQuery } from '@/store/api';
 import { useTheme } from '@/theme';
@@ -19,10 +19,25 @@ export function BudgetsScreen() {
   const { t } = useTranslation();
   const router = useRouter();
 
-  const { data: budgets = [], refetch: refetchBudgets } =
-    useListBudgetsQuery(currentPeriodMonth());
-  const { data: transactions = [], refetch: refetchTransactions } =
-    useListTransactionsQuery();
+  const {
+    data: budgets = [],
+    isLoading: budgetsLoading,
+    isError: budgetsError,
+    refetch: refetchBudgets,
+  } = useListBudgetsQuery(currentPeriodMonth());
+  const {
+    data: transactions = [],
+    isLoading: txnsLoading,
+    isError: txnsError,
+    refetch: refetchTransactions,
+  } = useListTransactionsQuery();
+  const isLoading = budgetsLoading || txnsLoading;
+  const isError = budgetsError || txnsError;
+
+  function retryAll() {
+    refetchBudgets();
+    refetchTransactions();
+  }
 
   // Reload when the tab regains focus instead of pull-to-refresh; deferred
   // so the tab switch renders instantly and the refetch runs after.
@@ -74,10 +89,16 @@ export function BudgetsScreen() {
           />
         </View>
 
-        {progress.length > 0 ? (
+        {isLoading ? (
+          <StateView variant="loading" />
+        ) : isError ? (
+          <StateView variant="error" onRetry={retryAll} />
+        ) : progress.length > 0 ? (
           progress.map((item) => (
             <Pressable
               key={item.budget.id}
+              accessibilityRole="button"
+              accessibilityLabel={displayName(item.budget)}
               onPress={() =>
                 router.push({
                   pathname: '/yeni-butce',
@@ -107,16 +128,11 @@ export function BudgetsScreen() {
             </Pressable>
           ))
         ) : (
-          <Text
-            style={{
-              fontFamily: theme.fonts.body.medium,
-              fontSize: 13,
-              color: theme.colors.textTertiary,
-              paddingTop: theme.spacing.lg,
-            }}
-          >
-            {t('budgets.empty')}
-          </Text>
+          <StateView
+            variant="empty"
+            icon="chart-pie"
+            message={t('budgets.empty')}
+          />
         )}
       </ScrollView>
     </SafeAreaView>

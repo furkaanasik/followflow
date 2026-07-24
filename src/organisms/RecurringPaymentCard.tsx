@@ -1,4 +1,5 @@
 import { createElement } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { CategoryIcon } from '@/atoms';
@@ -102,15 +103,28 @@ export function CardActions({
   onDelete: () => void;
 }) {
   const theme = useTheme();
+  const { t } = useTranslation();
   return (
-    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
-      <Pressable onPress={onEdit} accessibilityLabel="Düzenle">
+    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+      <Pressable
+        onPress={onEdit}
+        accessibilityRole="button"
+        accessibilityLabel={t('common.edit')}
+        hitSlop={8}
+        style={styles.action}
+      >
         {createElement(getIcon('pencil'), {
           size: 16,
           color: theme.colors.textSecondary,
         })}
       </Pressable>
-      <Pressable onPress={onDelete} accessibilityLabel="Sil">
+      <Pressable
+        onPress={onDelete}
+        accessibilityRole="button"
+        accessibilityLabel={t('common.delete')}
+        hitSlop={8}
+        style={styles.action}
+      >
         {createElement(getIcon('trash'), {
           size: 16,
           color: theme.colors.expenseCoral,
@@ -125,4 +139,10 @@ const styles = StyleSheet.create({
   row: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   info: { flexDirection: 'column', gap: 2, flex: 1 },
   metaRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  action: {
+    minWidth: 44,
+    minHeight: 44,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ButtonSecondary } from '@/atoms';
 import { formatCurrency } from '@/lib/format';
+import { StateView } from '@/molecules';
 import { AppBarBackTitle, IncomeSourceCard } from '@/organisms';
 import {
   useDeleteIncomeSourceMutation,
@@ -19,7 +20,12 @@ export function IncomeSourcesScreen() {
   const { t } = useTranslation();
   const router = useRouter();
 
-  const { data: incomeSources = [], refetch } = useListIncomeSourcesQuery();
+  const {
+    data: incomeSources = [],
+    isLoading,
+    isError,
+    refetch,
+  } = useListIncomeSourcesQuery();
   const [deleteIncomeSource] = useDeleteIncomeSourceMutation();
   const monthlyTotal = incomeSources.reduce((sum, s) => sum + s.amount, 0);
 
@@ -74,7 +80,11 @@ export function IncomeSourcesScreen() {
           })}
         </Text>
 
-        {incomeSources.length > 0 ? (
+        {isLoading ? (
+          <StateView variant="loading" />
+        ) : isError ? (
+          <StateView variant="error" onRetry={refetch} />
+        ) : incomeSources.length > 0 ? (
           incomeSources.map((source) => (
             <IncomeSourceCard
               key={source.id}
@@ -96,16 +106,11 @@ export function IncomeSourcesScreen() {
             />
           ))
         ) : (
-          <Text
-            style={{
-              fontFamily: theme.fonts.body.medium,
-              fontSize: 13,
-              color: theme.colors.textTertiary,
-              paddingTop: theme.spacing.lg,
-            }}
-          >
-            {t('incomeSources.empty')}
-          </Text>
+          <StateView
+            variant="empty"
+            icon="wallet"
+            message={t('incomeSources.empty')}
+          />
         )}
 
         <ButtonSecondary

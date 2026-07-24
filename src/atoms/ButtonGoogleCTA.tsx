@@ -19,9 +19,13 @@ export function ButtonGoogleCTA({
     <Pressable
       onPress={onPress}
       disabled={disabled}
+      accessibilityRole="button"
+      accessibilityLabel={label}
+      accessibilityState={{ disabled }}
       style={[styles.container, { opacity: disabled ? 0.5 : 1 }]}
     >
       <Text
+        accessible={false}
         style={{
           fontFamily: theme.fonts.heading.bold,
           fontSize: 18,

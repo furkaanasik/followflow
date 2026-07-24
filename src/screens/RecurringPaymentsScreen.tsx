@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ButtonSecondary } from '@/atoms';
 import { formatCurrency, formatDate } from '@/lib/format';
+import { StateView } from '@/molecules';
 import { AppBarBackTitle, RecurringPaymentCard } from '@/organisms';
 import {
   useDeleteRecurringPaymentMutation,
@@ -19,8 +20,12 @@ export function RecurringPaymentsScreen() {
   const { t } = useTranslation();
   const router = useRouter();
 
-  const { data: recurringPayments = [], refetch } =
-    useListRecurringPaymentsQuery();
+  const {
+    data: recurringPayments = [],
+    isLoading,
+    isError,
+    refetch,
+  } = useListRecurringPaymentsQuery();
   const [deleteRecurringPayment] = useDeleteRecurringPaymentMutation();
   const monthlyTotal = recurringPayments.reduce((sum, p) => sum + p.amount, 0);
 
@@ -79,7 +84,11 @@ export function RecurringPaymentsScreen() {
           })}
         </Text>
 
-        {recurringPayments.length > 0 ? (
+        {isLoading ? (
+          <StateView variant="loading" />
+        ) : isError ? (
+          <StateView variant="error" onRetry={refetch} />
+        ) : recurringPayments.length > 0 ? (
           recurringPayments.map((payment) => (
             <RecurringPaymentCard
               key={payment.id}
@@ -104,16 +113,11 @@ export function RecurringPaymentsScreen() {
             />
           ))
         ) : (
-          <Text
-            style={{
-              fontFamily: theme.fonts.body.medium,
-              fontSize: 13,
-              color: theme.colors.textTertiary,
-              paddingTop: theme.spacing.lg,
-            }}
-          >
-            {t('recurringPayments.empty')}
-          </Text>
+          <StateView
+            variant="empty"
+            icon="repeat"
+            message={t('recurringPayments.empty')}
+          />
         )}
 
         <ButtonSecondary

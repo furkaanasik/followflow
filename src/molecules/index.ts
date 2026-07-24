@@ -9,6 +9,7 @@ export * from './NumpadKey';
 export * from './NumpadKeyRow';
 export * from './SearchBar';
 export * from './SegmentedToggle';
+export * from './StateView';
 export * from './StepBadge';
 export * from './SwipeableRow';
 export * from './StepIndicator';

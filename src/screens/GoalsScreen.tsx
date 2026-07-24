@@ -1,13 +1,13 @@
 import { useFocusEffect, useRouter } from 'expo-router';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ButtonSecondary } from '@/atoms';
 import { goalPercent } from '@/lib/aggregate';
 import { formatCurrency, formatDate } from '@/lib/format';
-import { TitleSubtitle } from '@/molecules';
+import { StateView, TitleSubtitle } from '@/molecules';
 import { GoalCard } from '@/organisms';
 import { useListGoalsQuery } from '@/store/api';
 import { useTheme } from '@/theme';
@@ -17,7 +17,7 @@ export function GoalsScreen() {
   const { t } = useTranslation();
   const router = useRouter();
 
-  const { data: goals = [], refetch } = useListGoalsQuery();
+  const { data: goals = [], isLoading, isError, refetch } = useListGoalsQuery();
   const totalSaved = goals.reduce((sum, g) => sum + g.current_amount, 0);
 
   // Reload when the tab regains focus instead of pull-to-refresh; deferred
@@ -48,11 +48,17 @@ export function GoalsScreen() {
           />
         </View>
 
-        {goals.length > 0 ? (
+        {isLoading ? (
+          <StateView variant="loading" />
+        ) : isError ? (
+          <StateView variant="error" onRetry={refetch} />
+        ) : goals.length > 0 ? (
           goals.map((goal) => (
             <Pressable
               key={goal.id}
               onPress={() => router.push(`/hedef/${goal.id}`)}
+              accessibilityRole="button"
+              accessibilityLabel={goal.name}
             >
               <GoalCard
                 icon={goal.icon}
@@ -78,16 +84,7 @@ export function GoalsScreen() {
             </Pressable>
           ))
         ) : (
-          <Text
-            style={{
-              fontFamily: theme.fonts.body.medium,
-              fontSize: 13,
-              color: theme.colors.textTertiary,
-              paddingTop: theme.spacing.lg,
-            }}
-          >
-            {t('goals.empty')}
-          </Text>
+          <StateView variant="empty" icon="target" message={t('goals.empty')} />
         )}
 
         <ButtonSecondary
