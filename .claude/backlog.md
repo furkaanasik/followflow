@@ -25,9 +25,14 @@ Yeni işler buradan izlenir. Fazlar sıralı/tek-seferlikti; bu liste akan — i
 
 ### Yeni özellikler
 <!-- Buraya yeni feature fikirleri: her satır bağımsız /prp-plan girdisi -->
-- [ ] _(örnek)_ Tekrarlayan ödeme hatırlatma bildirimleri
-- [ ] _(örnek)_ İşlem CSV/PDF export
-- [ ] _(örnek)_ Aylık özet / rapor ekranı
+- [ ] **P1 — Bildirimler.** Tekrarlayan ödeme yaklaşınca hatırlatma; bütçe %80 dolunca uyarı.
+- [ ] **P2 — Kategori özelleştirme.** Kullanıcı kendi kategorisini ekler: ad + ikon + renk.
+- [ ] **P2 — Takvim görünümü.** Hangi gün hangi ödeme var, maaş günü, nakit akışı çizgisi.
+- [ ] **P2 — Arama + filtre geliştirme.** İşlemlerde tarih aralığı, kategori, tutar aralığı filtreleri.
+- [ ] **P2 — Veri dışa aktarma (CSV).** İşlemleri CSV olarak dışa aktar.
+- [ ] **P2 — Hızlı işlem şablonları.** Sık girilen işlemi ("Market 500₺") tek dokunuşla tekrar gir.
+- [ ] **P2 — Gelişmiş raporlar.** Aylık/yıllık trend, kategori ısı haritası, PDF/Excel export, yıl sonu özeti ("Wrapped" tarzı).
+- [ ] **P2 — Çoklu para birimi + döviz/altın takibi.** USD/EUR/gram altın cinsi birikim; hedefi döviz cinsinden tutabilme.
 
 ## In Progress
 <!-- Aktif işlenen item — branch adı yaz -->
