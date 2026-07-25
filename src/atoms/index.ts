@@ -1,5 +1,7 @@
+export * from './AmountDisplay';
 export * from './Avatar';
 export * from './BadgeAmount';
+export * from './BadgeCount';
 export * from './ButtonGoogleCTA';
 export * from './ButtonIconOnly';
 export * from './ButtonPrimary';
@@ -8,4 +10,3 @@ export * from './CategoryIcon';
 export * from './InputField';
 export * from './ProgressBar';
 export * from './SurfaceCard';
-export * from './AmountDisplay';
