@@ -16,7 +16,7 @@ Yeni işler buradan izlenir. Fazlar sıralı/tek-seferlikti; bu liste akan — i
 - [ ] **P0 — Email confirmation deep-link flow.** Dev için Supabase'de kapalı; prod öncesi confirm e-postası + deep-link handler şart (bkz memory `project_email_confirmation_deferred`).
 
 ### Test altyapısı
-- [x] **P2 — Core loop E2E'yi otomatize et.** ✅ Maestro suite (`.maestro/`): signup → onboarding → home → gider işlemi → ana ekran doğrulaması. Emülatörde 2/2 flow yeşil (2026-07-25). Bkz `.claude/PRPs/reports/core-loop-e2e-report.md`.
+
 
 ### Görsel QA / tasarım sadakati
 - [ ] **P3 — Pencil pixel-diff pass.** Desktop Pencil app hiçbir session'da attach olmadı (Phase 2/4/8/9/10 boyunca gap). App bağlıyken tüm ekranları `.pen` node'larına karşı diff'le.
@@ -39,3 +39,4 @@ Yeni işler buradan izlenir. Fazlar sıralı/tek-seferlikti; bu liste akan — i
 ## Done
 <!-- Bitmiş item'ler; PR# ekle -->
 - [x] **P1 — Test harness kur (jest + jest-expo).** 60 unit test (`aggregate`, `onboarding`, `amountInput`, `format`, `categories`) + `computeNextPaymentDate` Aralık rollover bug fix. PR #14.
+- [x] **P2 — Core loop E2E'yi otomatize et.** ✅ Maestro suite (`.maestro/`): signup → onboarding → home → gider işlemi → ana ekran doğrulaması. Emülatörde 2/2 flow yeşil (2026-07-25). Bkz `.claude/PRPs/reports/core-loop-e2e-report.md`. PR #15.
