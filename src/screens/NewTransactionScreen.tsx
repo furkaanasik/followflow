@@ -1,7 +1,7 @@
 import DateTimePicker, {
   type DateTimePickerChangeEvent,
 } from '@react-native-community/datetimepicker';
-import { createElement, useState } from 'react';
+import { createElement, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
@@ -20,8 +20,8 @@ import {
   NumpadKeyRow,
   SegmentedToggle,
 } from '@/molecules';
-import { categoriesByType, categoryByKey } from '@/lib/categories';
 import { formatDate, parseAmount } from '@/lib/format';
+import { useCategories } from '@/lib/useCategories';
 import {
   useCreateTransactionMutation,
   useListTransactionsQuery,
@@ -71,10 +71,11 @@ export function NewTransactionScreen() {
   const [amountRaw, setAmountRaw] = useState(() =>
     existing ? String(existing.amount) : '',
   );
-  const [categoryKey, setCategoryKey] = useState(() =>
-    existing && categoryByKey(existing.category)
-      ? existing.category
-      : categoriesByType(existing?.type ?? 'expense')[0].key,
+  const { byType, byKey } = useCategories();
+  // Empty string = "no explicit pick yet" → falls back to the first visible
+  // category of the current type below.
+  const [categoryKey, setCategoryKey] = useState(
+    () => existing?.category ?? '',
   );
   const [note, setNote] = useState(() => existing?.note ?? '');
   const [occurredAt, setOccurredAt] = useState(() =>
@@ -84,7 +85,17 @@ export function NewTransactionScreen() {
   const [fieldError, setFieldError] = useState<string | undefined>();
   const [formError, setFormError] = useState<string | undefined>();
 
-  const categories = categoriesByType(type);
+  const visible = byType(type);
+  const effectiveKey = categoryKey || visible[0]?.key || '';
+  // An edited transaction may reference a hidden or custom category that is
+  // not in the visible list — prepend it so the chip stays selectable.
+  const categories = useMemo(() => {
+    if (effectiveKey && !visible.some((c) => c.key === effectiveKey)) {
+      const sel = byKey(effectiveKey);
+      if (sel) return [sel, ...visible];
+    }
+    return visible;
+  }, [visible, effectiveKey, byKey]);
 
   const isToday = occurredAt.toDateString() === new Date().toDateString();
   const dateLabel = isToday
@@ -104,9 +115,8 @@ export function NewTransactionScreen() {
   }
 
   function handleTypeChange(next: string) {
-    const nextType = next as TxnType;
-    setType(nextType);
-    setCategoryKey(categoriesByType(nextType)[0].key);
+    setType(next as TxnType);
+    setCategoryKey('');
   }
 
   function handleKey(key: string) {
@@ -137,7 +147,7 @@ export function NewTransactionScreen() {
       setFieldError(t('validation.amountRequired'));
       return;
     }
-    const category = categoryByKey(categoryKey);
+    const category = byKey(effectiveKey);
     if (!category) {
       setFieldError(t('validation.categoryRequired'));
       return;
@@ -148,7 +158,7 @@ export function NewTransactionScreen() {
       type,
       category: category.key,
       icon: category.icon,
-      title: trimmedNote || t(category.labelKey),
+      title: trimmedNote || category.label,
       note: trimmedNote || null,
       amount,
       occurred_at: occurredAt.toISOString(),
@@ -231,9 +241,10 @@ export function NewTransactionScreen() {
             <CategoryChip
               key={cat.key}
               icon={cat.icon}
-              label={t(cat.labelKey)}
-              tint={cat.tint}
-              selected={cat.key === categoryKey}
+              label={cat.label}
+              tint={cat.tint ?? 'accentTeal'}
+              color={cat.color}
+              selected={cat.key === effectiveKey}
               onPress={() => setCategoryKey(cat.key)}
               testID={`tx-category-${cat.key}`}
             />

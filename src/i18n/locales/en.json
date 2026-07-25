@@ -44,7 +44,8 @@
     "amountInvalid": "Enter a valid amount.",
     "payDayInvalid": "Enter a valid day (1-31).",
     "amountRequired": "Enter an amount.",
-    "categoryRequired": "Pick a category."
+    "categoryRequired": "Pick a category.",
+    "categoryNameRequired": "Category name is required."
   },
   "onboarding": {
     "step": "STEP {{current}}/{{total}}",
@@ -142,6 +143,7 @@
     "management": "Management",
     "incomeSources": "My Income Sources",
     "recurringPayments": "Recurring Payments",
+    "categories": "Categories",
     "appearance": "Appearance",
     "themeDark": "Dark",
     "themeLight": "Light",
@@ -182,6 +184,33 @@
     "deleteTitle": "Delete Income Source",
     "deleteMessage": "This income source will be permanently deleted.",
     "saveFailed": "Couldn't save. Check your connection and try again."
+  },
+  "categoriesManage": {
+    "title": "Categories",
+    "subtitle": "Customize your categories: rename, recolor, or hide them.",
+    "empty": "No categories found.",
+    "add": "Add Category",
+    "hiddenBadge": "Hidden",
+    "builtinBadge": "Default",
+    "customBadge": "Custom"
+  },
+  "newCategory": {
+    "title": "New Category",
+    "editTitle": "Edit Category",
+    "nameLabel": "Category Name",
+    "namePlaceholder": "e.g. Coffee Shop",
+    "iconLabel": "Icon",
+    "colorLabel": "Color",
+    "typeLabel": "Type",
+    "hide": "Hide Category",
+    "show": "Show Category",
+    "resetDefault": "Reset to Default",
+    "delete": "Delete Category",
+    "deleteTitle": "Delete Category",
+    "deleteMessage": "This category will be deleted. Transactions in it will keep showing with their raw key.",
+    "save": "Save",
+    "saving": "Saving…",
+    "saveFailed": "Could not save. Check your connection and try again."
   },
   "newRecurring": {
     "title": "New Recurring Payment",

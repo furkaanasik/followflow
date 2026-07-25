@@ -214,6 +214,23 @@ function RootNavigator() {
           }}
         />
         <Stack.Screen
+          name="kategoriler"
+          options={{
+            headerShown: false,
+            contentStyle: { backgroundColor: theme.colors.bgApp },
+          }}
+        />
+        <Stack.Screen
+          name="yeni-kategori"
+          options={{
+            presentation: 'formSheet',
+            sheetAllowedDetents: [0.85],
+            sheetGrabberVisible: true,
+            headerShown: false,
+            contentStyle: { backgroundColor: theme.colors.bgSurface },
+          }}
+        />
+        <Stack.Screen
           name="yeni-tekrarlayan"
           options={{
             presentation: 'formSheet',

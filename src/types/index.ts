@@ -35,6 +35,12 @@ export type Budget = Database['public']['Tables']['budgets']['Row'];
 export type BudgetInsert = Database['public']['Tables']['budgets']['Insert'];
 export type BudgetUpdate = Database['public']['Tables']['budgets']['Update'];
 
+export type UserCategory = Database['public']['Tables']['categories']['Row'];
+export type UserCategoryInsert =
+  Database['public']['Tables']['categories']['Insert'];
+export type UserCategoryUpdate =
+  Database['public']['Tables']['categories']['Update'];
+
 export type Transaction = Database['public']['Tables']['transactions']['Row'];
 export type TransactionInsert =
   Database['public']['Tables']['transactions']['Insert'];

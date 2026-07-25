@@ -7,6 +7,7 @@ import type { ColorTokens } from '@/theme/tokens';
 export interface TransactionRowProps {
   icon: string;
   iconTint?: keyof ColorTokens;
+  iconColor?: string;
   title: string;
   subtitle: string;
   amount: string;
@@ -16,6 +17,7 @@ export interface TransactionRowProps {
 export function TransactionRow({
   icon,
   iconTint = 'accentTeal',
+  iconColor,
   title,
   subtitle,
   amount,
@@ -31,7 +33,7 @@ export function TransactionRow({
 
   return (
     <View style={styles.container}>
-      <CategoryIcon icon={icon} tint={iconTint} />
+      <CategoryIcon icon={icon} tint={iconTint} color={iconColor} />
       <View style={styles.info}>
         <Text
           style={{

@@ -6,8 +6,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ButtonIconOnly } from '@/atoms';
 import { groupByDate } from '@/lib/aggregate';
-import { categoryByKey } from '@/lib/categories';
 import { formatCurrency, formatDate } from '@/lib/format';
+import { useCategories } from '@/lib/useCategories';
 import { SearchBar, SegmentedToggle, StateView } from '@/molecules';
 import { AppBarSimpleTitle, TransactionListCard } from '@/organisms';
 import {
@@ -34,6 +34,7 @@ export function TransactionsScreen() {
     refetch,
   } = useListTransactionsQuery();
   const [deleteTransaction] = useDeleteTransactionMutation();
+  const { byKey } = useCategories();
 
   // Reload when the tab regains focus instead of pull-to-refresh; deferred
   // so the tab switch renders instantly and the refetch runs after.
@@ -66,8 +67,7 @@ export function TransactionsScreen() {
   }
 
   function categoryLabel(txn: Transaction) {
-    const cat = categoryByKey(txn.category);
-    return cat ? t(cat.labelKey) : txn.category;
+    return byKey(txn.category)?.label ?? txn.category;
   }
 
   const q = query.trim().toLowerCase();
@@ -83,11 +83,12 @@ export function TransactionsScreen() {
   const groups = groupByDate(filtered);
 
   function rowProps(txn: Transaction) {
-    const cat = categoryByKey(txn.category);
+    const cat = byKey(txn.category);
     return {
       id: txn.id,
       icon: txn.icon,
       iconTint: (cat?.tint ?? 'accentTeal') as keyof ColorTokens,
+      iconColor: cat?.color,
       title: txn.title,
       subtitle: `${categoryLabel(txn)} · ${formatDate(txn.occurred_at, { day: 'numeric', month: 'short', year: undefined })}`,
       tone: (txn.type === 'income' ? 'income' : 'expense') as
