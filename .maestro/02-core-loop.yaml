@@ -1,0 +1,43 @@
+# Flow 02 — core loop: home → new transaction (expense 500, Market) → progress on home.
+# Chained after 01: reuses the signed-in session, so NO clearState here.
+appId: com.anonymous.followflow
+name: 02-core-loop
+---
+- launchApp
+
+- extendedWaitUntil:
+    visible:
+      id: 'home-net-durum'
+    timeout: 15000
+
+# Open new-transaction bottom sheet
+- tapOn:
+    id: 'home-fab'
+- extendedWaitUntil:
+    visible:
+      id: 'tx-save'
+    timeout: 10000
+
+# Expense mode + category (key from src/lib/categories.ts)
+- tapOn:
+    id: 'tx-type-toggle-expense'
+- tapOn:
+    id: 'tx-category-market'
+
+# Amount 500 via numpad (labels are the text)
+- tapOn: '5'
+- tapOn: '0'
+- tapOn: '0'
+
+- tapOn:
+    id: 'tx-save'
+
+# Sheet closes (router.back) → home reflects the logged expense
+- extendedWaitUntil:
+    visible:
+      id: 'home-net-durum'
+    timeout: 10000
+- assertVisible:
+    id: 'home-recent'
+# formatCurrency is locked to tr-TR, so the amount string is locale-independent
+- assertVisible: '-₺500,00'

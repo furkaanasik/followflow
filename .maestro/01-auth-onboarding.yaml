@@ -1,0 +1,69 @@
+# Flow 01 — sign-up → onboarding (income → skip recurring → goal save) → home.
+# Fresh app state + unique email per run so re-runs never collide.
+# Requires: dev build installed (npx expo run:android), Supabase TEST project in .env,
+# email confirmation disabled on that project (sign-up must yield an immediate session).
+appId: com.anonymous.followflow
+name: 01-auth-onboarding
+---
+- launchApp:
+    clearState: true
+
+# Unique test email per run
+- evalScript: ${output.email = 'e2e_' + new Date().getTime() + '@followflow.test'}
+
+# Switch to sign-up mode
+- tapOn:
+    id: 'auth-mode-toggle-signUp'
+
+- tapOn:
+    id: 'login-email'
+- inputText: ${output.email}
+- tapOn:
+    id: 'login-password'
+- inputText: 'Test1234'
+# Keyboard is open right after typing, so hideKeyboard is safe here
+# (it sends back only to dismiss the keyboard, not to exit the app).
+- hideKeyboard
+- tapOn:
+    id: 'login-submit'
+
+# Route guard flips to (onboarding) — income step
+- extendedWaitUntil:
+    visible:
+      id: 'onboarding-income-name'
+    timeout: 15000
+- tapOn:
+    id: 'onboarding-income-name'
+- inputText: 'Maaş'
+- tapOn:
+    id: 'onboarding-income-amount'
+- inputText: '30000'
+- tapOn:
+    id: 'onboarding-income-payday'
+- inputText: '1'
+- tapOn:
+    id: 'onboarding-income-continue'
+
+# Recurring payment step — skip.
+# 'onboarding-skip' exists on the income step too, so first wait for the
+# income form to leave the screen before tapping it.
+- extendedWaitUntil:
+    notVisible:
+      id: 'onboarding-income-name'
+    timeout: 10000
+- tapOn:
+    id: 'onboarding-skip'
+
+# Goal step — save with empty fields just completes onboarding
+- extendedWaitUntil:
+    visible:
+      id: 'onboarding-goal-save'
+    timeout: 10000
+- tapOn:
+    id: 'onboarding-goal-save'
+
+# onboarding_completed → (tabs) home
+- extendedWaitUntil:
+    visible:
+      id: 'home-net-durum'
+    timeout: 15000

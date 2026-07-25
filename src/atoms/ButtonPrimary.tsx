@@ -16,6 +16,7 @@ export interface ButtonPrimaryProps {
   onPress: () => void;
   disabled?: boolean;
   style?: StyleProp<ViewStyle>;
+  testID?: string;
 }
 
 export function ButtonPrimary({
@@ -24,11 +25,13 @@ export function ButtonPrimary({
   onPress,
   disabled = false,
   style,
+  testID,
 }: ButtonPrimaryProps) {
   const theme = useTheme();
 
   return (
     <Pressable
+      testID={testID}
       onPress={onPress}
       disabled={disabled}
       accessibilityRole="button"

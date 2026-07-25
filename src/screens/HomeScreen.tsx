@@ -191,14 +191,16 @@ export function HomeScreen() {
           />
         </View>
 
-        <NetDurumCard
-          label={t('home.netStatus')}
-          amount={formatCurrency(summary.net)}
-          incomeAmount={formatCurrency(summary.income)}
-          expenseAmount={formatCurrency(summary.expense)}
-          incomeLabel={t('common.gelir')}
-          expenseLabel={t('common.gider')}
-        />
+        <View testID="home-net-durum">
+          <NetDurumCard
+            label={t('home.netStatus')}
+            amount={formatCurrency(summary.net)}
+            incomeAmount={formatCurrency(summary.income)}
+            expenseAmount={formatCurrency(summary.expense)}
+            incomeLabel={t('common.gelir')}
+            expenseLabel={t('common.gider')}
+          />
+        </View>
 
         {regularIncome > 0 ? (
           <InfoRowChevron
@@ -240,7 +242,7 @@ export function HomeScreen() {
         </View>
 
         {progress.length > 0 ? (
-          <View style={{ gap: 14 }}>
+          <View testID="home-budget-progress" style={{ gap: 14 }}>
             <SectionTitle title={t('home.budgetTracking')} />
             {progress.map((item) => (
               <View key={item.budget.id} style={{ gap: 4 }}>
@@ -271,7 +273,7 @@ export function HomeScreen() {
           </View>
         ) : null}
 
-        <View style={{ gap: theme.spacing.sm }}>
+        <View testID="home-recent" style={{ gap: theme.spacing.sm }}>
           <View style={styles.sectionHeader}>
             <SectionTitle title={t('home.recentTransactions')} />
             <Pressable
@@ -321,6 +323,7 @@ export function HomeScreen() {
             size={56}
             accessibilityLabel={t('home.addTransaction')}
             onPress={() => router.push('/yeni-islem')}
+            testID="home-fab"
           />
         </View>
       </View>

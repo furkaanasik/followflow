@@ -231,6 +231,7 @@ export function LoginScreen() {
               ]}
               value={authMode}
               onChange={changeAuthMode}
+              testID="auth-mode-toggle"
             />
 
             {infoMessage ? (
@@ -253,6 +254,7 @@ export function LoginScreen() {
               autoCapitalize="none"
               autoCorrect={false}
               error={emailError}
+              testID="login-email"
             />
             <FormFieldGroup
               label={t('auth.passwordLabel')}
@@ -269,11 +271,13 @@ export function LoginScreen() {
               autoCapitalize="none"
               autoCorrect={false}
               error={passwordError}
+              testID="login-password"
             />
             <ButtonPrimary
               label={primaryLabel}
               onPress={handleEmailSubmit}
               disabled={submittingEmail}
+              testID="login-submit"
             />
           </SurfaceCard>
 

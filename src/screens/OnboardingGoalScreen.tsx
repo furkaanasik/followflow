@@ -171,6 +171,7 @@ export function OnboardingGoalScreen() {
               }
               onPress={handleSave}
               disabled={submitting}
+              testID="onboarding-goal-save"
             />
           </SurfaceCard>
         </ScrollView>
