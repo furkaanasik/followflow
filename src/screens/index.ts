@@ -18,3 +18,4 @@ export * from './NewIncomeSourceScreen';
 export * from './NewRecurringPaymentScreen';
 export * from './CategoriesScreen';
 export * from './NewCategoryScreen';
+export * from './CalendarScreen';

@@ -143,6 +143,7 @@
     "management": "Yönetim",
     "incomeSources": "Gelir Kaynaklarım",
     "recurringPayments": "Tekrarlayan Ödemeler",
+    "calendar": "Takvim",
     "categories": "Kategoriler",
     "appearance": "Görünüm",
     "themeDark": "Koyu",
@@ -151,6 +152,14 @@
     "themeVibrantDark": "C. Koyu",
     "signOut": "Çıkış Yap",
     "signOutFailed": "Çıkış yapılamadı. Tekrar deneyin."
+  },
+  "calendar": {
+    "title": "Takvim",
+    "weekdays": ["Pt", "Sa", "Ça", "Pe", "Cu", "Ct", "Pz"],
+    "cashFlow": "Nakit akışı",
+    "empty": "Bu ay için kayıt yok",
+    "selectHint": "Detay için bir gün seç",
+    "payDay": "Maaş günü"
   },
   "frequency": {
     "weekly": "Haftalık",

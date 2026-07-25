@@ -143,6 +143,7 @@
     "management": "Management",
     "incomeSources": "My Income Sources",
     "recurringPayments": "Recurring Payments",
+    "calendar": "Calendar",
     "categories": "Categories",
     "appearance": "Appearance",
     "themeDark": "Dark",
@@ -151,6 +152,14 @@
     "themeVibrantDark": "V. Dark",
     "signOut": "Sign Out",
     "signOutFailed": "Couldn't sign out. Try again."
+  },
+  "calendar": {
+    "title": "Calendar",
+    "weekdays": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    "cashFlow": "Cash flow",
+    "empty": "No records for this month",
+    "selectHint": "Select a day for details",
+    "payDay": "Pay day"
   },
   "frequency": {
     "weekly": "Weekly",

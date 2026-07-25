@@ -3,6 +3,8 @@ export * from './AppTabBar';
 export * from './AppBarSimpleTitle';
 export * from './BottomNavigationBar';
 export * from './BudgetCard';
+export * from './CalendarMonthCard';
+export * from './CashFlowStrip';
 export * from './CategoryBreakdownCard';
 export * from './GoalCard';
 export * from './GoalProgressChart';

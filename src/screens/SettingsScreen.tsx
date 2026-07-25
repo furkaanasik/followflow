@@ -59,6 +59,12 @@ export function SettingsScreen() {
             onPress={() => router.push('/tekrarlayan-odemeler')}
           />
           <InfoRowChevron
+            icon="calendar"
+            label={t('settings.calendar')}
+            value=""
+            onPress={() => router.push('/takvim')}
+          />
+          <InfoRowChevron
             icon="tag"
             label={t('settings.categories')}
             value=""
