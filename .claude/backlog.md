@@ -32,10 +32,10 @@ Yeni işler buradan izlenir. Fazlar sıralı/tek-seferlikti; bu liste akan — i
 
 ## In Progress
 <!-- Aktif işlenen item — branch adı yaz -->
-- [ ] **P2 — Arama + filtre geliştirme.** İşlemlerde tarih aralığı, kategori, tutar aralığı filtreleri. Branch: `feat/arama-filtre` — implement + review tamam, commit/PR bekliyor.
 
 ## Done
 <!-- Bitmiş item'ler; PR# ekle -->
+- [x] **P2 — Arama + filtre geliştirme.** İşlemlerde tarih aralığı, kategori (çoklu), tutar aralığı filtreleri; animasyonlu panel, sayaç rozeti. Saf `filterTransactions` helper + 16 unit test. Yeni: `BadgeCount` atom, `DateField` molekül. PR #19.
 - [x] **P1 — Test harness kur (jest + jest-expo).** 60 unit test (`aggregate`, `onboarding`, `amountInput`, `format`, `categories`) + `computeNextPaymentDate` Aralık rollover bug fix. PR #14.
 - [x] **P2 — Core loop E2E'yi otomatize et.** ✅ Maestro suite (`.maestro/`): signup → onboarding → home → gider işlemi → ana ekran doğrulaması. Emülatörde 2/2 flow yeşil (2026-07-25). Bkz `.claude/PRPs/reports/core-loop-e2e-report.md`. PR #15.
 - [x] **P2 — Kategori özelleştirme.** Kullanıcı kendi kategorisini ekler: ad + ikon + renk.
