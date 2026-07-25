@@ -12,6 +12,7 @@ Yeni işler buradan izlenir. Fazlar sıralı/tek-seferlikti; bu liste akan — i
 ## Todo
 
 ### Auth & prod hazırlık
+- [ ] **P0 — Çıkış (log out).** Ayarlar ekranında oturumu kapatma yok. `supabase.auth.signOut()` + session temizle → Login'e dön. Kritik eksik.
 - [ ] **P1 — Google OAuth aktifle.** Supabase dashboard'da Google provider + Google Cloud OAuth client konfig. `Button/Google CTA` atomu ve email/parola yolu zaten hazır; sadece provider bağlı değil. Not: Expo'da native popup ilk denemede açılmadı (bkz memory `project_google_auth_deferred`). _(Phase 5 raporundan devir)_
 - [ ] **P0 — Email confirmation deep-link flow.** Dev için Supabase'de kapalı; prod öncesi confirm e-postası + deep-link handler şart (bkz memory `project_email_confirmation_deferred`).
 
