@@ -72,6 +72,6 @@ None beyond expected i18n typing errors before keys were added (i18next typing e
 | `src/lib/__tests__/categories.test.ts` | +6 | resolveCategories: defaults, override rename/recolor, hide, partial override, custom row, hidden custom |
 
 ## Next Steps
-- [ ] Manual device pass (Settings → Kategoriler flow, chips, cross-theme legibility)
-- [ ] `/code-review`
-- [ ] `/prp-pr`
+- [x] Manual device pass (Settings → Kategoriler flow, chips, cross-theme legibility)
+- [x] `/code-review`
+- [x] `/prp-pr`
