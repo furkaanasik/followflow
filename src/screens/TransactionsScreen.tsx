@@ -1,15 +1,30 @@
 import { useFocusEffect, useRouter } from 'expo-router';
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, ScrollView, StyleSheet, View } from 'react-native';
+import Animated, {
+  FadeInDown,
+  FadeOutUp,
+  LinearTransition,
+} from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ButtonIconOnly } from '@/atoms';
 import { groupByDate } from '@/lib/aggregate';
+import {
+  activeFilterCount,
+  EMPTY_FILTERS,
+  filterTransactions,
+  type TransactionFilters,
+} from '@/lib/filterTransactions';
 import { formatCurrency, formatDate } from '@/lib/format';
 import { useCategories } from '@/lib/useCategories';
 import { SearchBar, SegmentedToggle, StateView } from '@/molecules';
-import { AppBarSimpleTitle, TransactionListCard } from '@/organisms';
+import {
+  AppBarSimpleTitle,
+  TransactionFilterPanel,
+  TransactionListCard,
+} from '@/organisms';
 import {
   useDeleteTransactionMutation,
   useListTransactionsQuery,
@@ -22,10 +37,8 @@ export function TransactionsScreen() {
   const theme = useTheme();
   const { t } = useTranslation();
   const router = useRouter();
-  const [query, setQuery] = useState('');
-  const [typeFilter, setTypeFilter] = useState<'all' | 'income' | 'expense'>(
-    'all',
-  );
+  const [filters, setFilters] = useState<TransactionFilters>(EMPTY_FILTERS);
+  const [panelOpen, setPanelOpen] = useState(false);
 
   const {
     data: transactions = [],
@@ -66,21 +79,16 @@ export function TransactionsScreen() {
     );
   }
 
-  function categoryLabel(txn: Transaction) {
-    return byKey(txn.category)?.label ?? txn.category;
-  }
+  const categoryLabel = useCallback(
+    (txn: Transaction) => byKey(txn.category)?.label ?? txn.category,
+    [byKey],
+  );
 
-  const q = query.trim().toLowerCase();
-  const filtered = transactions.filter((txn) => {
-    if (typeFilter !== 'all' && txn.type !== typeFilter) return false;
-    if (!q) return true;
-    const haystack = [txn.title, categoryLabel(txn), txn.note ?? '']
-      .join(' ')
-      .toLowerCase();
-    return haystack.includes(q);
-  });
-
-  const groups = groupByDate(filtered);
+  const groups = useMemo(
+    () => groupByDate(filterTransactions(transactions, filters, categoryLabel)),
+    [transactions, filters, categoryLabel],
+  );
+  const advancedCount = activeFilterCount(filters);
 
   function rowProps(txn: Transaction) {
     const cat = byKey(txn.category);
@@ -119,9 +127,12 @@ export function TransactionsScreen() {
         </View>
 
         <SearchBar
-          value={query}
-          onChangeText={setQuery}
+          value={filters.query}
+          onChangeText={(query) => setFilters((f) => ({ ...f, query }))}
           placeholder={t('transactions.searchPlaceholder')}
+          filterLabel={t('transactions.filter')}
+          filterCount={advancedCount}
+          onFilterPress={() => setPanelOpen((v) => !v)}
         />
 
         <SegmentedToggle
@@ -130,37 +141,64 @@ export function TransactionsScreen() {
             { label: t('common.gelir'), value: 'income' },
             { label: t('common.gider'), value: 'expense' },
           ]}
-          value={typeFilter}
+          value={filters.type}
           onChange={(value) =>
-            setTypeFilter(value as 'all' | 'income' | 'expense')
+            setFilters((f) => ({
+              ...f,
+              type: value as 'all' | 'income' | 'expense',
+            }))
           }
         />
 
-        {isLoading ? (
-          <StateView variant="loading" />
-        ) : isError ? (
-          <StateView variant="error" onRetry={refetch} />
-        ) : groups.length > 0 ? (
-          groups.map((group) => (
-            <TransactionListCard
-              key={group.bucket}
-              dateLabel={t(`transactions.${group.bucket}`)}
-              transactions={group.items.map(rowProps)}
-              editLabel={t('transactions.edit')}
-              deleteLabel={t('transactions.delete')}
-              onEditItem={(id) =>
-                router.push({ pathname: '/yeni-islem', params: { id } })
+        {panelOpen ? (
+          <Animated.View
+            entering={FadeInDown.duration(220)}
+            exiting={FadeOutUp.duration(180)}
+          >
+            <TransactionFilterPanel
+              filters={filters}
+              onChange={setFilters}
+              onClear={() =>
+                setFilters((f) => ({
+                  ...EMPTY_FILTERS,
+                  query: f.query,
+                  type: f.type,
+                }))
               }
-              onDeleteItem={confirmDelete}
             />
-          ))
-        ) : (
-          <StateView
-            variant="empty"
-            icon="receipt"
-            message={t('transactions.empty')}
-          />
-        )}
+          </Animated.View>
+        ) : null}
+
+        <Animated.View
+          layout={LinearTransition.duration(220)}
+          style={{ gap: theme.spacing.md }}
+        >
+          {isLoading ? (
+            <StateView variant="loading" />
+          ) : isError ? (
+            <StateView variant="error" onRetry={refetch} />
+          ) : groups.length > 0 ? (
+            groups.map((group) => (
+              <TransactionListCard
+                key={group.bucket}
+                dateLabel={t(`transactions.${group.bucket}`)}
+                transactions={group.items.map(rowProps)}
+                editLabel={t('transactions.edit')}
+                deleteLabel={t('transactions.delete')}
+                onEditItem={(id) =>
+                  router.push({ pathname: '/yeni-islem', params: { id } })
+                }
+                onDeleteItem={confirmDelete}
+              />
+            ))
+          ) : (
+            <StateView
+              variant="empty"
+              icon="receipt"
+              message={t('transactions.empty')}
+            />
+          )}
+        </Animated.View>
       </ScrollView>
     </SafeAreaView>
   );
