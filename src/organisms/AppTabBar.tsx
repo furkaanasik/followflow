@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { BottomNavigationBar } from '@/organisms';
+import { TAB_ROUTES } from '@/navigation/tabs';
 
-import { TAB_ROUTES } from './tabs';
+import { BottomNavigationBar } from './BottomNavigationBar';
 
 export function AppTabBar({ state, navigation }: BottomTabBarProps) {
   const { t } = useTranslation();

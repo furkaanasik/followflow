@@ -1,6 +1,6 @@
 import { Tabs } from 'expo-router';
 
-import { AppTabBar } from '@/navigation/AppTabBar';
+import { AppTabBar } from '@/organisms';
 import { TAB_ROUTES } from '@/navigation/tabs';
 
 export default function TabLayout() {
