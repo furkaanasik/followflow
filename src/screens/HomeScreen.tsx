@@ -17,8 +17,8 @@ import {
   nextUpcomingPayment,
   type DateBucket,
 } from '@/lib/aggregate';
-import { categoryByKey } from '@/lib/categories';
 import { CHART_PALETTE } from '@/lib/color';
+import { useCategories } from '@/lib/useCategories';
 import { formatCurrency, formatDate } from '@/lib/format';
 import { elevatedShadow } from '@/lib/shadow';
 import {
@@ -65,6 +65,7 @@ export function HomeScreen() {
   const { data: budgets = [] } = useListBudgetsQuery(currentPeriodMonth());
   const { data: incomeSources = [] } = useListIncomeSourcesQuery();
   const { data: recurringPayments = [] } = useListRecurringPaymentsQuery();
+  const { byKey } = useCategories();
 
   const summary = monthSummary(transactions);
   const regularIncome = monthlyIncomeTotal(incomeSources);
@@ -76,10 +77,9 @@ export function HomeScreen() {
   const restTotal = rest.reduce((sum, s) => sum + s.total, 0);
   const totalExpense = byCategory.reduce((sum, s) => sum + s.total, 0);
   const slices: BreakdownSlice[] = top.map((slice, index) => {
-    const cat = categoryByKey(slice.category);
     return {
       category: slice.category,
-      label: cat ? t(cat.labelKey) : slice.category,
+      label: byKey(slice.category)?.label ?? slice.category,
       total: slice.total,
       amount: formatCurrency(slice.total),
       color: CHART_PALETTE[index],
@@ -122,13 +122,14 @@ export function HomeScreen() {
   }
 
   function rowProps(txn: Transaction) {
-    const cat = categoryByKey(txn.category);
-    const label = cat ? t(cat.labelKey) : txn.category;
+    const cat = byKey(txn.category);
+    const label = cat?.label ?? txn.category;
     const when = bucketLabel(bucketFor(txn.occurred_at), txn.occurred_at);
     return {
       id: txn.id,
       icon: txn.icon,
       iconTint: (cat?.tint ?? 'accentTeal') as keyof ColorTokens,
+      iconColor: cat?.color,
       title: txn.title,
       subtitle: `${label} · ${when}`,
       tone: (txn.type === 'income' ? 'income' : 'expense') as

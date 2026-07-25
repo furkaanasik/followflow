@@ -58,6 +58,12 @@ export function SettingsScreen() {
             value=""
             onPress={() => router.push('/tekrarlayan-odemeler')}
           />
+          <InfoRowChevron
+            icon="tag"
+            label={t('settings.categories')}
+            value=""
+            onPress={() => router.push('/kategoriler')}
+          />
         </View>
 
         <View style={{ gap: theme.spacing.sm }}>

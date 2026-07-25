@@ -1,5 +1,5 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -16,8 +16,8 @@ import {
   nextAmountRaw,
   NUMPAD_ROWS,
 } from '@/lib/amountInput';
-import { categoriesByType, categoryByKey } from '@/lib/categories';
 import { parseAmount } from '@/lib/format';
+import { useCategories } from '@/lib/useCategories';
 import { AlertBanner, CategoryChip, NumpadKeyRow } from '@/molecules';
 import {
   useCreateBudgetMutation,
@@ -44,10 +44,9 @@ export function NewBudgetScreen() {
 
   const existing = id ? budgets.find((b) => b.id === id) : undefined;
 
-  const [categoryKey, setCategoryKey] = useState(() =>
-    existing && categoryByKey(existing.category_name)
-      ? existing.category_name
-      : categoriesByType('expense')[0].key,
+  const { byType, byKey } = useCategories();
+  const [categoryKey, setCategoryKey] = useState(
+    () => existing?.category_name ?? '',
   );
   const [amountRaw, setAmountRaw] = useState(() =>
     existing ? String(existing.limit_amount) : '',
@@ -55,7 +54,17 @@ export function NewBudgetScreen() {
   const [fieldError, setFieldError] = useState<string | undefined>();
   const [formError, setFormError] = useState<string | undefined>();
 
-  const categories = categoriesByType('expense');
+  const visible = byType('expense');
+  const effectiveKey = categoryKey || visible[0]?.key || '';
+  // An edited budget may reference a hidden or custom category not in the
+  // visible list — prepend it so the chip stays selectable.
+  const categories = useMemo(() => {
+    if (effectiveKey && !visible.some((c) => c.key === effectiveKey)) {
+      const sel = byKey(effectiveKey);
+      if (sel) return [sel, ...visible];
+    }
+    return visible;
+  }, [visible, effectiveKey, byKey]);
 
   function handleKey(key: string) {
     setFieldError(undefined);
@@ -71,7 +80,7 @@ export function NewBudgetScreen() {
       setFieldError(t('validation.amountRequired'));
       return;
     }
-    const category = categoryByKey(categoryKey);
+    const category = byKey(effectiveKey);
     if (!category) {
       setFieldError(t('validation.categoryRequired'));
       return;
@@ -163,9 +172,10 @@ export function NewBudgetScreen() {
               <CategoryChip
                 key={cat.key}
                 icon={cat.icon}
-                label={t(cat.labelKey)}
-                tint={cat.tint}
-                selected={cat.key === categoryKey}
+                label={cat.label}
+                tint={cat.tint ?? 'accentTeal'}
+                color={cat.color}
+                selected={cat.key === effectiveKey}
                 onPress={() => setCategoryKey(cat.key)}
               />
             ))}

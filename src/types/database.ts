@@ -159,6 +159,36 @@ export interface Database {
         >;
         Relationships: [];
       };
+      categories: {
+        Row: {
+          id: string;
+          user_id: string;
+          builtin_key: string | null;
+          type: 'income' | 'expense';
+          name: string | null;
+          icon: string | null;
+          color: string | null;
+          hidden: boolean;
+          sort_order: number;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          builtin_key?: string | null;
+          type: 'income' | 'expense';
+          name?: string | null;
+          icon?: string | null;
+          color?: string | null;
+          hidden?: boolean;
+          sort_order?: number;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: Partial<Database['public']['Tables']['categories']['Insert']>;
+        Relationships: [];
+      };
       transactions: {
         Row: {
           id: string;

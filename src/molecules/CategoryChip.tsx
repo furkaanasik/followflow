@@ -10,6 +10,7 @@ export interface CategoryChipProps {
   icon: string;
   label: string;
   tint?: keyof ColorTokens;
+  color?: string;
   selected?: boolean;
   onPress: () => void;
   testID?: string;
@@ -19,6 +20,7 @@ export function CategoryChip({
   icon,
   label,
   tint = 'accentTeal',
+  color: iconColor,
   selected = false,
   onPress,
   testID,
@@ -47,7 +49,9 @@ export function CategoryChip({
     >
       {createElement(getIcon(icon), {
         size: 14,
-        color: selected ? theme.colors.accentTeal : theme.colors[tint],
+        color: selected
+          ? theme.colors.accentTeal
+          : (iconColor ?? theme.colors[tint]),
       })}
       <Text
         numberOfLines={1}

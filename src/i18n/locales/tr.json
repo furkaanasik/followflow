@@ -44,7 +44,8 @@
     "amountInvalid": "Geçerli bir tutar gir.",
     "payDayInvalid": "Geçerli bir gün gir (1-31).",
     "amountRequired": "Bir tutar gir.",
-    "categoryRequired": "Bir kategori seç."
+    "categoryRequired": "Bir kategori seç.",
+    "categoryNameRequired": "Kategori adı gerekli."
   },
   "onboarding": {
     "step": "ADIM {{current}}/{{total}}",
@@ -142,6 +143,7 @@
     "management": "Yönetim",
     "incomeSources": "Gelir Kaynaklarım",
     "recurringPayments": "Tekrarlayan Ödemeler",
+    "categories": "Kategoriler",
     "appearance": "Görünüm",
     "themeDark": "Koyu",
     "themeLight": "Açık",
@@ -181,6 +183,33 @@
     "delete": "Gelir Kaynağını Sil",
     "deleteTitle": "Gelir Kaynağını Sil",
     "deleteMessage": "Bu gelir kaynağı kalıcı olarak silinecek.",
+    "saveFailed": "Kaydedilemedi. Bağlantını kontrol edip tekrar dene."
+  },
+  "categoriesManage": {
+    "title": "Kategoriler",
+    "subtitle": "Kategorilerini özelleştir: yeniden adlandır, renklendir veya gizle.",
+    "empty": "Kategori bulunamadı.",
+    "add": "Kategori Ekle",
+    "hiddenBadge": "Gizli",
+    "builtinBadge": "Varsayılan",
+    "customBadge": "Özel"
+  },
+  "newCategory": {
+    "title": "Yeni Kategori",
+    "editTitle": "Kategoriyi Düzenle",
+    "nameLabel": "Kategori Adı",
+    "namePlaceholder": "örn. Kahve Dükkanı",
+    "iconLabel": "İkon",
+    "colorLabel": "Renk",
+    "typeLabel": "Tür",
+    "hide": "Kategoriyi Gizle",
+    "show": "Kategoriyi Göster",
+    "resetDefault": "Varsayılana Sıfırla",
+    "delete": "Kategoriyi Sil",
+    "deleteTitle": "Kategoriyi Sil",
+    "deleteMessage": "Bu kategori silinecek. Bu kategorideki işlemler ham anahtarla görünmeye devam eder.",
+    "save": "Kaydet",
+    "saving": "Kaydediliyor…",
     "saveFailed": "Kaydedilemedi. Bağlantını kontrol edip tekrar dene."
   },
   "newRecurring": {

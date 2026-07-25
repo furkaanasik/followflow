@@ -19,6 +19,7 @@ export const api = createApi({
   reducerPath: 'api',
   baseQuery: fakeBaseQuery<ApiError>(),
   tagTypes: [
+    'Category',
     'IncomeSource',
     'RecurringPayment',
     'Goal',

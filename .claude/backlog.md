@@ -15,9 +15,6 @@ Yeni işler buradan izlenir. Fazlar sıralı/tek-seferlikti; bu liste akan — i
 - [ ] **P1 — Google OAuth aktifle.** Supabase dashboard'da Google provider + Google Cloud OAuth client konfig. `Button/Google CTA` atomu ve email/parola yolu zaten hazır; sadece provider bağlı değil. Not: Expo'da native popup ilk denemede açılmadı (bkz memory `project_google_auth_deferred`). _(Phase 5 raporundan devir)_
 - [ ] **P0 — Email confirmation deep-link flow.** Dev için Supabase'de kapalı; prod öncesi confirm e-postası + deep-link handler şart (bkz memory `project_email_confirmation_deferred`).
 
-### Test altyapısı
-
-
 ### Görsel QA / tasarım sadakati
 - [ ] **P3 — Pencil pixel-diff pass.** Desktop Pencil app hiçbir session'da attach olmadı (Phase 2/4/8/9/10 boyunca gap). App bağlıyken tüm ekranları `.pen` node'larına karşı diff'le.
 - [ ] **P3 — Cross-theme görsel QA.** `light` / `vibrant` / `vibrant-dark` interaktif QA — şimdiye statik doğrulandı (tüm token key'leri paylaşımlı, undefined-token crash yok). Interaktif browser/device path olunca doğrula.
@@ -25,7 +22,6 @@ Yeni işler buradan izlenir. Fazlar sıralı/tek-seferlikti; bu liste akan — i
 ### Yeni özellikler
 <!-- Buraya yeni feature fikirleri: her satır bağımsız /prp-plan girdisi -->
 - [ ] **P1 — Bildirimler.** Tekrarlayan ödeme yaklaşınca hatırlatma; bütçe %80 dolunca uyarı.
-- [ ] **P2 — Kategori özelleştirme.** Kullanıcı kendi kategorisini ekler: ad + ikon + renk.
 - [ ] **P2 — Takvim görünümü.** Hangi gün hangi ödeme var, maaş günü, nakit akışı çizgisi.
 - [ ] **P2 — Arama + filtre geliştirme.** İşlemlerde tarih aralığı, kategori, tutar aralığı filtreleri.
 - [ ] **P2 — Veri dışa aktarma (CSV).** İşlemleri CSV olarak dışa aktar.
@@ -40,3 +36,4 @@ Yeni işler buradan izlenir. Fazlar sıralı/tek-seferlikti; bu liste akan — i
 <!-- Bitmiş item'ler; PR# ekle -->
 - [x] **P1 — Test harness kur (jest + jest-expo).** 60 unit test (`aggregate`, `onboarding`, `amountInput`, `format`, `categories`) + `computeNextPaymentDate` Aralık rollover bug fix. PR #14.
 - [x] **P2 — Core loop E2E'yi otomatize et.** ✅ Maestro suite (`.maestro/`): signup → onboarding → home → gider işlemi → ana ekran doğrulaması. Emülatörde 2/2 flow yeşil (2026-07-25). Bkz `.claude/PRPs/reports/core-loop-e2e-report.md`. PR #15.
+- [x] **P2 — Kategori özelleştirme.** Kullanıcı kendi kategorisini ekler: ad + ikon + renk.

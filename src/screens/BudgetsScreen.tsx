@@ -6,8 +6,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ButtonIconOnly } from '@/atoms';
 import { budgetProgress, currentPeriodMonth } from '@/lib/aggregate';
-import { categoryByKey } from '@/lib/categories';
 import { formatCurrency, formatDate } from '@/lib/format';
+import { useCategories } from '@/lib/useCategories';
 import { StateView, TitleSubtitle } from '@/molecules';
 import { BudgetCard } from '@/organisms';
 import { useListBudgetsQuery, useListTransactionsQuery } from '@/store/api';
@@ -31,6 +31,7 @@ export function BudgetsScreen() {
     isError: txnsError,
     refetch: refetchTransactions,
   } = useListTransactionsQuery();
+  const { byKey } = useCategories();
   const isLoading = budgetsLoading || txnsLoading;
   const isError = budgetsError || txnsError;
 
@@ -59,8 +60,7 @@ export function BudgetsScreen() {
   });
 
   function displayName(budget: Budget) {
-    const cat = categoryByKey(budget.category_name);
-    return cat ? t(cat.labelKey) : budget.category_name;
+    return byKey(budget.category_name)?.label ?? budget.category_name;
   }
 
   return (

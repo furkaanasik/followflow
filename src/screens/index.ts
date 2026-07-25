@@ -16,3 +16,5 @@ export * from './IncomeSourcesScreen';
 export * from './RecurringPaymentsScreen';
 export * from './NewIncomeSourceScreen';
 export * from './NewRecurringPaymentScreen';
+export * from './CategoriesScreen';
+export * from './NewCategoryScreen';

@@ -9,16 +9,18 @@ import type { ColorTokens } from '@/theme/tokens';
 export interface CategoryIconProps {
   icon: string;
   tint?: keyof ColorTokens;
+  color?: string;
   size?: number;
 }
 
 export function CategoryIcon({
   icon,
   tint = 'accentTeal',
+  color,
   size = 44,
 }: CategoryIconProps) {
   const theme = useTheme();
-  const tintColor = theme.colors[tint];
+  const tintColor = color ?? theme.colors[tint];
 
   return (
     <View
