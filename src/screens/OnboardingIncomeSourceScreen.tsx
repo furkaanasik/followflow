@@ -137,6 +137,7 @@ export function OnboardingIncomeSourceScreen() {
               placeholder={t('onboarding.income.namePlaceholder')}
               icon="tag"
               error={nameError}
+              testID="onboarding-income-name"
             />
             <FormFieldGroup
               label={t('onboarding.amountLabel')}
@@ -146,6 +147,7 @@ export function OnboardingIncomeSourceScreen() {
               icon="banknote"
               keyboardType="decimal-pad"
               error={amountError}
+              testID="onboarding-income-amount"
             />
 
             <View style={{ gap: theme.spacing.xs }}>
@@ -175,6 +177,7 @@ export function OnboardingIncomeSourceScreen() {
               icon="calendar"
               keyboardType="number-pad"
               error={payDayError}
+              testID="onboarding-income-payday"
             />
 
             <ButtonPrimary
@@ -185,6 +188,7 @@ export function OnboardingIncomeSourceScreen() {
               }
               onPress={handleSave}
               disabled={submitting}
+              testID="onboarding-income-continue"
             />
           </SurfaceCard>
         </ScrollView>

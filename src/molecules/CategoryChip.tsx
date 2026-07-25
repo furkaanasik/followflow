@@ -12,6 +12,7 @@ export interface CategoryChipProps {
   tint?: keyof ColorTokens;
   selected?: boolean;
   onPress: () => void;
+  testID?: string;
 }
 
 export function CategoryChip({
@@ -20,11 +21,13 @@ export function CategoryChip({
   tint = 'accentTeal',
   selected = false,
   onPress,
+  testID,
 }: CategoryChipProps) {
   const theme = useTheme();
   const color = selected ? theme.colors.accentTeal : theme.colors.textSecondary;
   return (
     <Pressable
+      testID={testID}
       onPress={onPress}
       accessibilityRole="button"
       accessibilityState={{ selected }}

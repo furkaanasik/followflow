@@ -24,6 +24,7 @@ export interface InputFieldProps {
   keyboardType?: TextInputProps['keyboardType'];
   autoCapitalize?: TextInputProps['autoCapitalize'];
   autoCorrect?: boolean;
+  testID?: string;
 }
 
 export function InputField({
@@ -40,6 +41,7 @@ export function InputField({
   keyboardType = 'default',
   autoCapitalize = 'sentences',
   autoCorrect = true,
+  testID,
 }: InputFieldProps) {
   const theme = useTheme();
   const [focused, setFocused] = useState(false);
@@ -69,6 +71,7 @@ export function InputField({
           })
         : null}
       <TextInput
+        testID={testID}
         style={{
           flex: 1,
           fontFamily: theme.fonts.body.regular,

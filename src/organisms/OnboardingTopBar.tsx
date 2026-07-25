@@ -39,6 +39,7 @@ export function OnboardingTopBar({
       <StepIndicator steps={totalSteps} currentStep={step} />
       <View style={[styles.side, styles.right]}>
         <Pressable
+          testID="onboarding-skip"
           onPress={onSkip}
           hitSlop={8}
           style={styles.skipTap}

@@ -204,6 +204,7 @@ export function NewTransactionScreen() {
           ]}
           value={type}
           onChange={handleTypeChange}
+          testID="tx-type-toggle"
         />
 
         <View style={styles.amountArea}>
@@ -234,6 +235,7 @@ export function NewTransactionScreen() {
               tint={cat.tint}
               selected={cat.key === categoryKey}
               onPress={() => setCategoryKey(cat.key)}
+              testID={`tx-category-${cat.key}`}
             />
           ))}
         </View>
@@ -306,6 +308,7 @@ export function NewTransactionScreen() {
           }
           onPress={handleSave}
           disabled={submitting}
+          testID="tx-save"
         />
       </View>
     </View>

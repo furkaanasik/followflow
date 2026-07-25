@@ -25,6 +25,7 @@ export interface SegmentedToggleProps {
   options: SegmentedToggleOption[];
   value: string;
   onChange: (value: string) => void;
+  testID?: string;
 }
 
 const TRACK_PADDING = 3;
@@ -33,6 +34,7 @@ export function SegmentedToggle({
   options,
   value,
   onChange,
+  testID,
 }: SegmentedToggleProps) {
   const theme = useTheme();
   const [trackWidth, setTrackWidth] = useState(0);
@@ -94,6 +96,7 @@ export function SegmentedToggle({
         return (
           <Pressable
             key={option.value}
+            testID={testID ? `${testID}-${option.value}` : undefined}
             onPress={() => onChange(option.value)}
             accessibilityRole="button"
             accessibilityState={{ selected }}

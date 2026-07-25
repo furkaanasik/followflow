@@ -1,0 +1,9 @@
+# Maestro workspace config — flows run in filename order via `npm run e2e`.
+flows:
+  - '01-auth-onboarding.yaml'
+  - '02-core-loop.yaml'
+executionOrder:
+  continueOnFailure: false
+  flowsOrder:
+    - 01-auth-onboarding
+    - 02-core-loop

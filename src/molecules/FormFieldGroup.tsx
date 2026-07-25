@@ -17,6 +17,7 @@ export interface FormFieldGroupProps {
   keyboardType?: InputFieldProps['keyboardType'];
   autoCapitalize?: InputFieldProps['autoCapitalize'];
   autoCorrect?: boolean;
+  testID?: string;
 }
 
 export function FormFieldGroup({
@@ -33,6 +34,7 @@ export function FormFieldGroup({
   keyboardType,
   autoCapitalize,
   autoCorrect,
+  testID,
 }: FormFieldGroupProps) {
   const theme = useTheme();
   return (
@@ -47,6 +49,7 @@ export function FormFieldGroup({
         {label}
       </Text>
       <InputField
+        testID={testID}
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}

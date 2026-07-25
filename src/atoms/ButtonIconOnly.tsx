@@ -12,6 +12,7 @@ export interface ButtonIconOnlyProps {
   variant?: 'accent' | 'surface';
   size?: number;
   iconColor?: keyof ColorTokens;
+  testID?: string;
 }
 
 export function ButtonIconOnly({
@@ -21,6 +22,7 @@ export function ButtonIconOnly({
   variant = 'accent',
   size = 44,
   iconColor,
+  testID,
 }: ButtonIconOnlyProps) {
   const theme = useTheme();
   const isSurface = variant === 'surface';
@@ -30,6 +32,7 @@ export function ButtonIconOnly({
 
   return (
     <Pressable
+      testID={testID}
       onPress={onPress}
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel}
