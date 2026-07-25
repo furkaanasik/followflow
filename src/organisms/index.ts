@@ -1,4 +1,5 @@
 export * from './AppBarBackTitle';
+export * from './AppTabBar';
 export * from './AppBarSimpleTitle';
 export * from './BottomNavigationBar';
 export * from './BudgetCard';
