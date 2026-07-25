@@ -22,7 +22,6 @@ Yeni işler buradan izlenir. Fazlar sıralı/tek-seferlikti; bu liste akan — i
 ### Yeni özellikler
 <!-- Buraya yeni feature fikirleri: her satır bağımsız /prp-plan girdisi -->
 - [ ] **P1 — Bildirimler.** Tekrarlayan ödeme yaklaşınca hatırlatma; bütçe %80 dolunca uyarı.
-- [ ] **P2 — Takvim görünümü.** Hangi gün hangi ödeme var, maaş günü, nakit akışı çizgisi.
 - [ ] **P2 — Arama + filtre geliştirme.** İşlemlerde tarih aralığı, kategori, tutar aralığı filtreleri.
 - [ ] **P2 — Veri dışa aktarma (CSV).** İşlemleri CSV olarak dışa aktar.
 - [ ] **P2 — Hızlı işlem şablonları.** Sık girilen işlemi ("Market 500₺") tek dokunuşla tekrar gir.
@@ -37,3 +36,4 @@ Yeni işler buradan izlenir. Fazlar sıralı/tek-seferlikti; bu liste akan — i
 - [x] **P1 — Test harness kur (jest + jest-expo).** 60 unit test (`aggregate`, `onboarding`, `amountInput`, `format`, `categories`) + `computeNextPaymentDate` Aralık rollover bug fix. PR #14.
 - [x] **P2 — Core loop E2E'yi otomatize et.** ✅ Maestro suite (`.maestro/`): signup → onboarding → home → gider işlemi → ana ekran doğrulaması. Emülatörde 2/2 flow yeşil (2026-07-25). Bkz `.claude/PRPs/reports/core-loop-e2e-report.md`. PR #15.
 - [x] **P2 — Kategori özelleştirme.** Kullanıcı kendi kategorisini ekler: ad + ikon + renk.
+- [x] **P2 — Takvim görünümü.** Ayarlar → Takvim: ay ızgarası (ödeme/maaş günü/işlem işaretleri), nakit akışı şeridi, gün detayı. 15 unit test. PR #18.
