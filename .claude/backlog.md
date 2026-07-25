@@ -16,7 +16,6 @@ Yeni işler buradan izlenir. Fazlar sıralı/tek-seferlikti; bu liste akan — i
 - [ ] **P0 — Email confirmation deep-link flow.** Dev için Supabase'de kapalı; prod öncesi confirm e-postası + deep-link handler şart (bkz memory `project_email_confirmation_deferred`).
 
 ### Test altyapısı
-- [ ] **P1 — Test harness kur (jest + jest-expo).** Repo'da runner yok. İlk hedef pure helper'lar: `src/**/aggregate.ts`, `src/lib/categories.ts`, `computeNextPaymentDate`, `src/lib/format.ts` (bilerek saf tutuldular).
 - [ ] **P2 — Core loop E2E'yi otomatize et.** Şu an manuel smoke: gelir kaynağı ekle → işlem logla → bütçe/hedef ilerlemesi. Detox/Maestro değerlendir.
 
 ### Görsel QA / tasarım sadakati
@@ -39,3 +38,4 @@ Yeni işler buradan izlenir. Fazlar sıralı/tek-seferlikti; bu liste akan — i
 
 ## Done
 <!-- Bitmiş item'ler; PR# ekle -->
+- [x] **P1 — Test harness kur (jest + jest-expo).** 60 unit test (`aggregate`, `onboarding`, `amountInput`, `format`, `categories`) + `computeNextPaymentDate` Aralık rollover bug fix. PR #14.
