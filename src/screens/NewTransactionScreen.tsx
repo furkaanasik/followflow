@@ -4,7 +4,14 @@ import DateTimePicker, {
 import { createElement, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+  Platform,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import {
@@ -21,6 +28,7 @@ import {
   SegmentedToggle,
 } from '@/molecules';
 import { formatDate, parseAmount } from '@/lib/format';
+import { deriveQuickTemplates, type QuickTemplate } from '@/lib/quickTemplates';
 import { useCategories } from '@/lib/useCategories';
 import {
   useCreateTransactionMutation,
@@ -96,6 +104,20 @@ export function NewTransactionScreen() {
     }
     return visible;
   }, [visible, effectiveKey, byKey]);
+
+  // Create mode only — prefilling over an edited row would clobber it.
+  const templates = useMemo(
+    () => (existing ? [] : deriveQuickTemplates(transactions)),
+    [existing, transactions],
+  );
+
+  function applyTemplate(tpl: QuickTemplate) {
+    setFieldError(undefined);
+    setType(tpl.type);
+    setAmountRaw(String(tpl.amount));
+    setCategoryKey(tpl.category);
+    setNote(tpl.note ?? '');
+  }
 
   const isToday = occurredAt.toDateString() === new Date().toDateString();
   const dateLabel = isToday
@@ -216,6 +238,25 @@ export function NewTransactionScreen() {
           onChange={handleTypeChange}
           testID="tx-type-toggle"
         />
+
+        {templates.length > 0 ? (
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={styles.templatesScroll}
+            contentContainerStyle={styles.templates}
+          >
+            {templates.map((tpl, i) => (
+              <CategoryChip
+                key={`${tpl.type}-${tpl.category}-${tpl.amount}-${i}`}
+                icon={tpl.icon}
+                label={`${byKey(tpl.category)?.label ?? tpl.category} ${formatAmountInput(String(tpl.amount))}`}
+                onPress={() => applyTemplate(tpl)}
+                testID={`tx-template-${i}`}
+              />
+            ))}
+          </ScrollView>
+        ) : null}
 
         <View style={styles.amountArea}>
           <AmountDisplay
@@ -348,6 +389,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     gap: 6,
+  },
+  // ScrollView otherwise flex-grows in the column and stretches the chips.
+  templatesScroll: { flexGrow: 0 },
+  templates: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
   },
   chips: {
     flexDirection: 'row',
