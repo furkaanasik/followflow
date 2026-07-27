@@ -27,13 +27,13 @@ Yeni işler buradan izlenir. Fazlar sıralı/tek-seferlikti; bu liste akan — i
 - [ ] **P1 — Bildirimler.** Tekrarlayan ödeme yaklaşınca hatırlatma; bütçe %80 dolunca uyarı.
 - [ ] **P3 — Raporlar: PDF/Excel export.** Rapor ekranındaki dönemi PDF (expo-print) ve/veya Excel/xlsx dosyası olarak OS share sheet ile dışa aktar. Yeni bağımlılık gerekir; CSV yolu zaten var (`toCsv`/`exportTransactionsCsv`) — pattern devral. _(eski "Gelişmiş raporlar" böl 2/3)_
 - [ ] **P3 — Yıl sonu "Wrapped" özeti.** Yıl sonu highlight ekranı (toplam gelir/gider, en çok harcanan kategori, en yoğun ay, tasarruf oranı, hedef ilerlemesi). Saf aggregation, kart akışı. _(eski "Gelişmiş raporlar" böl 3/3)_
-- [ ] **P2 — İşlem düzenleme/silme.** İşlemler listesinde satıra tıklayınca düzenle/sil yolu yok (tap ve long-press no-op). `yeni-islem` sheet'i `id` param ile edit modunda açılsın + sil butonu; RTK Query update/delete endpoint'leri. _(Çoklu para birimi cihaz testi bulgusu)_
 
 ## In Progress
 <!-- Aktif işlenen item — branch adı yaz -->
 
 ## Done
 <!-- Bitmiş item'ler; PR# ekle -->
+- [x] **P2 — İşlem düzenleme/silme.** Temel edit/sil (satır kaydırma → düzenle/sil, `yeni-islem` `id` param ile edit modu, RTK Query update/delete) PR #23'te geldi. Tap→düzenle UX + filtre panelinde döviz seçimi (`currencies`) + ana sayfa donut dilim boşluğu düzeltmesi PR #24. _(Çoklu para birimi cihaz testi bulgusu)_
 - [x] **P2 — Çoklu para birimi + döviz/altın takibi.** TRY/USD/EUR/gram altın: tüm para tablolarında `currency` + profilde `main_currency`; canlı kur (er-api, 10s timeout) + `fx_rates` snapshot cache (offline fallback, rate bounds CHECK); tüm formlarda `CurrencySelector`; aggregate/raporlar ana para birimine çevrilir; yeni Varlıklarım ekranı (`/varliklarim`). Altın kuru için ücretsiz kaynak yok — GAU toplam dışı, notla. 159 test; cihazda doğrulandı. PR #23.
 - [x] **P2 — Raporlar: trend + kategori ısı haritası.** Ayarlar → Raporlar: aylık/yıllık gelir-gider trend grafiği (bara dokun → tutar detayı) + ay × kategori gider ısı haritası. Saf `monthlyTrend`/`yearlyTrend`/`categoryHeatmap` + 12 unit test; yeni bağımlılık yok. PR #22.
 - [x] **P2 — Hızlı işlem şablonları.** Geçmişten türetilen chip satırı (Yeni İşlem sheet, tip toggle altı); tap → tip/tutar/kategori/not prefill, tarih "bugün" kalır. Saf `deriveQuickTemplates` (son 200 işlem, frekans+recency sıralı) + 10 unit test. Cihazda doğrulandı. PR #21.
