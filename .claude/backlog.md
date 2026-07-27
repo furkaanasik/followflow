@@ -34,7 +34,7 @@ Yeni işler buradan izlenir. Fazlar sıralı/tek-seferlikti; bu liste akan — i
 
 ## Done
 <!-- Bitmiş item'ler; PR# ekle -->
-- [x] **P2 — Veri dışa aktarma (CSV).** İşlemler ekranı header'ında share butonu; aktif filtrelere göre CSV (BOM + RFC 4180) üretip OS share sheet ile paylaşır. Saf `toCsv` + `exportTransactionsCsv` (expo-file-system/expo-sharing). 10 unit test. Cihazda doğrulandı.
+- [x] **P2 — Veri dışa aktarma (CSV).** İşlemler ekranı header'ında share butonu; aktif filtrelere göre CSV (BOM + RFC 4180) üretip OS share sheet ile paylaşır. Saf `toCsv` + `exportTransactionsCsv` (expo-file-system/expo-sharing). 12 unit test. Cihazda doğrulandı. PR #20.
 - [x] **P2 — Arama + filtre geliştirme.** İşlemlerde tarih aralığı, kategori (çoklu), tutar aralığı filtreleri; animasyonlu panel, sayaç rozeti. Saf `filterTransactions` helper + 16 unit test. Yeni: `BadgeCount` atom, `DateField` molekül. PR #19.
 - [x] **P1 — Test harness kur (jest + jest-expo).** 60 unit test (`aggregate`, `onboarding`, `amountInput`, `format`, `categories`) + `computeNextPaymentDate` Aralık rollover bug fix. PR #14.
 - [x] **P2 — Core loop E2E'yi otomatize et.** ✅ Maestro suite (`.maestro/`): signup → onboarding → home → gider işlemi → ana ekran doğrulaması. Emülatörde 2/2 flow yeşil (2026-07-25). Bkz `.claude/PRPs/reports/core-loop-e2e-report.md`. PR #15.
