@@ -122,6 +122,7 @@
     "filterDateFrom": "Başlangıç",
     "filterDateTo": "Bitiş",
     "filterCategory": "Kategori",
+    "filterCurrency": "Para birimi",
     "filterAmount": "Tutar",
     "filterAmountMin": "Min",
     "filterAmountMax": "Maks",

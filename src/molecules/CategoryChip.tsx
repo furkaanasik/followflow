@@ -7,7 +7,7 @@ import { useTheme } from '@/theme';
 import type { ColorTokens } from '@/theme/tokens';
 
 export interface CategoryChipProps {
-  icon: string;
+  icon?: string;
   label: string;
   tint?: keyof ColorTokens;
   color?: string;
@@ -47,12 +47,14 @@ export function CategoryChip({
         },
       ]}
     >
-      {createElement(getIcon(icon), {
-        size: 14,
-        color: selected
-          ? theme.colors.accentTeal
-          : (iconColor ?? theme.colors[tint]),
-      })}
+      {icon
+        ? createElement(getIcon(icon), {
+            size: 14,
+            color: selected
+              ? theme.colors.accentTeal
+              : (iconColor ?? theme.colors[tint]),
+          })
+        : null}
       <Text
         numberOfLines={1}
         style={{

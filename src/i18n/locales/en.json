@@ -122,6 +122,7 @@
     "filterDateFrom": "From",
     "filterDateTo": "To",
     "filterCategory": "Category",
+    "filterCurrency": "Currency",
     "filterAmount": "Amount",
     "filterAmountMin": "Min",
     "filterAmountMax": "Max",

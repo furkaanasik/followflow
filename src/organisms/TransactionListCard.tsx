@@ -47,7 +47,7 @@ export function TransactionListCard({
               onEdit={() => onEditItem(id)}
               onDelete={() => onDeleteItem(id)}
             >
-              <TransactionRow {...row} />
+              <TransactionRow {...row} onPress={() => onEditItem(id)} />
             </SwipeableRow>
           ) : (
             <TransactionRow key={id} {...row} />
