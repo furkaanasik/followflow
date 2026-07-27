@@ -7,10 +7,15 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ButtonIconOnly } from '@/atoms';
 import { budgetProgress, currentPeriodMonth } from '@/lib/aggregate';
 import { formatCurrency, formatDate } from '@/lib/format';
+import { type CurrencyCode } from '@/lib/currency';
 import { useCategories } from '@/lib/useCategories';
 import { StateView, TitleSubtitle } from '@/molecules';
 import { BudgetCard } from '@/organisms';
-import { useListBudgetsQuery, useListTransactionsQuery } from '@/store/api';
+import {
+  useListBudgetsQuery,
+  useListTransactionsQuery,
+  useRates,
+} from '@/store/api';
 import { useTheme } from '@/theme';
 import type { Budget } from '@/types';
 
@@ -52,7 +57,8 @@ export function BudgetsScreen() {
     }, [refetchBudgets, refetchTransactions]),
   );
 
-  const progress = budgetProgress(budgets, transactions);
+  const { rates } = useRates();
+  const progress = budgetProgress(budgets, transactions, new Date(), rates ?? undefined);
   const monthLabel = formatDate(new Date(), {
     day: undefined,
     month: 'long',
@@ -116,11 +122,13 @@ export function BudgetsScreen() {
                     ? t('budgets.overBy', {
                         amount: formatCurrency(
                           item.spent - item.budget.limit_amount,
+                          item.budget.currency as CurrencyCode,
                         ),
                       })
                     : t('budgets.remaining', {
                         amount: formatCurrency(
                           item.budget.limit_amount - item.spent,
+                          item.budget.currency as CurrencyCode,
                         ),
                       })
                 }

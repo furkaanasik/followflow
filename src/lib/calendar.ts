@@ -17,6 +17,7 @@ export interface CalendarEvent {
   label: string;
   icon: string;
   amount: number;
+  currency: string;
   sign: -1 | 0 | 1;
 }
 
@@ -90,6 +91,7 @@ export function expandRecurring(
         label: payment.name,
         icon: payment.icon,
         amount: payment.amount,
+        currency: payment.currency,
         sign: -1,
       });
     };
@@ -142,6 +144,7 @@ export function payDayEvents(
       label: source.name,
       icon: 'briefcase',
       amount: source.amount,
+      currency: source.currency,
       sign: 1,
     });
   }
@@ -163,6 +166,7 @@ export function transactionEvents(
       label: txn.title,
       icon: txn.icon,
       amount: txn.amount,
+      currency: txn.currency,
       sign: txn.type === 'income' ? 1 : -1,
     });
   }

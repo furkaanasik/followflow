@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { calendarMonth, eventsForDay } from '@/lib/calendar';
 import { formatCurrency, formatDate } from '@/lib/format';
+import { type CurrencyCode } from '@/lib/currency';
 import { getIcon } from '@/lib/icons';
 import { StateView } from '@/molecules';
 import { AppBarBackTitle, CalendarMonthCard, CashFlowStrip } from '@/organisms';
@@ -186,7 +187,7 @@ export function CalendarScreen() {
                       >
                         {event.kind === 'payday'
                           ? t('calendar.payDay')
-                          : `${event.sign > 0 ? '+' : '-'}${formatCurrency(event.amount)}`}
+                          : `${event.sign > 0 ? '+' : '-'}${formatCurrency(event.amount, event.currency as CurrencyCode)}`}
                       </Text>
                     </View>
                   ))

@@ -6,8 +6,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ButtonSecondary } from '@/atoms';
 import { useLanguage } from '@/i18n/LanguageProvider';
 import { signOut } from '@/lib/auth';
-import { InfoRowChevron, SegmentedToggle } from '@/molecules';
+import { toCurrencyCode, type CurrencyCode } from '@/lib/currency';
+import { CurrencySelector, InfoRowChevron, SegmentedToggle } from '@/molecules';
 import { AppBarSimpleTitle } from '@/organisms';
+import { useGetProfileQuery, useUpdateProfileMutation } from '@/store/api';
 import { useTheme } from '@/theme';
 import type { ThemeMode } from '@/theme/tokens';
 
@@ -16,6 +18,15 @@ export function SettingsScreen() {
   const { t } = useTranslation();
   const router = useRouter();
   const { language, setLanguage } = useLanguage();
+  const { data: profile } = useGetProfileQuery();
+  const [updateProfile] = useUpdateProfileMutation();
+  const mainCurrency = toCurrencyCode(profile?.main_currency);
+
+  function handleMainCurrencyChange(currency: CurrencyCode) {
+    updateProfile({ main_currency: currency })
+      .unwrap()
+      .catch(() => Alert.alert(t('settings.mainCurrencyFailed')));
+  }
 
   async function handleSignOut() {
     try {
@@ -75,6 +86,28 @@ export function SettingsScreen() {
             label={t('settings.reports')}
             value=""
             onPress={() => router.push('/raporlar')}
+          />
+          <InfoRowChevron
+            icon="coins"
+            label={t('settings.portfolio')}
+            value=""
+            onPress={() => router.push('/varliklarim')}
+          />
+        </View>
+
+        <View style={{ gap: theme.spacing.sm }}>
+          <Text
+            style={{
+              fontFamily: theme.fonts.heading.semibold,
+              fontSize: 16,
+              color: theme.colors.textPrimary,
+            }}
+          >
+            {t('settings.mainCurrency')}
+          </Text>
+          <CurrencySelector
+            value={mainCurrency}
+            onChange={handleMainCurrencyChange}
           />
         </View>
 

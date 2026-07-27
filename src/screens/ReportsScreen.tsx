@@ -5,11 +5,16 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { formatCurrency, formatDate } from '@/lib/format';
+import { toCurrencyCode } from '@/lib/currency';
 import { categoryHeatmap, monthlyTrend, yearlyTrend } from '@/lib/reports';
 import { useCategories } from '@/lib/useCategories';
 import { SegmentedToggle, StateView } from '@/molecules';
 import { AppBarBackTitle, CategoryHeatmap, TrendChart } from '@/organisms';
-import { useListTransactionsQuery } from '@/store/api';
+import {
+  useGetProfileQuery,
+  useListTransactionsQuery,
+  useRates,
+} from '@/store/api';
 import { useTheme } from '@/theme';
 
 const WINDOW_MONTHS = 6;
@@ -23,6 +28,13 @@ export function ReportsScreen() {
   const [period, setPeriod] = useState<'monthly' | 'yearly'>('monthly');
 
   const txnsQuery = useListTransactionsQuery();
+  const { data: profile } = useGetProfileQuery();
+  const { rates } = useRates();
+  const mainCurrency = toCurrencyCode(profile?.main_currency);
+  const convertOpts = useMemo(
+    () => (rates ? { convertTo: mainCurrency, rates } : undefined),
+    [rates, mainCurrency],
+  );
   const refetch = txnsQuery.refetch;
 
   useFocusEffect(
@@ -37,8 +49,8 @@ export function ReportsScreen() {
   const points = useMemo(() => {
     const series =
       period === 'monthly'
-        ? monthlyTrend(txns ?? [], WINDOW_MONTHS)
-        : yearlyTrend(txns ?? []);
+        ? monthlyTrend(txns ?? [], WINDOW_MONTHS, new Date(), convertOpts)
+        : yearlyTrend(txns ?? [], 3, new Date(), convertOpts);
     return series.map((p) => ({
       key: p.key,
       label:
@@ -51,14 +63,14 @@ export function ReportsScreen() {
           : String(p.year),
       income: p.income,
       expense: p.expense,
-      incomeAmount: formatCurrency(p.income),
-      expenseAmount: formatCurrency(p.expense),
+      incomeAmount: formatCurrency(p.income, mainCurrency),
+      expenseAmount: formatCurrency(p.expense, mainCurrency),
       current: p.current,
     }));
-  }, [txns, period]);
+  }, [txns, period, convertOpts, mainCurrency]);
 
   const heatmap = useMemo(() => {
-    const data = categoryHeatmap(txns ?? [], WINDOW_MONTHS);
+    const data = categoryHeatmap(txns ?? [], WINDOW_MONTHS, new Date(), convertOpts);
     const monthLabels = data.months.map((m) =>
       formatDate(new Date(m.year, m.monthIndex, 1), {
         day: undefined,
@@ -79,7 +91,7 @@ export function ReportsScreen() {
       }),
     }));
     return { monthLabels, rows };
-  }, [txns, byKey]);
+  }, [txns, byKey, convertOpts]);
 
   return (
     <SafeAreaView

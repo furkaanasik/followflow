@@ -1,6 +1,7 @@
 export * from './baseApi';
 export * from './budgetsApi';
 export * from './categoriesApi';
+export * from './fxApi';
 export * from './goalContributionsApi';
 export * from './goalsApi';
 export * from './incomeSourcesApi';

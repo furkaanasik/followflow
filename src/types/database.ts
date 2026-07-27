@@ -8,6 +8,7 @@ export interface Database {
           avatar_url: string | null;
           theme_mode: 'dark' | 'light' | 'vibrant' | 'vibrant-dark';
           onboarding_completed: boolean;
+          main_currency: string;
           created_at: string;
           updated_at: string;
         };
@@ -17,6 +18,7 @@ export interface Database {
           avatar_url?: string | null;
           theme_mode?: 'dark' | 'light' | 'vibrant' | 'vibrant-dark';
           onboarding_completed?: boolean;
+          main_currency?: string;
           created_at?: string;
           updated_at?: string;
         };
@@ -26,6 +28,7 @@ export interface Database {
           avatar_url?: string | null;
           theme_mode?: 'dark' | 'light' | 'vibrant' | 'vibrant-dark';
           onboarding_completed?: boolean;
+          main_currency?: string;
           created_at?: string;
           updated_at?: string;
         };
@@ -39,6 +42,7 @@ export interface Database {
           amount: number;
           frequency: 'weekly' | 'biweekly' | 'monthly' | 'yearly' | 'one-time';
           pay_day: number | null;
+          currency: string;
           created_at: string;
           updated_at: string;
         };
@@ -49,6 +53,7 @@ export interface Database {
           amount: number;
           frequency: 'weekly' | 'biweekly' | 'monthly' | 'yearly' | 'one-time';
           pay_day?: number | null;
+          currency?: string;
           created_at?: string;
           updated_at?: string;
         };
@@ -66,6 +71,7 @@ export interface Database {
           amount: number;
           frequency: 'weekly' | 'biweekly' | 'monthly' | 'yearly' | 'one-time';
           next_payment_date: string;
+          currency: string;
           created_at: string;
           updated_at: string;
         };
@@ -77,6 +83,7 @@ export interface Database {
           amount: number;
           frequency: 'weekly' | 'biweekly' | 'monthly' | 'yearly' | 'one-time';
           next_payment_date: string;
+          currency?: string;
           created_at?: string;
           updated_at?: string;
         };
@@ -94,6 +101,7 @@ export interface Database {
           target_amount: number;
           current_amount: number;
           target_date: string | null;
+          currency: string;
           created_at: string;
           updated_at: string;
         };
@@ -105,6 +113,7 @@ export interface Database {
           target_amount: number;
           current_amount?: number;
           target_date?: string | null;
+          currency?: string;
           created_at?: string;
           updated_at?: string;
         };
@@ -119,6 +128,7 @@ export interface Database {
           category_name: string;
           limit_amount: number;
           period_month: string;
+          currency: string;
           created_at: string;
           updated_at: string;
         };
@@ -129,6 +139,7 @@ export interface Database {
           category_name: string;
           limit_amount: number;
           period_month: string;
+          currency?: string;
           created_at?: string;
           updated_at?: string;
         };
@@ -142,6 +153,7 @@ export interface Database {
           goal_id: string;
           amount: number;
           note: string | null;
+          currency: string;
           occurred_at: string;
           created_at: string;
         };
@@ -151,6 +163,7 @@ export interface Database {
           goal_id: string;
           amount: number;
           note?: string | null;
+          currency?: string;
           occurred_at?: string;
           created_at?: string;
         };
@@ -189,6 +202,24 @@ export interface Database {
         Update: Partial<Database['public']['Tables']['categories']['Insert']>;
         Relationships: [];
       };
+      fx_rates: {
+        Row: {
+          id: string;
+          quote: string;
+          rate: number;
+          as_of: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          quote: string;
+          rate: number;
+          as_of: string;
+          created_at?: string;
+        };
+        Update: Partial<Database['public']['Tables']['fx_rates']['Insert']>;
+        Relationships: [];
+      };
       transactions: {
         Row: {
           id: string;
@@ -199,6 +230,7 @@ export interface Database {
           title: string;
           note: string | null;
           amount: number;
+          currency: string;
           occurred_at: string;
           created_at: string;
           updated_at: string;
@@ -212,6 +244,7 @@ export interface Database {
           title: string;
           note?: string | null;
           amount: number;
+          currency?: string;
           occurred_at?: string;
           created_at?: string;
           updated_at?: string;

@@ -16,12 +16,19 @@ import {
   nextAmountRaw,
   NUMPAD_ROWS,
 } from '@/lib/amountInput';
+import { symbolFor, toCurrencyCode, type CurrencyCode } from '@/lib/currency';
 import { parseAmount } from '@/lib/format';
 import { useCategories } from '@/lib/useCategories';
-import { AlertBanner, CategoryChip, NumpadKeyRow } from '@/molecules';
+import {
+  AlertBanner,
+  CategoryChip,
+  CurrencySelector,
+  NumpadKeyRow,
+} from '@/molecules';
 import {
   useCreateBudgetMutation,
   useDeleteBudgetMutation,
+  useGetProfileQuery,
   useListBudgetsQuery,
   useUpdateBudgetMutation,
 } from '@/store/api';
@@ -43,7 +50,12 @@ export function NewBudgetScreen() {
   const submitting = creating || updating || deleting;
 
   const existing = id ? budgets.find((b) => b.id === id) : undefined;
+  const { data: profile } = useGetProfileQuery();
+  const mainCurrency = toCurrencyCode(profile?.main_currency);
 
+  const [currency, setCurrency] = useState<CurrencyCode>(
+    () => existing ? toCurrencyCode(existing.currency) : mainCurrency,
+  );
   const { byType, byKey } = useCategories();
   const [categoryKey, setCategoryKey] = useState(
     () => existing?.category_name ?? '',
@@ -90,6 +102,7 @@ export function NewBudgetScreen() {
       icon: category.icon,
       category_name: category.key,
       limit_amount: amount,
+      currency,
       period_month: currentPeriodMonth(),
     };
     try {
@@ -182,6 +195,8 @@ export function NewBudgetScreen() {
           </View>
         </View>
 
+        <CurrencySelector value={currency} onChange={setCurrency} />
+
         <View style={styles.amountArea}>
           <Text
             style={{
@@ -193,7 +208,9 @@ export function NewBudgetScreen() {
           >
             {t('newBudget.limitLabel')}
           </Text>
-          <AmountDisplay amount={formatAmountInput(amountRaw)} />
+          <AmountDisplay
+            amount={formatAmountInput(amountRaw, symbolFor(currency))}
+          />
           {fieldError ? (
             <Text
               style={{

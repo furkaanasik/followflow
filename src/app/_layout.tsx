@@ -20,7 +20,12 @@ import { Provider } from 'react-redux';
 import '@/i18n';
 import { LanguageProvider } from '@/i18n/LanguageProvider';
 import { supabase } from '@/lib/supabase';
-import { api, AUTH_INVALID_CODE, useGetProfileQuery } from '@/store/api';
+import {
+  api,
+  AUTH_INVALID_CODE,
+  useGetProfileQuery,
+  useGetRatesQuery,
+} from '@/store/api';
 import { useAppSelector } from '@/store/hooks';
 import { setBootstrapped } from '@/store/slices/appSlice';
 import { setSession } from '@/store/slices/authSlice';
@@ -41,6 +46,10 @@ function RootNavigator() {
     error: profileError,
     refetch: refetchProfile,
   } = useGetProfileQuery(undefined, { skip: status !== 'authenticated' });
+
+  // Warm the FX cache as soon as the user is in; screens read via useRates.
+  // A failed fetch falls back to the fx_rates snapshot and never blocks UI.
+  useGetRatesQuery(undefined, { skip: status !== 'authenticated' });
 
   const authInvalid =
     (profileError as { code?: string } | undefined)?.code === AUTH_INVALID_CODE;
@@ -198,6 +207,13 @@ function RootNavigator() {
         />
         <Stack.Screen
           name="tekrarlayan-odemeler"
+          options={{
+            headerShown: false,
+            contentStyle: { backgroundColor: theme.colors.bgApp },
+          }}
+        />
+        <Stack.Screen
+          name="varliklarim"
           options={{
             headerShown: false,
             contentStyle: { backgroundColor: theme.colors.bgApp },

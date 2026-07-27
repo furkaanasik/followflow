@@ -1,14 +1,23 @@
+import { isGold, toCurrencyCode, type CurrencyCode } from './currency';
+
 const DEFAULT_LOCALE = 'tr-TR';
-const CURRENCY = 'TRY';
 
 export function formatCurrency(
   value: number,
+  currencyInput: CurrencyCode | string = 'TRY',
   options: { locale?: string; maximumFractionDigits?: number } = {},
 ): string {
   const { locale = DEFAULT_LOCALE, maximumFractionDigits = 2 } = options;
+  // DB rows carry currency as plain text; validate here so an unexpected
+  // value falls back to TRY instead of throwing inside Intl.NumberFormat.
+  const currency = toCurrencyCode(currencyInput);
+  // GAU is not an ISO 4217 code — Intl's currency style would throw.
+  if (isGold(currency)) {
+    return `${formatNumber(value, { locale, maximumFractionDigits })} gr`;
+  }
   return new Intl.NumberFormat(locale, {
     style: 'currency',
-    currency: CURRENCY,
+    currency,
     minimumFractionDigits: 2,
     maximumFractionDigits,
   }).format(value);

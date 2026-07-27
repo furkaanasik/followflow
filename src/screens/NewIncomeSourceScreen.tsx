@@ -13,10 +13,17 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ButtonIconOnly, ButtonPrimary, ButtonSecondary } from '@/atoms';
-import { AlertBanner, FormFieldGroup, SegmentedToggle } from '@/molecules';
+import { toCurrencyCode, type CurrencyCode } from '@/lib/currency';
+import {
+  AlertBanner,
+  CurrencySelector,
+  FormFieldGroup,
+  SegmentedToggle,
+} from '@/molecules';
 import {
   useCreateIncomeSourceMutation,
   useDeleteIncomeSourceMutation,
+  useGetProfileQuery,
   useListIncomeSourcesQuery,
   useUpdateIncomeSourceMutation,
 } from '@/store/api';
@@ -41,8 +48,13 @@ export function NewIncomeSourceScreen() {
   const submitting = creating || updating || deleting;
 
   const existing = id ? incomeSources.find((s) => s.id === id) : undefined;
+  const { data: profile } = useGetProfileQuery();
+  const mainCurrency = toCurrencyCode(profile?.main_currency);
 
   const [name, setName] = useState(() => existing?.name ?? '');
+  const [currency, setCurrency] = useState<CurrencyCode>(
+    () => existing ? toCurrencyCode(existing.currency) : mainCurrency,
+  );
   const [amount, setAmount] = useState(() =>
     existing ? String(existing.amount) : '',
   );
@@ -93,6 +105,7 @@ export function NewIncomeSourceScreen() {
     const payload = {
       name: name.trim(),
       amount: parsedAmount,
+      currency,
       frequency: frequency as 'monthly' | 'weekly',
       pay_day: parsedPayDay,
     };
@@ -188,6 +201,19 @@ export function NewIncomeSourceScreen() {
             keyboardType="decimal-pad"
             error={amountError}
           />
+
+          <View style={{ gap: theme.spacing.xs }}>
+            <Text
+              style={{
+                fontFamily: theme.fonts.body.semibold,
+                fontSize: 12,
+                color: theme.colors.textSecondary,
+              }}
+            >
+              {t('currency.label')}
+            </Text>
+            <CurrencySelector value={currency} onChange={setCurrency} />
+          </View>
 
           <View style={{ gap: theme.spacing.xs }}>
             <Text

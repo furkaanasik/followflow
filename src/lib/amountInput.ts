@@ -7,14 +7,16 @@ export const NUMPAD_ROWS = [
   ['.', '0', '⌫'],
 ];
 
-export function formatAmountInput(raw: string): string {
-  if (!raw) return '₺0';
+// symbol prefixes fiat ("₺0"); gram gold suffixes ("0 gr").
+export function formatAmountInput(raw: string, symbol = '₺'): string {
+  const suffix = symbol === 'gr';
+  if (!raw) return suffix ? '0 gr' : `${symbol}0`;
   const [intPart, decPart] = raw.split('.');
   const grouped = new Intl.NumberFormat('tr-TR', {
     maximumFractionDigits: 0,
   }).format(Number(intPart || '0'));
   const dec = raw.includes('.') ? `,${decPart ?? ''}` : '';
-  return `₺${grouped}${dec}`;
+  return suffix ? `${grouped}${dec} gr` : `${symbol}${grouped}${dec}`;
 }
 
 // Applies one numpad key to the raw value: max two decimals, max 12 chars,

@@ -20,6 +20,7 @@ import {
   monthlyContributionSeries,
 } from '@/lib/aggregate';
 import { formatCurrency, formatDate } from '@/lib/format';
+import { type CurrencyCode } from '@/lib/currency';
 import { getIcon } from '@/lib/icons';
 import { StateView } from '@/molecules';
 import { AppBarBackTitle, GoalProgressChart } from '@/organisms';
@@ -183,7 +184,7 @@ export function GoalDetailScreen() {
                   color: theme.colors.accentTeal,
                 }}
               >
-                {formatCurrency(goal.current_amount)}
+                {formatCurrency(goal.current_amount, goal.currency as CurrencyCode)}
               </Text>
             </View>
             <View style={{ gap: 2, alignItems: 'flex-end' }}>
@@ -203,7 +204,7 @@ export function GoalDetailScreen() {
                   color: theme.colors.textPrimary,
                 }}
               >
-                {formatCurrency(goal.target_amount)}
+                {formatCurrency(goal.target_amount, goal.currency as CurrencyCode)}
               </Text>
             </View>
           </View>
@@ -244,7 +245,7 @@ export function GoalDetailScreen() {
                       color: theme.colors.textPrimary,
                     }}
                   >
-                    {formatCurrency(contribution.amount)}
+                    {formatCurrency(contribution.amount, goal.currency as CurrencyCode)}
                   </Text>
                   <Text
                     style={{
@@ -347,7 +348,7 @@ export function GoalDetailScreen() {
                 }}
               >
                 {t('goalDetail.assumption', {
-                  amount: formatCurrency(rate),
+                  amount: formatCurrency(rate, goal.currency as CurrencyCode),
                 })}
               </Text>
             </View>

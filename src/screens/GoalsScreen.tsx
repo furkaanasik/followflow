@@ -7,9 +7,15 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ButtonSecondary } from '@/atoms';
 import { goalPercent } from '@/lib/aggregate';
 import { formatCurrency, formatDate } from '@/lib/format';
+import { toCurrencyCode, type CurrencyCode } from '@/lib/currency';
+import { holdingsByCurrency, totalInMainCurrency } from '@/lib/portfolio';
 import { StateView, TitleSubtitle } from '@/molecules';
 import { GoalCard } from '@/organisms';
-import { useListGoalsQuery } from '@/store/api';
+import {
+  useGetProfileQuery,
+  useListGoalsQuery,
+  useRates,
+} from '@/store/api';
 import { useTheme } from '@/theme';
 
 export function GoalsScreen() {
@@ -18,7 +24,16 @@ export function GoalsScreen() {
   const router = useRouter();
 
   const { data: goals = [], isLoading, isError, refetch } = useListGoalsQuery();
-  const totalSaved = goals.reduce((sum, g) => sum + g.current_amount, 0);
+  const { data: profile } = useGetProfileQuery();
+  const { rates } = useRates();
+  const mainCurrency = toCurrencyCode(profile?.main_currency);
+  const totalSaved = totalInMainCurrency(
+    holdingsByCurrency(
+      goals.map((g) => ({ amount: g.current_amount, currency: g.currency, sign: 1 as const })),
+    ),
+    mainCurrency,
+    rates,
+  ).total;
 
   // Reload when the tab regains focus instead of pull-to-refresh; deferred
   // so the tab switch renders instantly and the refetch runs after.
@@ -43,7 +58,7 @@ export function GoalsScreen() {
             title={t('goals.title')}
             subtitle={t('goals.subtitle', {
               count: goals.length,
-              total: formatCurrency(totalSaved),
+              total: formatCurrency(totalSaved, mainCurrency),
             })}
           />
         </View>
@@ -64,11 +79,11 @@ export function GoalsScreen() {
                 icon={goal.icon}
                 name={goal.name}
                 targetLabel={t('goals.target', {
-                  amount: formatCurrency(goal.target_amount),
+                  amount: formatCurrency(goal.target_amount, goal.currency as CurrencyCode),
                 })}
                 percent={Math.round(goalPercent(goal))}
                 percentLabel={t('goals.completed')}
-                amountsLabel={`${formatCurrency(goal.current_amount)} / ${formatCurrency(goal.target_amount)}`}
+                amountsLabel={`${formatCurrency(goal.current_amount, goal.currency as CurrencyCode)} / ${formatCurrency(goal.target_amount, goal.currency as CurrencyCode)}`}
                 etaLabel={
                   goal.target_date
                     ? t('goals.eta', {

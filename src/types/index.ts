@@ -41,6 +41,9 @@ export type UserCategoryInsert =
 export type UserCategoryUpdate =
   Database['public']['Tables']['categories']['Update'];
 
+export type FxRate = Database['public']['Tables']['fx_rates']['Row'];
+export type FxRateInsert = Database['public']['Tables']['fx_rates']['Insert'];
+
 export type Transaction = Database['public']['Tables']['transactions']['Row'];
 export type TransactionInsert =
   Database['public']['Tables']['transactions']['Insert'];

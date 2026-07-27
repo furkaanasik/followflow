@@ -27,6 +27,7 @@ export const api = createApi({
     'Budget',
     'Transaction',
     'Profile',
+    'FxRate',
   ],
   endpoints: () => ({}),
 });
