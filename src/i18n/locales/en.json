@@ -130,7 +130,11 @@
     "delete": "Delete",
     "deleteTitle": "Delete Transaction",
     "deleteMessage": "This transaction will be permanently deleted.",
-    "deleteFailed": "Couldn't delete. Check your connection and try again."
+    "deleteFailed": "Couldn't delete. Check your connection and try again.",
+    "export": "Export",
+    "exportEmpty": "No transactions to export",
+    "exportUnavailable": "Sharing is not available on this device",
+    "exportFailed": "Export failed. Please try again."
   },
   "newTransaction": {
     "title": "New Transaction",
