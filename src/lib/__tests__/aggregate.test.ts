@@ -283,3 +283,55 @@ describe('groupByDate', () => {
     expect(groupByDate([], REF)).toEqual([]);
   });
 });
+
+describe('multi-currency conversion (ConvertOpts)', () => {
+  const rates = {
+    base: 'TRY' as const,
+    rates: { USD: 40, EUR: 44 },
+    asOf: '2026-07-27',
+  };
+  const opts = { convertTo: 'TRY' as const, rates };
+  const REF2 = new Date(2026, 6, 15);
+
+  it('monthSummary converts mixed currencies into the target', () => {
+    const txns = [
+      txn({ type: 'income', amount: 1000, currency: 'TRY' }),
+      txn({ type: 'income', amount: 10, currency: 'USD' }),
+      txn({ type: 'expense', amount: 5, currency: 'EUR' }),
+    ];
+    expect(monthSummary(txns, REF2, opts)).toEqual({
+      income: 1400,
+      expense: 220,
+      net: 1180,
+    });
+  });
+
+  it('rows without a usable rate are excluded, not zeroed', () => {
+    const txns = [
+      txn({ type: 'income', amount: 1000, currency: 'TRY' }),
+      txn({ type: 'income', amount: 5, currency: 'GAU' }),
+    ];
+    expect(monthSummary(txns, REF2, opts).income).toBe(1000);
+  });
+
+  it('budgetProgress converts spending into the budget currency', () => {
+    const budgets = [
+      budget({ category_name: 'market', limit_amount: 100, currency: 'USD' }),
+    ];
+    const txns = [
+      txn({ type: 'expense', category: 'market', amount: 400, currency: 'TRY' }),
+      txn({ type: 'expense', category: 'market', amount: 10, currency: 'USD' }),
+    ];
+    const [p] = budgetProgress(budgets, txns, REF2, rates);
+    expect(p.spent).toBe(20); // 400 TRY = 10 USD, + 10 USD
+    expect(p.percent).toBe(20);
+  });
+
+  it('monthlyIncomeTotal converts sources', () => {
+    const sources = [
+      incomeSource({ amount: 1000, frequency: 'monthly', currency: 'TRY' }),
+      incomeSource({ amount: 10, frequency: 'monthly', currency: 'USD' }),
+    ];
+    expect(monthlyIncomeTotal(sources, opts)).toBe(1400);
+  });
+});

@@ -13,11 +13,18 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ButtonIconOnly, ButtonPrimary, ButtonSecondary } from '@/atoms';
+import { toCurrencyCode, type CurrencyCode } from '@/lib/currency';
 import { computeNextPaymentDate } from '@/lib/onboarding';
-import { AlertBanner, FormFieldGroup, SegmentedToggle } from '@/molecules';
+import {
+  AlertBanner,
+  CurrencySelector,
+  FormFieldGroup,
+  SegmentedToggle,
+} from '@/molecules';
 import {
   useCreateRecurringPaymentMutation,
   useDeleteRecurringPaymentMutation,
+  useGetProfileQuery,
   useListRecurringPaymentsQuery,
   useUpdateRecurringPaymentMutation,
 } from '@/store/api';
@@ -42,8 +49,13 @@ export function NewRecurringPaymentScreen() {
   const submitting = creating || updating || deleting;
 
   const existing = id ? recurringPayments.find((p) => p.id === id) : undefined;
+  const { data: profile } = useGetProfileQuery();
+  const mainCurrency = toCurrencyCode(profile?.main_currency);
 
   const [name, setName] = useState(() => existing?.name ?? '');
+  const [currency, setCurrency] = useState<CurrencyCode>(
+    () => existing ? toCurrencyCode(existing.currency) : mainCurrency,
+  );
   const [amount, setAmount] = useState(() =>
     existing ? String(existing.amount) : '',
   );
@@ -96,6 +108,7 @@ export function NewRecurringPaymentScreen() {
     const payload = {
       name: name.trim(),
       amount: parsedAmount,
+      currency,
       frequency: frequency as 'monthly' | 'weekly',
       next_payment_date: computeNextPaymentDate(parsedPayDay),
     };
@@ -197,6 +210,19 @@ export function NewRecurringPaymentScreen() {
             keyboardType="decimal-pad"
             error={amountError}
           />
+
+          <View style={{ gap: theme.spacing.xs }}>
+            <Text
+              style={{
+                fontFamily: theme.fonts.body.semibold,
+                fontSize: 12,
+                color: theme.colors.textSecondary,
+              }}
+            >
+              {t('currency.label')}
+            </Text>
+            <CurrencySelector value={currency} onChange={setCurrency} />
+          </View>
 
           <View style={{ gap: theme.spacing.xs }}>
             <Text

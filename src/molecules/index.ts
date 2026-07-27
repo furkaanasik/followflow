@@ -1,6 +1,7 @@
 export * from './AlertBanner';
 export * from './BudgetProgressRow';
 export * from './CategoryChip';
+export * from './CurrencySelector';
 export * from './DateField';
 export * from './DividerOr';
 export * from './FormFieldGroup';

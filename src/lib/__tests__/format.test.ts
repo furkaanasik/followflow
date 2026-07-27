@@ -32,10 +32,28 @@ describe('parseAmount', () => {
 });
 
 describe('formatCurrency', () => {
-  it('formats TRY with tr-TR grouping', () => {
+  it('formats TRY with tr-TR grouping (default currency)', () => {
     const out = formatCurrency(1234.5);
     expect(out).toContain('₺');
     expect(out).toContain('1.234,5');
+  });
+
+  it('formats USD with dollar symbol', () => {
+    const out = formatCurrency(10, 'USD');
+    expect(out).toContain('$');
+    expect(out).toContain('10,00');
+  });
+
+  it('formats EUR with euro symbol', () => {
+    expect(formatCurrency(5, 'EUR')).toContain('€');
+  });
+
+  it('formats gram gold without Intl currency style', () => {
+    expect(formatCurrency(12.5, 'GAU')).toBe('12,5 gr');
+  });
+
+  it('gram gold groups with tr-TR dots', () => {
+    expect(formatCurrency(1000, 'GAU')).toBe('1.000 gr');
   });
 });
 

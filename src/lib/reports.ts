@@ -1,5 +1,17 @@
 import type { Transaction } from '@/types';
 
+import { type ConvertOpts } from './aggregate';
+import { convert, toCurrencyCode } from './currency';
+
+function converted(
+  amount: number,
+  currency: string,
+  opts?: ConvertOpts,
+): number | null {
+  if (!opts) return amount;
+  return convert(amount, toCurrencyCode(currency), opts.convertTo, opts.rates);
+}
+
 export interface TrendPoint {
   key: string; // YYYY-MM (monthly) or YYYY (yearly)
   monthIndex: number;
@@ -17,6 +29,7 @@ export function monthlyTrend(
   txns: Transaction[],
   months = 6,
   ref = new Date(),
+  opts?: ConvertOpts,
 ): TrendPoint[] {
   const series: TrendPoint[] = [];
   for (let i = months - 1; i >= 0; i--) {
@@ -35,8 +48,10 @@ export function monthlyTrend(
   for (const txn of txns) {
     const bucket = byKey.get(monthKey(new Date(txn.occurred_at)));
     if (!bucket) continue;
-    if (txn.type === 'income') bucket.income += txn.amount;
-    else bucket.expense += txn.amount;
+    const amount = converted(txn.amount, txn.currency, opts);
+    if (amount == null) continue;
+    if (txn.type === 'income') bucket.income += amount;
+    else bucket.expense += amount;
   }
   for (const p of series) p.net = p.income - p.expense;
   return series;
@@ -46,6 +61,7 @@ export function yearlyTrend(
   txns: Transaction[],
   years = 3,
   ref = new Date(),
+  opts?: ConvertOpts,
 ): TrendPoint[] {
   const series: TrendPoint[] = [];
   for (let i = years - 1; i >= 0; i--) {
@@ -64,8 +80,10 @@ export function yearlyTrend(
   for (const txn of txns) {
     const bucket = byKey.get(String(new Date(txn.occurred_at).getFullYear()));
     if (!bucket) continue;
-    if (txn.type === 'income') bucket.income += txn.amount;
-    else bucket.expense += txn.amount;
+    const amount = converted(txn.amount, txn.currency, opts);
+    if (amount == null) continue;
+    if (txn.type === 'income') bucket.income += amount;
+    else bucket.expense += amount;
   }
   for (const p of series) p.net = p.income - p.expense;
   return series;
@@ -88,6 +106,7 @@ export function categoryHeatmap(
   txns: Transaction[],
   months = 6,
   ref = new Date(),
+  opts?: ConvertOpts,
 ): Heatmap {
   const monthList: HeatmapMonth[] = [];
   for (let i = months - 1; i >= 0; i--) {
@@ -107,13 +126,15 @@ export function categoryHeatmap(
     if (txn.type !== 'expense') continue;
     const key = monthKey(new Date(txn.occurred_at));
     if (!monthKeys.has(key)) continue;
+    const amount = converted(txn.amount, txn.currency, opts);
+    if (amount == null) continue;
     const cellKey = `${key}|${txn.category}`;
-    const total = (cells.get(cellKey) ?? 0) + txn.amount;
+    const total = (cells.get(cellKey) ?? 0) + amount;
     cells.set(cellKey, total);
     if (total > max) max = total;
     categoryTotals.set(
       txn.category,
-      (categoryTotals.get(txn.category) ?? 0) + txn.amount,
+      (categoryTotals.get(txn.category) ?? 0) + amount,
     );
   }
 

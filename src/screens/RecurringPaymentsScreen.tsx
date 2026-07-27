@@ -6,11 +6,15 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ButtonSecondary } from '@/atoms';
 import { formatCurrency, formatDate } from '@/lib/format';
+import { toCurrencyCode, type CurrencyCode } from '@/lib/currency';
+import { holdingsByCurrency, totalInMainCurrency } from '@/lib/portfolio';
 import { StateView } from '@/molecules';
 import { AppBarBackTitle, RecurringPaymentCard } from '@/organisms';
 import {
   useDeleteRecurringPaymentMutation,
   useListRecurringPaymentsQuery,
+  useGetProfileQuery,
+  useRates,
 } from '@/store/api';
 import { useTheme } from '@/theme';
 import type { RecurringPayment } from '@/types';
@@ -27,7 +31,16 @@ export function RecurringPaymentsScreen() {
     refetch,
   } = useListRecurringPaymentsQuery();
   const [deleteRecurringPayment] = useDeleteRecurringPaymentMutation();
-  const monthlyTotal = recurringPayments.reduce((sum, p) => sum + p.amount, 0);
+  const { data: profile } = useGetProfileQuery();
+  const { rates } = useRates();
+  const mainCurrency = toCurrencyCode(profile?.main_currency);
+  const monthlyTotal = totalInMainCurrency(
+    holdingsByCurrency(
+      recurringPayments.map((p) => ({ amount: p.amount, currency: p.currency, sign: 1 as const })),
+    ),
+    mainCurrency,
+    rates,
+  ).total;
 
   useFocusEffect(
     useCallback(() => {
@@ -79,7 +92,7 @@ export function RecurringPaymentsScreen() {
           }}
         >
           {t('recurringPayments.subtitle', {
-            total: formatCurrency(monthlyTotal),
+            total: formatCurrency(monthlyTotal, mainCurrency),
             count: recurringPayments.length,
           })}
         </Text>
@@ -94,7 +107,7 @@ export function RecurringPaymentsScreen() {
               key={payment.id}
               icon={payment.icon}
               name={payment.name}
-              amount={formatCurrency(payment.amount)}
+              amount={formatCurrency(payment.amount, payment.currency as CurrencyCode)}
               frequencyLabel={t(`frequency.${payment.frequency}`)}
               nextLabel={t('recurringPayments.next', {
                 date: formatDate(payment.next_payment_date, {

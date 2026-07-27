@@ -164,7 +164,10 @@
     "themeVibrant": "Canlı",
     "themeVibrantDark": "C. Koyu",
     "signOut": "Çıkış Yap",
-    "signOutFailed": "Çıkış yapılamadı. Tekrar deneyin."
+    "signOutFailed": "Çıkış yapılamadı. Tekrar deneyin.",
+    "portfolio": "Varlıklarım",
+    "mainCurrency": "Ana Para Birimi",
+    "mainCurrencyFailed": "Ana para birimi güncellenemedi."
   },
   "reports": {
     "title": "Raporlar",
@@ -178,7 +181,15 @@
   },
   "calendar": {
     "title": "Takvim",
-    "weekdays": ["Pt", "Sa", "Ça", "Pe", "Cu", "Ct", "Pz"],
+    "weekdays": [
+      "Pt",
+      "Sa",
+      "Ça",
+      "Pe",
+      "Cu",
+      "Ct",
+      "Pz"
+    ],
     "cashFlow": "Nakit akışı",
     "empty": "Bu ay için kayıt yok",
     "selectHint": "Detay için bir gün seç",
@@ -344,5 +355,18 @@
     "diger": "Diğer",
     "maas": "Maaş",
     "freelance": "Freelance"
+  },
+  "currency": {
+    "label": "Para Birimi",
+    "TRY": "₺ TL",
+    "USD": "$ USD",
+    "EUR": "€ EUR",
+    "GAU": "gr Altın"
+  },
+  "portfolio": {
+    "title": "Varlıklarım",
+    "total": "Toplam ({{currency}})",
+    "stale": "Kur güncel değil — son kaydedilen kurlar kullanılıyor.",
+    "excluded": "{{units}} kuru bulunamadığı için toplama dahil edilmedi."
   }
 }

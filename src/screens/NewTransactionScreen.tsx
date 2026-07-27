@@ -20,10 +20,12 @@ import {
   ButtonPrimary,
   InputField,
 } from '@/atoms';
+import { symbolFor, toCurrencyCode, type CurrencyCode } from '@/lib/currency';
 import { getIcon } from '@/lib/icons';
 import {
   AlertBanner,
   CategoryChip,
+  CurrencySelector,
   NumpadKeyRow,
   SegmentedToggle,
 } from '@/molecules';
@@ -32,6 +34,7 @@ import { deriveQuickTemplates, type QuickTemplate } from '@/lib/quickTemplates';
 import { useCategories } from '@/lib/useCategories';
 import {
   useCreateTransactionMutation,
+  useGetProfileQuery,
   useListTransactionsQuery,
   useUpdateTransactionMutation,
 } from '@/store/api';
@@ -45,14 +48,15 @@ const NUMPAD_ROWS = [
   ['.', '0', '⌫'],
 ];
 
-function formatAmountInput(raw: string): string {
-  if (!raw) return '₺0';
+function formatAmountInput(raw: string, symbol = '₺'): string {
+  const suffix = symbol === 'gr';
+  if (!raw) return suffix ? '0 gr' : `${symbol}0`;
   const [intPart, decPart] = raw.split('.');
   const grouped = new Intl.NumberFormat('tr-TR', {
     maximumFractionDigits: 0,
   }).format(Number(intPart || '0'));
   const dec = raw.includes('.') ? `,${decPart ?? ''}` : '';
-  return `₺${grouped}${dec}`;
+  return suffix ? `${grouped}${dec} gr` : `${symbol}${grouped}${dec}`;
 }
 
 type TxnType = 'income' | 'expense';
@@ -75,7 +79,13 @@ export function NewTransactionScreen() {
   // so the row is available at mount for the lazy state initializers below.
   const existing = id ? transactions.find((txn) => txn.id === id) : undefined;
 
+  const { data: profile } = useGetProfileQuery();
+  const mainCurrency = toCurrencyCode(profile?.main_currency);
+
   const [type, setType] = useState<TxnType>(() => existing?.type ?? 'expense');
+  const [currency, setCurrency] = useState<CurrencyCode>(() =>
+    existing ? toCurrencyCode(existing.currency) : mainCurrency,
+  );
   const [amountRaw, setAmountRaw] = useState(() =>
     existing ? String(existing.amount) : '',
   );
@@ -183,6 +193,7 @@ export function NewTransactionScreen() {
       title: trimmedNote || category.label,
       note: trimmedNote || null,
       amount,
+      currency,
       occurred_at: occurredAt.toISOString(),
     };
     try {
@@ -258,9 +269,15 @@ export function NewTransactionScreen() {
           </ScrollView>
         ) : null}
 
+        <CurrencySelector
+          value={currency}
+          onChange={setCurrency}
+          testID="tx-currency"
+        />
+
         <View style={styles.amountArea}>
           <AmountDisplay
-            amount={formatAmountInput(amountRaw)}
+            amount={formatAmountInput(amountRaw, symbolFor(currency))}
             tone={type === 'income' ? 'income' : 'expense'}
           />
           {fieldError ? (
@@ -385,8 +402,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  // flex:1 alone collapses to 0 when the expense category chips wrap to
+  // three rows (amount becomes invisible); minHeight keeps it readable.
   amountArea: {
     flex: 1,
+    minHeight: 56,
     justifyContent: 'center',
     gap: 6,
   },

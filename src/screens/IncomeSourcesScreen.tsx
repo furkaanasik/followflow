@@ -6,11 +6,15 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ButtonSecondary } from '@/atoms';
 import { formatCurrency } from '@/lib/format';
+import { toCurrencyCode, type CurrencyCode } from '@/lib/currency';
+import { holdingsByCurrency, totalInMainCurrency } from '@/lib/portfolio';
 import { StateView } from '@/molecules';
 import { AppBarBackTitle, IncomeSourceCard } from '@/organisms';
 import {
   useDeleteIncomeSourceMutation,
   useListIncomeSourcesQuery,
+  useGetProfileQuery,
+  useRates,
 } from '@/store/api';
 import { useTheme } from '@/theme';
 import type { IncomeSource } from '@/types';
@@ -27,7 +31,16 @@ export function IncomeSourcesScreen() {
     refetch,
   } = useListIncomeSourcesQuery();
   const [deleteIncomeSource] = useDeleteIncomeSourceMutation();
-  const monthlyTotal = incomeSources.reduce((sum, s) => sum + s.amount, 0);
+  const { data: profile } = useGetProfileQuery();
+  const { rates } = useRates();
+  const mainCurrency = toCurrencyCode(profile?.main_currency);
+  const monthlyTotal = totalInMainCurrency(
+    holdingsByCurrency(
+      incomeSources.map((s) => ({ amount: s.amount, currency: s.currency, sign: 1 as const })),
+    ),
+    mainCurrency,
+    rates,
+  ).total;
 
   useFocusEffect(
     useCallback(() => {
@@ -75,7 +88,7 @@ export function IncomeSourcesScreen() {
           }}
         >
           {t('incomeSources.subtitle', {
-            total: formatCurrency(monthlyTotal),
+            total: formatCurrency(monthlyTotal, mainCurrency),
             count: incomeSources.length,
           })}
         </Text>
@@ -89,7 +102,7 @@ export function IncomeSourcesScreen() {
             <IncomeSourceCard
               key={source.id}
               name={source.name}
-              amount={formatCurrency(source.amount)}
+              amount={formatCurrency(source.amount, source.currency as CurrencyCode)}
               frequencyLabel={t(`frequency.${source.frequency}`)}
               dayLabel={
                 source.pay_day != null

@@ -20,6 +20,7 @@ import {
 import { CHART_PALETTE } from '@/lib/color';
 import { useCategories } from '@/lib/useCategories';
 import { formatCurrency, formatDate } from '@/lib/format';
+import { toCurrencyCode, type CurrencyCode } from '@/lib/currency';
 import { elevatedShadow } from '@/lib/shadow';
 import {
   BudgetProgressRow,
@@ -38,6 +39,7 @@ import {
   useListIncomeSourcesQuery,
   useListRecurringPaymentsQuery,
   useListTransactionsQuery,
+  useRates,
 } from '@/store/api';
 import { useAppSelector } from '@/store/hooks';
 import { useTheme } from '@/theme';
@@ -67,11 +69,17 @@ export function HomeScreen() {
   const { data: recurringPayments = [] } = useListRecurringPaymentsQuery();
   const { byKey } = useCategories();
 
-  const summary = monthSummary(transactions);
-  const regularIncome = monthlyIncomeTotal(incomeSources);
+  const { rates } = useRates();
+  const mainCurrency = toCurrencyCode(profile?.main_currency);
+  const convertOpts = rates
+    ? { convertTo: mainCurrency, rates }
+    : undefined;
+
+  const summary = monthSummary(transactions, new Date(), convertOpts);
+  const regularIncome = monthlyIncomeTotal(incomeSources, convertOpts);
   const upcoming = nextUpcomingPayment(recurringPayments);
 
-  const byCategory = expenseByCategory(transactions);
+  const byCategory = expenseByCategory(transactions, new Date(), convertOpts);
   const top = byCategory.slice(0, CHART_PALETTE.length);
   const rest = byCategory.slice(CHART_PALETTE.length);
   const restTotal = rest.reduce((sum, s) => sum + s.total, 0);
@@ -81,7 +89,7 @@ export function HomeScreen() {
       category: slice.category,
       label: byKey(slice.category)?.label ?? slice.category,
       total: slice.total,
-      amount: formatCurrency(slice.total),
+      amount: formatCurrency(slice.total, mainCurrency),
       color: CHART_PALETTE[index],
     };
   });
@@ -90,12 +98,12 @@ export function HomeScreen() {
       category: 'other',
       label: t('categories.diger'),
       total: restTotal,
-      amount: formatCurrency(restTotal),
+      amount: formatCurrency(restTotal, mainCurrency),
       color: CHART_OTHER_COLOR,
     });
   }
 
-  const progress = budgetProgress(budgets, transactions);
+  const progress = budgetProgress(budgets, transactions, new Date(), rates ?? undefined);
   const recent = transactions.slice(0, 5);
 
   const emailName = session?.user.email?.split('@')[0];
@@ -134,7 +142,7 @@ export function HomeScreen() {
       subtitle: `${label} · ${when}`,
       tone: (txn.type === 'income' ? 'income' : 'expense') as
         'income' | 'expense',
-      amount: `${txn.type === 'income' ? '+' : '-'}${formatCurrency(txn.amount)}`,
+      amount: `${txn.type === 'income' ? '+' : '-'}${formatCurrency(txn.amount, txn.currency as CurrencyCode)}`,
     };
   }
 
@@ -195,9 +203,9 @@ export function HomeScreen() {
         <View testID="home-net-durum">
           <NetDurumCard
             label={t('home.netStatus')}
-            amount={formatCurrency(summary.net)}
-            incomeAmount={formatCurrency(summary.income)}
-            expenseAmount={formatCurrency(summary.expense)}
+            amount={formatCurrency(summary.net, mainCurrency)}
+            incomeAmount={formatCurrency(summary.income, mainCurrency)}
+            expenseAmount={formatCurrency(summary.expense, mainCurrency)}
             incomeLabel={t('common.gelir')}
             expenseLabel={t('common.gider')}
           />
@@ -207,7 +215,7 @@ export function HomeScreen() {
           <InfoRowChevron
             icon="repeat"
             label={t('home.regularIncome')}
-            value={formatCurrency(regularIncome)}
+            value={formatCurrency(regularIncome, mainCurrency)}
             onPress={() => {}}
           />
         ) : null}
@@ -225,7 +233,7 @@ export function HomeScreen() {
                     days: upcoming.daysLeft,
                   })
             }
-            value={formatCurrency(upcoming.payment.amount)}
+            value={formatCurrency(upcoming.payment.amount, upcoming.payment.currency as CurrencyCode)}
             valueColor="expenseCoral"
             onPress={() => {}}
           />
@@ -236,7 +244,7 @@ export function HomeScreen() {
           <CategoryBreakdownCard
             slices={slices}
             total={totalExpense}
-            totalLabel={formatCurrency(totalExpense)}
+            totalLabel={formatCurrency(totalExpense, mainCurrency)}
             caption={t('home.spending')}
             emptyLabel={t('home.noData')}
           />
@@ -249,7 +257,7 @@ export function HomeScreen() {
               <View key={item.budget.id} style={{ gap: 4 }}>
                 <BudgetProgressRow
                   name={item.budget.category_name}
-                  subtitle={`${formatCurrency(item.spent)} / ${formatCurrency(item.budget.limit_amount)}`}
+                  subtitle={`${formatCurrency(item.spent, item.budget.currency as CurrencyCode)} / ${formatCurrency(item.budget.limit_amount, item.budget.currency as CurrencyCode)}`}
                   subtitleColor={item.over ? 'warningRed' : 'textSecondary'}
                   progress={item.percent}
                   progressColor={item.over ? 'warningRed' : 'accentTeal'}
@@ -265,6 +273,7 @@ export function HomeScreen() {
                     {t('home.overBy', {
                       amount: formatCurrency(
                         item.spent - item.budget.limit_amount,
+                        item.budget.currency as CurrencyCode,
                       ),
                     })}
                   </Text>

@@ -28,6 +28,7 @@ Yeni işler buradan izlenir. Fazlar sıralı/tek-seferlikti; bu liste akan — i
 - [ ] **P3 — Raporlar: PDF/Excel export.** Rapor ekranındaki dönemi PDF (expo-print) ve/veya Excel/xlsx dosyası olarak OS share sheet ile dışa aktar. Yeni bağımlılık gerekir; CSV yolu zaten var (`toCsv`/`exportTransactionsCsv`) — pattern devral. _(eski "Gelişmiş raporlar" böl 2/3)_
 - [ ] **P3 — Yıl sonu "Wrapped" özeti.** Yıl sonu highlight ekranı (toplam gelir/gider, en çok harcanan kategori, en yoğun ay, tasarruf oranı, hedef ilerlemesi). Saf aggregation, kart akışı. _(eski "Gelişmiş raporlar" böl 3/3)_
 - [ ] **P2 — Çoklu para birimi + döviz/altın takibi.** USD/EUR/gram altın cinsi birikim; hedefi döviz cinsinden tutabilme.
+- [ ] **P2 — İşlem düzenleme/silme.** İşlemler listesinde satıra tıklayınca düzenle/sil yolu yok (tap ve long-press no-op). `yeni-islem` sheet'i `id` param ile edit modunda açılsın + sil butonu; RTK Query update/delete endpoint'leri. _(Çoklu para birimi cihaz testi bulgusu)_
 
 ## In Progress
 <!-- Aktif işlenen item — branch adı yaz -->

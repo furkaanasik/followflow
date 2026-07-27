@@ -7,6 +7,26 @@ import type {
   Transaction,
 } from '@/types';
 
+import { convert, toCurrencyCode, type CurrencyCode, type RatesTable } from './currency';
+
+// When provided, every row amount is converted into `convertTo` before
+// summing; rows whose currency cannot convert (missing rate, e.g. gold
+// without a gold price) are EXCLUDED from the sum. Absent opts = raw sums,
+// which keeps all pre-multi-currency call sites and tests unchanged.
+export interface ConvertOpts {
+  convertTo: CurrencyCode;
+  rates: RatesTable;
+}
+
+function converted(
+  amount: number,
+  currency: string,
+  opts?: ConvertOpts,
+): number | null {
+  if (!opts) return amount;
+  return convert(amount, toCurrencyCode(currency), opts.convertTo, opts.rates);
+}
+
 // budgets.period_month is a Postgres `date` stored as the first of the month
 // (YYYY-MM-01) — build the string with `-01`, never bare YYYY-MM.
 export const currentPeriodMonth = (d = new Date()) =>
@@ -28,13 +48,16 @@ export interface MonthSummary {
 export function monthSummary(
   txns: Transaction[],
   ref = new Date(),
+  opts?: ConvertOpts,
 ): MonthSummary {
   let income = 0;
   let expense = 0;
   for (const txn of txns) {
     if (!isSameMonth(txn.occurred_at, ref)) continue;
-    if (txn.type === 'income') income += txn.amount;
-    else expense += txn.amount;
+    const amount = converted(txn.amount, txn.currency, opts);
+    if (amount == null) continue;
+    if (txn.type === 'income') income += amount;
+    else expense += amount;
   }
   return { income, expense, net: income - expense };
 }
@@ -47,11 +70,14 @@ export interface CategorySlice {
 export function expenseByCategory(
   txns: Transaction[],
   ref = new Date(),
+  opts?: ConvertOpts,
 ): CategorySlice[] {
   const totals = new Map<string, number>();
   for (const txn of txns) {
     if (txn.type !== 'expense' || !isSameMonth(txn.occurred_at, ref)) continue;
-    totals.set(txn.category, (totals.get(txn.category) ?? 0) + txn.amount);
+    const amount = converted(txn.amount, txn.currency, opts);
+    if (amount == null) continue;
+    totals.set(txn.category, (totals.get(txn.category) ?? 0) + amount);
   }
   return [...totals.entries()]
     .map(([category, total]) => ({ category, total }))
@@ -69,18 +95,28 @@ export interface BudgetProgress {
 // budget.category_name (case-insensitive). Seed data may store a display name
 // in category_name; matching case-insensitively covers "Market" vs "market".
 // Going forward, store the category KEY in both columns.
+// With `rates`, spending converts into each budget's own currency so a USD
+// budget tracks correctly against TRY expenses (and vice versa); unconvertible
+// rows are excluded.
 export function budgetProgress(
   budgets: Budget[],
   txns: Transaction[],
   ref = new Date(),
+  rates?: RatesTable,
 ): BudgetProgress[] {
   return budgets.map((budget) => {
     const target = budget.category_name.toLowerCase();
+    const opts = rates
+      ? { convertTo: toCurrencyCode(budget.currency), rates }
+      : undefined;
     let spent = 0;
     for (const txn of txns) {
       if (txn.type !== 'expense' || !isSameMonth(txn.occurred_at, ref))
         continue;
-      if (txn.category.toLowerCase() === target) spent += txn.amount;
+      if (txn.category.toLowerCase() !== target) continue;
+      const amount = converted(txn.amount, txn.currency, opts);
+      if (amount == null) continue;
+      spent += amount;
     }
     const percent =
       budget.limit_amount > 0
@@ -100,11 +136,15 @@ const MONTHLY_FACTOR: Record<IncomeSource['frequency'], number> = {
   'one-time': 0,
 };
 
-export function monthlyIncomeTotal(sources: IncomeSource[]): number {
-  return sources.reduce(
-    (sum, source) => sum + source.amount * MONTHLY_FACTOR[source.frequency],
-    0,
-  );
+export function monthlyIncomeTotal(
+  sources: IncomeSource[],
+  opts?: ConvertOpts,
+): number {
+  return sources.reduce((sum, source) => {
+    const amount = converted(source.amount, source.currency, opts);
+    if (amount == null) return sum;
+    return sum + amount * MONTHLY_FACTOR[source.frequency];
+  }, 0);
 }
 
 export interface UpcomingPayment {

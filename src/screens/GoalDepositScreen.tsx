@@ -16,6 +16,7 @@ import {
   NUMPAD_ROWS,
 } from '@/lib/amountInput';
 import { formatCurrency, parseAmount } from '@/lib/format';
+import { type CurrencyCode } from '@/lib/currency';
 import { AlertBanner, NumpadKeyRow } from '@/molecules';
 import { useDepositToGoalMutation, useListGoalsQuery } from '@/store/api';
 import { useTheme } from '@/theme';
@@ -95,7 +96,7 @@ export function GoalDepositScreen() {
               >
                 {t('goalDeposit.subtitle', {
                   name: goal.name,
-                  remaining: formatCurrency(remaining),
+                  remaining: formatCurrency(remaining, goal.currency as CurrencyCode),
                 })}
               </Text>
             ) : null}

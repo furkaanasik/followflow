@@ -19,6 +19,7 @@ import {
 } from '@/lib/filterTransactions';
 import { exportTransactionsCsv } from '@/lib/exportCsv';
 import { formatCurrency, formatDate } from '@/lib/format';
+import { type CurrencyCode } from '@/lib/currency';
 import { toCsv } from '@/lib/toCsv';
 import { useCategories } from '@/lib/useCategories';
 import { SearchBar, SegmentedToggle, StateView } from '@/molecules';
@@ -118,7 +119,7 @@ export function TransactionsScreen() {
       subtitle: `${categoryLabel(txn)} · ${formatDate(txn.occurred_at, { day: 'numeric', month: 'short', year: undefined })}`,
       tone: (txn.type === 'income' ? 'income' : 'expense') as
         'income' | 'expense',
-      amount: `${txn.type === 'income' ? '+' : '-'}${formatCurrency(txn.amount)}`,
+      amount: `${txn.type === 'income' ? '+' : '-'}${formatCurrency(txn.amount, txn.currency as CurrencyCode)}`,
     };
   }
 

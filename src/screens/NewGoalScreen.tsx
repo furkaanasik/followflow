@@ -25,10 +25,12 @@ import {
 import { formatDate, parseAmount } from '@/lib/format';
 import { getIcon } from '@/lib/icons';
 import { GOAL_ICONS } from '@/lib/goalIcons';
-import { AlertBanner, FormFieldGroup } from '@/molecules';
+import { toCurrencyCode, type CurrencyCode } from '@/lib/currency';
+import { AlertBanner, CurrencySelector, FormFieldGroup } from '@/molecules';
 import {
   useCreateGoalMutation,
   useDeleteGoalMutation,
+  useGetProfileQuery,
   useListGoalsQuery,
   useUpdateGoalMutation,
 } from '@/store/api';
@@ -50,8 +52,13 @@ export function NewGoalScreen() {
   const submitting = creating || updating || deleting;
 
   const existing = id ? goals.find((g) => g.id === id) : undefined;
+  const { data: profile } = useGetProfileQuery();
+  const mainCurrency = toCurrencyCode(profile?.main_currency);
 
   const [name, setName] = useState(() => existing?.name ?? '');
+  const [currency, setCurrency] = useState<CurrencyCode>(
+    () => existing ? toCurrencyCode(existing.currency) : mainCurrency,
+  );
   const [icon, setIcon] = useState(() => existing?.icon ?? GOAL_ICONS[0]);
   const [targetRaw, setTargetRaw] = useState(() =>
     existing ? String(existing.target_amount) : '',
@@ -90,6 +97,7 @@ export function NewGoalScreen() {
     const payload = {
       icon,
       name: trimmedName,
+      currency,
       target_amount: target,
       target_date: targetDate ? targetDate.toISOString().slice(0, 10) : null,
     };
@@ -213,6 +221,19 @@ export function NewGoalScreen() {
                 </Pressable>
               ))}
             </View>
+          </View>
+
+          <View style={{ gap: theme.spacing.xs }}>
+            <Text
+              style={{
+                fontFamily: theme.fonts.body.semibold,
+                fontSize: 12,
+                color: theme.colors.textSecondary,
+              }}
+            >
+              {t('currency.label')}
+            </Text>
+            <CurrencySelector value={currency} onChange={setCurrency} />
           </View>
 
           <FormFieldGroup

@@ -164,7 +164,10 @@
     "themeVibrant": "Vibrant",
     "themeVibrantDark": "V. Dark",
     "signOut": "Sign Out",
-    "signOutFailed": "Couldn't sign out. Try again."
+    "signOutFailed": "Couldn't sign out. Try again.",
+    "portfolio": "My Assets",
+    "mainCurrency": "Main Currency",
+    "mainCurrencyFailed": "Could not update main currency."
   },
   "reports": {
     "title": "Reports",
@@ -178,7 +181,15 @@
   },
   "calendar": {
     "title": "Calendar",
-    "weekdays": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    "weekdays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
     "cashFlow": "Cash flow",
     "empty": "No records for this month",
     "selectHint": "Select a day for details",
@@ -344,5 +355,18 @@
     "diger": "Other",
     "maas": "Salary",
     "freelance": "Freelance"
+  },
+  "currency": {
+    "label": "Currency",
+    "TRY": "₺ TRY",
+    "USD": "$ USD",
+    "EUR": "€ EUR",
+    "GAU": "gr Gold"
+  },
+  "portfolio": {
+    "title": "My Assets",
+    "total": "Total ({{currency}})",
+    "stale": "Rates are outdated — last cached rates in use.",
+    "excluded": "{{units}} excluded from the total (no rate available)."
   }
 }
