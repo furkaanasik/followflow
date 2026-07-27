@@ -23,6 +23,9 @@ const SIZE = 140;
 const STROKE = 26;
 const RADIUS = (SIZE - STROKE) / 2;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+// Small gap between segments so their butt caps never overlap at the seams
+// (overlapping anti-aliased edges made the first/largest slice look ragged).
+const GAP = 3;
 
 export function CategoryBreakdownCard({
   slices,
@@ -110,11 +113,18 @@ export function CategoryBreakdownCard({
     );
   }
 
-  const dashes = slices.map((slice) => (slice.total / total) * CIRCUMFERENCE);
-  const offsets = dashes.reduce<number[]>((acc, _dash, index) => {
-    acc.push(index === 0 ? 0 : acc[index - 1] + dashes[index - 1]);
+  // Full angular length of each segment (used for positioning).
+  const segments = slices.map((slice) => (slice.total / total) * CIRCUMFERENCE);
+  const starts = segments.reduce<number[]>((acc, _seg, index) => {
+    acc.push(index === 0 ? 0 : acc[index - 1] + segments[index - 1]);
     return acc;
   }, []);
+  // Visible arc shrinks by GAP; offset shifts by GAP/2 to centre the gap.
+  const useGap = slices.length > 1;
+  const dashes = segments.map((seg) =>
+    useGap ? Math.max(seg - GAP, 0.01) : seg,
+  );
+  const offsets = starts.map((start) => (useGap ? start + GAP / 2 : start));
 
   return (
     <View style={styles.row}>

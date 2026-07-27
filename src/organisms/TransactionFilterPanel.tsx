@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { ButtonSecondary, InputField, SurfaceCard } from '@/atoms';
+import { SUPPORTED_CURRENCIES, type CurrencyCode } from '@/lib/currency';
 import {
   activeFilterCount,
   type TransactionFilters,
@@ -73,6 +74,13 @@ export function TransactionFilterPanel({
       ? filters.categoryKeys.filter((k) => k !== key)
       : [...filters.categoryKeys, key];
     onChange({ ...filters, categoryKeys });
+  }
+
+  function toggleCurrency(code: CurrencyCode) {
+    const currencies = filters.currencies.includes(code)
+      ? filters.currencies.filter((c) => c !== code)
+      : [...filters.currencies, code];
+    onChange({ ...filters, currencies });
   }
 
   function handleMinChange(text: string) {
@@ -153,6 +161,20 @@ export function TransactionFilterPanel({
       </View>
 
       <View style={{ gap: theme.spacing.xs }}>
+        <Text style={labelStyle}>{t('transactions.filterCurrency')}</Text>
+        <View style={styles.currencyRow}>
+          {SUPPORTED_CURRENCIES.map((code) => (
+            <CategoryChip
+              key={code}
+              label={t(`currency.${code}`)}
+              selected={filters.currencies.includes(code)}
+              onPress={() => toggleCurrency(code)}
+            />
+          ))}
+        </View>
+      </View>
+
+      <View style={{ gap: theme.spacing.xs }}>
         <Text style={labelStyle}>{t('transactions.filterAmount')}</Text>
         <View style={[styles.row, { gap: theme.spacing.sm }]}>
           <View style={styles.amountField}>
@@ -187,4 +209,5 @@ export function TransactionFilterPanel({
 const styles = StyleSheet.create({
   row: { flexDirection: 'row' },
   amountField: { flex: 1 },
+  currencyRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
 });

@@ -1,9 +1,11 @@
+import type { CurrencyCode } from '@/lib/currency';
 import type { Transaction } from '@/types';
 
 export interface TransactionFilters {
   query: string;
   type: 'all' | 'income' | 'expense';
   categoryKeys: string[]; // empty = all categories
+  currencies: CurrencyCode[]; // empty = all currencies
   from: string | null; // ISO date (inclusive, start of day)
   to: string | null; // ISO date (inclusive, end of day)
   minAmount: number | null;
@@ -14,6 +16,7 @@ export const EMPTY_FILTERS: TransactionFilters = {
   query: '',
   type: 'all',
   categoryKeys: [],
+  currencies: [],
   from: null,
   to: null,
   minAmount: null,
@@ -41,6 +44,11 @@ export function filterTransactions(
       !filters.categoryKeys.includes(txn.category)
     )
       return false;
+    if (
+      filters.currencies.length &&
+      !filters.currencies.includes(txn.currency as CurrencyCode)
+    )
+      return false;
     const t = new Date(txn.occurred_at).getTime();
     if (fromMs !== null && t < fromMs) return false;
     if (toMs !== null && t > toMs) return false;
@@ -63,6 +71,7 @@ export function filterTransactions(
 export function activeFilterCount(f: TransactionFilters): number {
   let n = 0;
   if (f.categoryKeys.length) n += 1;
+  if (f.currencies.length) n += 1;
   if (f.from || f.to) n += 1;
   if (f.minAmount !== null || f.maxAmount !== null) n += 1;
   return n;

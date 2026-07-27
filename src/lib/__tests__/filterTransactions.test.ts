@@ -81,6 +81,32 @@ describe('filterTransactions', () => {
     ).toEqual(['a', 'b']);
   });
 
+  it('filters by currency', () => {
+    const withUsd = [
+      ...fixtures,
+      txn({ id: 'd', currency: 'USD', occurred_at: iso(2026, 7, 5) }),
+    ];
+    expect(
+      ids(filterTransactions(withUsd, filters({ currencies: ['USD'] }), label)),
+    ).toEqual(['d']);
+  });
+
+  it('filters by multiple currencies as a union', () => {
+    const withUsd = [
+      ...fixtures,
+      txn({ id: 'd', currency: 'USD', occurred_at: iso(2026, 7, 5) }),
+    ];
+    expect(
+      ids(
+        filterTransactions(
+          withUsd,
+          filters({ currencies: ['TRY', 'USD'] }),
+          label,
+        ),
+      ),
+    ).toHaveLength(4);
+  });
+
   it('includes a transaction on the from boundary day', () => {
     expect(
       ids(
@@ -169,6 +195,7 @@ describe('activeFilterCount', () => {
 
   it('counts each group once', () => {
     expect(activeFilterCount(filters({ categoryKeys: ['market'] }))).toBe(1);
+    expect(activeFilterCount(filters({ currencies: ['USD'] }))).toBe(1);
     expect(activeFilterCount(filters({ from: iso(2026, 7, 1) }))).toBe(1);
     expect(activeFilterCount(filters({ to: iso(2026, 7, 1) }))).toBe(1);
     expect(activeFilterCount(filters({ minAmount: 1 }))).toBe(1);

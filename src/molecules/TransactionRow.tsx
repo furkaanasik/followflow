@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { CategoryIcon } from '@/atoms';
 import { useTheme } from '@/theme';
@@ -12,6 +12,7 @@ export interface TransactionRowProps {
   subtitle: string;
   amount: string;
   tone?: 'income' | 'expense' | 'neutral';
+  onPress?: () => void;
 }
 
 export function TransactionRow({
@@ -22,6 +23,7 @@ export function TransactionRow({
   subtitle,
   amount,
   tone = 'neutral',
+  onPress,
 }: TransactionRowProps) {
   const theme = useTheme();
   const amountColor =
@@ -31,8 +33,12 @@ export function TransactionRow({
         ? theme.colors.expenseCoral
         : theme.colors.textPrimary;
 
+  const Container = onPress ? Pressable : View;
   return (
-    <View style={styles.container}>
+    <Container
+      {...(onPress ? { onPress, accessibilityRole: 'button' as const } : {})}
+      style={styles.container}
+    >
       <CategoryIcon icon={icon} tint={iconTint} color={iconColor} />
       <View style={styles.info}>
         <Text
@@ -63,7 +69,7 @@ export function TransactionRow({
       >
         {amount}
       </Text>
-    </View>
+    </Container>
   );
 }
 
