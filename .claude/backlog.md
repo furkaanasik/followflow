@@ -25,7 +25,6 @@ Yeni işler buradan izlenir. Fazlar sıralı/tek-seferlikti; bu liste akan — i
 ### Yeni özellikler
 <!-- Buraya yeni feature fikirleri: her satır bağımsız /prp-plan girdisi -->
 - [ ] **P1 — Bildirimler.** Tekrarlayan ödeme yaklaşınca hatırlatma; bütçe %80 dolunca uyarı.
-- [ ] **P2 — Raporlar: trend + kategori ısı haritası.** Yeni "Raporlar" ekranı (Ayarlar → giriş). Aylık/yıllık gelir-gider trend grafiği + kategori ısı haritası (ay × kategori yoğunluk). Saf aggregation + mevcut View/chart pattern; yeni bağımlılık yok. _(eski "Gelişmiş raporlar" böl 1/3)_
 - [ ] **P3 — Raporlar: PDF/Excel export.** Rapor ekranındaki dönemi PDF (expo-print) ve/veya Excel/xlsx dosyası olarak OS share sheet ile dışa aktar. Yeni bağımlılık gerekir; CSV yolu zaten var (`toCsv`/`exportTransactionsCsv`) — pattern devral. _(eski "Gelişmiş raporlar" böl 2/3)_
 - [ ] **P3 — Yıl sonu "Wrapped" özeti.** Yıl sonu highlight ekranı (toplam gelir/gider, en çok harcanan kategori, en yoğun ay, tasarruf oranı, hedef ilerlemesi). Saf aggregation, kart akışı. _(eski "Gelişmiş raporlar" böl 3/3)_
 - [ ] **P2 — Çoklu para birimi + döviz/altın takibi.** USD/EUR/gram altın cinsi birikim; hedefi döviz cinsinden tutabilme.
@@ -35,6 +34,7 @@ Yeni işler buradan izlenir. Fazlar sıralı/tek-seferlikti; bu liste akan — i
 
 ## Done
 <!-- Bitmiş item'ler; PR# ekle -->
+- [x] **P2 — Raporlar: trend + kategori ısı haritası.** Ayarlar → Raporlar: aylık/yıllık gelir-gider trend grafiği (bara dokun → tutar detayı) + ay × kategori gider ısı haritası. Saf `monthlyTrend`/`yearlyTrend`/`categoryHeatmap` + 12 unit test; yeni bağımlılık yok. PR #22.
 - [x] **P2 — Hızlı işlem şablonları.** Geçmişten türetilen chip satırı (Yeni İşlem sheet, tip toggle altı); tap → tip/tutar/kategori/not prefill, tarih "bugün" kalır. Saf `deriveQuickTemplates` (son 200 işlem, frekans+recency sıralı) + 10 unit test. Cihazda doğrulandı. PR #21.
 - [x] **P2 — Veri dışa aktarma (CSV).** İşlemler ekranı header'ında share butonu; aktif filtrelere göre CSV (BOM + RFC 4180) üretip OS share sheet ile paylaşır. Saf `toCsv` + `exportTransactionsCsv` (expo-file-system/expo-sharing). 12 unit test. Cihazda doğrulandı. PR #20.
 - [x] **P2 — Arama + filtre geliştirme.** İşlemlerde tarih aralığı, kategori (çoklu), tutar aralığı filtreleri; animasyonlu panel, sayaç rozeti. Saf `filterTransactions` helper + 16 unit test. Yeni: `BadgeCount` atom, `DateField` molekül. PR #19.
