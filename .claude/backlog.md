@@ -25,7 +25,9 @@ Yeni işler buradan izlenir. Fazlar sıralı/tek-seferlikti; bu liste akan — i
 ### Yeni özellikler
 <!-- Buraya yeni feature fikirleri: her satır bağımsız /prp-plan girdisi -->
 - [ ] **P1 — Bildirimler.** Tekrarlayan ödeme yaklaşınca hatırlatma; bütçe %80 dolunca uyarı.
-- [ ] **P2 — Gelişmiş raporlar.** Aylık/yıllık trend, kategori ısı haritası, PDF/Excel export, yıl sonu özeti ("Wrapped" tarzı).
+- [ ] **P2 — Raporlar: trend + kategori ısı haritası.** Yeni "Raporlar" ekranı (Ayarlar → giriş). Aylık/yıllık gelir-gider trend grafiği + kategori ısı haritası (ay × kategori yoğunluk). Saf aggregation + mevcut View/chart pattern; yeni bağımlılık yok. _(eski "Gelişmiş raporlar" böl 1/3)_
+- [ ] **P3 — Raporlar: PDF/Excel export.** Rapor ekranındaki dönemi PDF (expo-print) ve/veya Excel/xlsx dosyası olarak OS share sheet ile dışa aktar. Yeni bağımlılık gerekir; CSV yolu zaten var (`toCsv`/`exportTransactionsCsv`) — pattern devral. _(eski "Gelişmiş raporlar" böl 2/3)_
+- [ ] **P3 — Yıl sonu "Wrapped" özeti.** Yıl sonu highlight ekranı (toplam gelir/gider, en çok harcanan kategori, en yoğun ay, tasarruf oranı, hedef ilerlemesi). Saf aggregation, kart akışı. _(eski "Gelişmiş raporlar" böl 3/3)_
 - [ ] **P2 — Çoklu para birimi + döviz/altın takibi.** USD/EUR/gram altın cinsi birikim; hedefi döviz cinsinden tutabilme.
 
 ## In Progress
