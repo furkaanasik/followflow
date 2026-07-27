@@ -248,7 +248,7 @@ export function NewTransactionScreen() {
           >
             {templates.map((tpl, i) => (
               <CategoryChip
-                key={`${tpl.type}-${tpl.category}-${tpl.amount}-${i}`}
+                key={`${tpl.type}-${tpl.category}-${tpl.amount}-${tpl.note ?? ''}`}
                 icon={tpl.icon}
                 label={`${byKey(tpl.category)?.label ?? tpl.category} ${formatAmountInput(String(tpl.amount))}`}
                 onPress={() => applyTemplate(tpl)}

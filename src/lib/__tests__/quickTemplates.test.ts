@@ -68,12 +68,29 @@ describe('deriveQuickTemplates', () => {
     expect(deriveQuickTemplates(rows, 5)).toHaveLength(5);
   });
 
-  it('excludes rows with amount <= 0', () => {
+  it('excludes rows with amount <= 0 or NaN', () => {
     const result = deriveQuickTemplates([
       txn({ amount: 0 }),
       txn({ amount: -50 }),
+      txn({ amount: NaN }),
     ]);
     expect(result).toEqual([]);
+  });
+
+  it('only derives from the most recent `window` transactions', () => {
+    const old = txn({
+      category: 'eski',
+      amount: 100,
+      occurred_at: '2026-01-01',
+    });
+    const fresh = txn({
+      category: 'yeni',
+      amount: 200,
+      occurred_at: '2026-07-01',
+    });
+    const result = deriveQuickTemplates([old, fresh, fresh], 5, 2);
+    expect(result).toHaveLength(1);
+    expect(result[0].category).toBe('yeni');
   });
 
   it('keeps income and expense with same category/amount distinct', () => {
