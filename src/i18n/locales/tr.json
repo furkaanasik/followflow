@@ -130,7 +130,11 @@
     "delete": "Sil",
     "deleteTitle": "İşlemi Sil",
     "deleteMessage": "Bu işlem kalıcı olarak silinecek.",
-    "deleteFailed": "Silinemedi. Bağlantını kontrol edip tekrar dene."
+    "deleteFailed": "Silinemedi. Bağlantını kontrol edip tekrar dene.",
+    "export": "Dışa aktar",
+    "exportEmpty": "Dışa aktarılacak işlem yok",
+    "exportUnavailable": "Bu cihazda paylaşım kullanılamıyor",
+    "exportFailed": "Dışa aktarılamadı. Tekrar dene."
   },
   "newTransaction": {
     "title": "Yeni İşlem",

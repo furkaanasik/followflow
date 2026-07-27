@@ -17,7 +17,9 @@ import {
   filterTransactions,
   type TransactionFilters,
 } from '@/lib/filterTransactions';
+import { exportTransactionsCsv } from '@/lib/exportCsv';
 import { formatCurrency, formatDate } from '@/lib/format';
+import { toCsv } from '@/lib/toCsv';
 import { useCategories } from '@/lib/useCategories';
 import { SearchBar, SegmentedToggle, StateView } from '@/molecules';
 import {
@@ -84,10 +86,25 @@ export function TransactionsScreen() {
     [byKey],
   );
 
-  const groups = useMemo(
-    () => groupByDate(filterTransactions(transactions, filters, categoryLabel)),
+  const filtered = useMemo(
+    () => filterTransactions(transactions, filters, categoryLabel),
     [transactions, filters, categoryLabel],
   );
+  const groups = useMemo(() => groupByDate(filtered), [filtered]);
+
+  async function handleExport() {
+    if (filtered.length === 0) {
+      Alert.alert(t('transactions.exportEmpty'));
+      return;
+    }
+    try {
+      const ok = await exportTransactionsCsv(toCsv(filtered, categoryLabel));
+      if (!ok) Alert.alert(t('transactions.exportUnavailable'));
+    } catch {
+      Alert.alert(t('transactions.exportFailed'));
+    }
+  }
+
   const advancedCount = activeFilterCount(filters);
 
   function rowProps(txn: Transaction) {
@@ -117,13 +134,22 @@ export function TransactionsScreen() {
       >
         <View style={styles.header}>
           <AppBarSimpleTitle title={t('transactions.title')} />
-          <ButtonIconOnly
-            icon="plus"
-            variant="accent"
-            size={44}
-            accessibilityLabel={t('home.addTransaction')}
-            onPress={() => router.push('/yeni-islem')}
-          />
+          <View style={styles.headerActions}>
+            <ButtonIconOnly
+              icon="share"
+              variant="surface"
+              size={44}
+              accessibilityLabel={t('transactions.export')}
+              onPress={handleExport}
+            />
+            <ButtonIconOnly
+              icon="plus"
+              variant="accent"
+              size={44}
+              accessibilityLabel={t('home.addTransaction')}
+              onPress={() => router.push('/yeni-islem')}
+            />
+          </View>
         </View>
 
         <SearchBar
@@ -216,5 +242,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  headerActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
   },
 });
