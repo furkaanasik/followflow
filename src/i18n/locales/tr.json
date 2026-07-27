@@ -157,6 +157,7 @@
     "recurringPayments": "Tekrarlayan Ödemeler",
     "calendar": "Takvim",
     "categories": "Kategoriler",
+    "reports": "Raporlar",
     "appearance": "Görünüm",
     "themeDark": "Koyu",
     "themeLight": "Açık",
@@ -164,6 +165,16 @@
     "themeVibrantDark": "C. Koyu",
     "signOut": "Çıkış Yap",
     "signOutFailed": "Çıkış yapılamadı. Tekrar deneyin."
+  },
+  "reports": {
+    "title": "Raporlar",
+    "trend": "Gelir–Gider Trendi",
+    "monthly": "Aylık",
+    "yearly": "Yıllık",
+    "income": "Gelir",
+    "expense": "Gider",
+    "heatmap": "Kategori Isı Haritası",
+    "empty": "Rapor için yeterli veri yok"
   },
   "calendar": {
     "title": "Takvim",

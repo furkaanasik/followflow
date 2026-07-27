@@ -70,6 +70,12 @@ export function SettingsScreen() {
             value=""
             onPress={() => router.push('/kategoriler')}
           />
+          <InfoRowChevron
+            icon="bar-chart-2"
+            label={t('settings.reports')}
+            value=""
+            onPress={() => router.push('/raporlar')}
+          />
         </View>
 
         <View style={{ gap: theme.spacing.sm }}>

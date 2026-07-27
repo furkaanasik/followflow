@@ -204,6 +204,13 @@ function RootNavigator() {
           }}
         />
         <Stack.Screen
+          name="raporlar"
+          options={{
+            headerShown: false,
+            contentStyle: { backgroundColor: theme.colors.bgApp },
+          }}
+        />
+        <Stack.Screen
           name="takvim"
           options={{
             headerShown: false,

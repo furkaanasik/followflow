@@ -157,6 +157,7 @@
     "recurringPayments": "Recurring Payments",
     "calendar": "Calendar",
     "categories": "Categories",
+    "reports": "Reports",
     "appearance": "Appearance",
     "themeDark": "Dark",
     "themeLight": "Light",
@@ -164,6 +165,16 @@
     "themeVibrantDark": "V. Dark",
     "signOut": "Sign Out",
     "signOutFailed": "Couldn't sign out. Try again."
+  },
+  "reports": {
+    "title": "Reports",
+    "trend": "Income–Expense Trend",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "income": "Income",
+    "expense": "Expense",
+    "heatmap": "Category Heatmap",
+    "empty": "Not enough data for a report"
   },
   "calendar": {
     "title": "Calendar",
