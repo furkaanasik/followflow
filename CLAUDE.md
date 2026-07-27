@@ -1,6 +1,15 @@
 # FollowFlow
 
-Personal finance / budget tracking mobile app (Turkish UI). Repo currently contains **design only** — no source code yet. Design lives in `design/design.pen`, a Pencil design file (390px mobile screens).
+Personal finance / budget tracking mobile app (Turkish UI). Built with **Expo / React Native + Expo Router + Redux Toolkit (RTK Query) + Supabase**. v1 (Phase 0–11) shipped; active work tracked in [`.claude/backlog.md`](./.claude/backlog.md) (frozen history in `.claude/phases.md`). The original Pencil design still lives in `design/design.pen` and remains the visual source of truth.
+
+## Codebase
+
+- **Stack**: Expo (React Native), `expo-router` (file-based routing under `src/app/`), Redux Toolkit + RTK Query (`src/store/`), Supabase (`@supabase/supabase-js`, migrations in `supabase/migrations/`). TypeScript throughout. i18n via `i18next`/`react-i18next` (`src/i18n/locales/{tr,en}.json`). Icons: `lucide-react-native`. Charts: plain RN Views + `react-native-svg` (no chart lib). No new runtime deps without cause.
+- **Path alias**: `@/*` → `src/*`, `@/assets/*` → `assets/*`.
+- **Structure** (`src/`): `atoms/` `molecules/` `organisms/` (atomic-design tiers, barrel `index.ts` each) · `screens/` (one component per screen, barrel export) · `app/` (Expo Router routes; a route file just re-exports its screen — e.g. `takvim.tsx` → `CalendarScreen`) · `lib/` (pure helpers + tests in `lib/__tests__/`) · `store/` (`slices/`, `api/` RTK Query endpoints) · `theme/` (tokens + `useTheme`) · `types/` · `i18n/`.
+- **Patterns**: RTK Query endpoints return a plain `ApiError` (never a class) via `toApiError`; screens fetch with generated hooks + `useFocusEffect` refetch; loading/error via `StateView`; all aggregation is pure fns in `lib/` (unit-tested). New screen = lib fn (+ test) → organism(s) → screen → `app/<route>.tsx` → register in `app/_layout.tsx` Stack → barrels → Settings `InfoRowChevron` entry → i18n both locales.
+- **Commands**: `npm test` (jest), `npm run typecheck` (`tsc --noEmit`), `npm run lint` (`expo lint`), `npm run format`, `npm run e2e` (Maestro, `.maestro/`), `npm start` (expo). Themes must stay legible in all 4 modes — use theme tokens, never hardcode colors.
+- **Workflow** (per backlog item): `/prp-plan <item>` → `/prp-implement` → `/code-review` → `/prp-commit` → `/prp-pr` → web merge → cleanup → move item to `Done`.
 
 ## Working with `design/design.pen`
 
